@@ -1,0 +1,2 @@
+Use:
+conda list -e > Project/IronOxidationSimulator/config/requirements.txt
