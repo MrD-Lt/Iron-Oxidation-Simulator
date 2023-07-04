@@ -1,0 +1,1 @@
+Rearranged the structure of my codes(.py files) to make it more clear and easy to understand.
