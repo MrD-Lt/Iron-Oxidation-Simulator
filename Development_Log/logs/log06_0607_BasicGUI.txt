@@ -1,0 +1,1 @@
+Created a basic GUI which has some basic logic and functions (without any backend).
