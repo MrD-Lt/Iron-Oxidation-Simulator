@@ -1,11 +1,10 @@
-from PyQt5.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QWidget
+from PyQt5.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QWidget, QAction, QFileDialog
 from PyQt5.QtCore import pyqtSignal, QObject
 import sys
 from gui.settings_window import SettingsWindow
 from gui.input_window import InputWindow
 from gui.button_area import ButtonArea
 from gui.help_window import HelpWindow
-
 
 
 class MainWindow(QMainWindow):
@@ -21,12 +20,17 @@ class MainWindow(QMainWindow):
         # 功能选择
         self.settings = Settings()
 
+        self.feature_actions = {
+            "reaction_order_analysis": QAction("reaction_order_analysis", self, checkable=True),
+            "option2": QAction("option2", self, checkable=True),
+            "option3": QAction("option3", self, checkable=True),
+            "option4": QAction("option4", self, checkable=True),
+        }
         self.func_menu = self.menu.addMenu("Feature selections")
-        self.func_menu.addAction("Option1", self.select_option1)
-        self.func_menu.addAction("option2", self.select_option2)
-        self.func_menu.addAction("option3", self.select_option3)
-        self.func_menu.addAction("option4", self.select_option4)
-        # TODO: 根据需要添加更多的选项
+        for action in self.feature_actions.values():
+            self.func_menu.addAction(action)
+            # 连接 triggered 信号到新的槽函数
+            action.triggered.connect(self.update_func_option)
 
         # 输入设置
         self.input_menu = self.menu.addMenu("Input settings")
@@ -70,17 +74,29 @@ class MainWindow(QMainWindow):
         self.layout.addWidget(self.button_area)
         self.central_widget.setLayout(self.layout)
 
+    def update_func_option(self, checked):
+        # 获取发送信号的 QAction
+        action = self.sender()
+        # 获取 QAction 的名字
+        option = action.text()
+        # 更新 func_current_options 字典
+        self.settings.func_current_options[option] = checked
+        # 触发 settings_changed 信号
+        self.settings.settings_changed.emit()
+        # 检查 "开始计算" 按钮的状态
+        self.check_calculate_button_state()
+
     def check_calculate_button_state(self):
-        # 如果有文本输入并且选择的功能不为 "None"，则启用 "开始计算" 按钮
-        has_input = self.input_window.manual_input_text.toPlainText() or self.input_window.file_path_label.text()
-        func_selected = self.settings.func_current_option != "None"
-        self.button_area.calculate_button.setEnabled(bool(has_input) and func_selected)
+        # 如果有数据输入并且至少有一个功能被选中，就启用 "开始计算" 按钮
+        has_input = bool(self.input_window.data)
+        func_selected = any(self.settings.func_current_options.values())
+        self.button_area.calculate_button.setEnabled(has_input and func_selected)
 
     def placeholder(self):
         pass  # 占位函数
 
     def select_option1(self):
-        self.settings.set_func_option("Option1")
+        self.settings.set_func_option("reaction_order_analysis")
 
     def select_option2(self):
         self.settings.set_func_option("Option2")
@@ -111,12 +127,24 @@ class MainWindow(QMainWindow):
     def open_contact(self):
         pass
 
+    def toggle_option(self, checked, option):
+        if checked:
+            self.settings.func_current_option = option
+        else:
+            self.settings.func_current_option = "None"
+        self.settings.settings_changed.emit()
+
 
 class Settings(QObject):
     settings_changed = pyqtSignal()
 
     def __init__(self):
         super().__init__()
+
+        self.func_current_options = {option: False for option in
+                                     ["reaction_order_analysis", "option2", "option3", "option4"]}
+
+        # 其余代码
         self.func_current_option = "None"
         self.input_current_option = "None"
         self.save_current_option = "No"
@@ -136,7 +164,8 @@ class Settings(QObject):
     def reset(self):
         self.save_current_option = "No"
         self.input_current_option = "None"
-        self.func_current_option = "None"
+        self.func_current_options = {option: False for option in
+                                     ["reaction_order_analysis", "option2", "option3", "option4"]}
         self.settings_changed.emit()
 
 

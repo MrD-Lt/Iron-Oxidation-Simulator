@@ -1,5 +1,6 @@
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QGroupBox, QPushButton, QFileDialog, QLabel, QTextEdit
+from src.utils.regression_analysis import read_data
 
 
 class InputWindow(QWidget):
@@ -8,10 +9,17 @@ class InputWindow(QWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-
         self.main_window = parent
+        self.data = {}  # 初始化 self.data 为一个空字典
+        self.filename = None  # 添加一个新的属性来存储文件名
 
         layout = QVBoxLayout()
+
+        # 创建输入方法字典
+        self.data_readers = {
+            "reaction_order_analysis": read_data,
+            # "other_function": other_data_reader,
+        }
 
         # 创建手动输入部分
         self.manual_input_group = QGroupBox("Manual Input")
@@ -41,7 +49,6 @@ class InputWindow(QWidget):
         self.manual_input_button.clicked.connect(self.manual_input_confirmed)
         self.file_browse_button.clicked.connect(self.browse_file)
 
-
         # 初始化
         self.manual_input_group.setEnabled(False)
         self.file_input_group.setEnabled(False)
@@ -60,17 +67,37 @@ class InputWindow(QWidget):
 
     def manual_input_confirmed(self):
         text = self.manual_input_text.toPlainText()
-        # TODO: 处理文本输入
+        # 解析文本并转化为数据
+        lines = text.splitlines()
+        self.data = [list(map(float, line.split(' '))) for line in lines if line]
         self.emit_input_changed()  # 在这里发出 input_changed 信号
         self.manual_input_text.clear()
 
     def browse_file(self):
         file_path, _ = QFileDialog.getOpenFileName()
         if file_path:
+            self.filename = file_path  # 保存文件名
             self.file_path_label.setText(file_path)
-            # TODO: 处理文件输入
-            self.emit_input_changed()  # 发出 input_changed 信号
+            # 根据当前选中的功能查找相应的数据读取函数
+            for func_option, selected in self.main_window.settings.func_current_options.items():
+                if selected:
+                    data_reader = self.data_readers.get(func_option)
+                    if data_reader is not None:
+                        # 读取文件数据
+                        self.data[func_option] = data_reader(file_path)  # 直接使用相应的数据读取函数
+                        self.emit_input_changed()  # 发出 input_changed 信号
+            # Update the "Start" button status
+            self.main_window.button_area.update_start_button()
 
     def emit_input_changed(self):
         # 当文本改变时发出 input_changed 信号
         self.input_changed.emit()
+
+    # 用来清除数据
+    def clear_data(self):
+        self.data = {}
+
+    def reset(self):
+        self.clear_data()
+        self.filename = None  # 清除文件名
+        self.file_path_label.clear()  # 清除文件路径标签的文本
