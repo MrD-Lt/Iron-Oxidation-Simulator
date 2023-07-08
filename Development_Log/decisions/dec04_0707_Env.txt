@@ -1,1 +1,2 @@
 Decided to use .yml file instead of .txt file.
+conda env export > Project/IronOxidationSimulator/config/environment.yml
