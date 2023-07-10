@@ -23,14 +23,14 @@ jobs:
         uses: conda-incubator/setup-miniconda@v2.2.0
         with:
           activate-environment: my-environment
-          environment-file: environment.yml
+          environment-file: Project/IronOxidationSimulator/config/environment.yml
           python-version: ${{ matrix.python-version }}
           auto-activate-base: false
 
       - name: Install dependencies
         shell: bash -l
         run: |
-          conda env update --file Project/IronOxidationSimulator/config/environment.yml --prune
+          conda env update --file environment.yml --prune
           conda list
 
       - name: Show Python version
