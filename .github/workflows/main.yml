@@ -1,0 +1,52 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+        python-version: [3.9]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Miniconda
+        uses: conda-incubator/setup-miniconda@v2.2.0
+        with:
+          activate-environment: my-environment
+          environment-file: environment.yml
+          python-version: ${{ matrix.python-version }}
+          auto-activate-base: false
+
+      - name: Install dependencies
+        shell: bash -l {0}
+        run: |
+          conda env update --file Project/IronOxidationSimulator/config/environment.yml --prune
+          conda list
+
+      - name: Show Python version
+        shell: bash -l {0}
+        run: python --version
+
+      - name: Install PyInstaller
+        shell: bash -l {0}
+        run: pip install pyinstaller
+
+      - name: Build with PyInstaller
+        shell: bash -l {0}
+        run: pyinstaller --onefile Project/IronOxidationSimulator/src/mainwindow.py
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: MyApplication-${{ matrix.os }}
+          path: dist/
