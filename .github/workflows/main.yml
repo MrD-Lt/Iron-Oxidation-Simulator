@@ -1,4 +1,4 @@
-name: Build and Test
+name: Build
 
 on:
   push:
@@ -28,22 +28,27 @@ jobs:
           auto-activate-base: false
 
       - name: Install dependencies
-        shell: bash -l
+        shell: bash -l {0}
         run: |
-          conda env update --file environment.yml --prune
+          conda env update --file Project/IronOxidationSimulator/config/environment.yml --prune
           conda list
 
       - name: Show Python version
-        shell: bash -l
+        shell: bash -l {0}
         run: python --version
 
       - name: Install PyInstaller
-        shell: bash -l
+        shell: bash -l {0}
         run: pip install pyinstaller
 
       - name: Build with PyInstaller
-        shell: bash -l
-        run: pyinstaller --onefile Project/IronOxidationSimulator/src/mainwindow.py
+        shell: bash -l {0}
+        run: |
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            pyinstaller --onefile .\src\mainwindow.py
+          else
+            pyinstaller --onefile ./src/mainwindow.py
+          fi
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
