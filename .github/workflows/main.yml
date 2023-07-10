@@ -19,6 +19,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Cache conda
+        uses: actions/cache@v2
+        with:
+          path: ~/miniconda3/pkgs
+          key: ${{ runner.os }}-conda-${{ hashFiles('Project/IronOxidationSimulator/config/environment.yml') }}
+
       - name: Set up Miniconda
         uses: conda-incubator/setup-miniconda@v2.2.0
         with:
@@ -43,7 +49,12 @@ jobs:
 
       - name: Build with PyInstaller
         shell: bash -l {0}
-        run: pyinstaller --onefile ./Project/IronOxidationSimulator/src/mainwindow.py
+        run: |
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            pyinstaller --onefile --paths "./Project/IronOxidationSimulator/src" --add-data "./Project/IronOxidationSimulator/assets;./assets" .\Project\IronOxidationSimulator\src\mainwindow.py
+          else
+            pyinstaller --onefile --paths "./Project/IronOxidationSimulator/src" --add-data "./Project/IronOxidationSimulator/assets;./assets" ./Project/IronOxidationSimulator/src/mainwindow.py
+          fi
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
