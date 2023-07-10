@@ -1,3 +1,5 @@
+import os
+
 from PyQt5.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QWidget, QAction, QFileDialog
 from PyQt5.QtCore import pyqtSignal, QObject
 import sys
@@ -169,8 +171,15 @@ class Settings(QObject):
         self.settings_changed.emit()
 
 
+# Used for finding path when package the codes:
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
+
+
 if __name__ == "__main__":
-    with open("ui/style.qss") as f:
+    with open(resource_path("ui/style.qss")) as f:
         qss = f.read()
     app = QApplication(sys.argv)
     app.setStyleSheet(qss)
