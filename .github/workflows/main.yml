@@ -19,6 +19,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Cache conda
+        uses: actions/cache@v2
+        with:
+          path: ~/miniconda3/pkgs
+          key: ${{ runner.os }}-conda-${{ hashFiles('Project/IronOxidationSimulator/config/environment.yml') }}
+
       - name: Set up Miniconda
         uses: conda-incubator/setup-miniconda@v2.2.0
         with:
@@ -32,6 +38,7 @@ jobs:
         run: |
           conda env update --file Project/IronOxidationSimulator/config/environment.yml --prune
           conda list
+
       - name: Show Python version
         shell: bash -l {0}
         run: python --version
