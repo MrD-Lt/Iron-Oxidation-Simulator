@@ -1,0 +1,1 @@
+Decided to use GitHub Actions to create different executable files for macOS and Windows.

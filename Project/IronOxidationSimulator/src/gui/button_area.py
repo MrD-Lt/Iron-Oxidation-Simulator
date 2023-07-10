@@ -73,7 +73,6 @@ class ButtonArea(QWidget):
                     except ValueError:
                         print("Invalid data format")
                         return
-                    print("input读到的data",data)
                     x, y, sdx_absolute, sdx_upper, sdx_lower, sdy_absolute, sdy_upper, sdy_lower = data
 
                     # 调用 regression_analysis.py 中的函数
@@ -82,7 +81,8 @@ class ButtonArea(QWidget):
                     )
 
                     # 保存结果
-                    self.result[option] = x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope, se_intercept, r_squared
+                    self.result[
+                        option] = x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope, se_intercept, r_squared
 
                     # 设置右侧部分的按钮为启用状态
                     self.result_button.setEnabled(True)
@@ -92,6 +92,7 @@ class ButtonArea(QWidget):
                 elif option == "example":
                     # 执行 "example" 的计算...
                     ...
+
     def reset(self):
         # 设置右侧部分的按钮为禁用状态
         self.result_button.setEnabled(False)
@@ -102,7 +103,6 @@ class ButtonArea(QWidget):
         # 重置 InputWindow
         self.main_window.input_window.reset()
         self.update_start_button()
-
 
     def show_result(self):
         # 遍历所有选中的功能
@@ -133,7 +133,6 @@ class ButtonArea(QWidget):
                     # 显示 option2 功能的可视化...
                     pass
                 # 添加其他功能的处理...
-
 
     def save_result(self):
         # 获取用户选择的文件路径
