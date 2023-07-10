@@ -43,12 +43,7 @@ jobs:
 
       - name: Build with PyInstaller
         shell: bash -l {0}
-        run: |
-          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
-            pyinstaller --onefile .\Project\IronOxidationSimulator\src\mainwindow.py
-          else
-            pyinstaller --onefile ./Project/IronOxidationSimulator/src/mainwindow.py
-          fi
+        run: pyinstaller --onefile ./Project/IronOxidationSimulator/src/mainwindow.py
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
