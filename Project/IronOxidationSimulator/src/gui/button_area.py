@@ -1,8 +1,8 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QRadioButton, QDialog, QFileDialog
-from src.gui.result_window import ResultWindow
-from src.gui.visual_window import VisualWindow
-from src.utils.regression_analysis import calculate_regression, plot_regression
-from src.utils.save import save
+from gui.result_window import ResultWindow
+from gui.visual_window import VisualWindow
+from utils.regression_analysis import calculate_regression, plot_regression
+from utils.save import save
 
 
 class ButtonArea(QWidget):
@@ -65,6 +65,7 @@ class ButtonArea(QWidget):
 
                     # 获取已经读取的数据
                     data = self.main_window.input_window.data[option]
+                    print(data)
                     if data is None:
                         print("No data available")
                         return

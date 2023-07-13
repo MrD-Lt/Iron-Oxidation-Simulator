@@ -1,6 +1,6 @@
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QGroupBox, QPushButton, QFileDialog, QLabel, QTextEdit
-from src.utils.regression_analysis import read_data
+from utils.regression_analysis import read_data
 
 
 class InputWindow(QWidget):
