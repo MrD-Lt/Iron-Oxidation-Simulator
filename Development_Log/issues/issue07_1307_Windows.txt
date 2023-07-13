@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "mainwindow.py", line 183, in <module>
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x80 in position 11: illegal multibyte sequence
+[26968] Failed to execute script 'mainwindow' due to unhandled exception!
+
+Error when running after package codes into  exe file.
