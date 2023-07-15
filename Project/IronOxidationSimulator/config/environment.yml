@@ -9,7 +9,7 @@ dependencies:
   - numpy
   - pandas
   - scikit-learn
-  - openpyxl
   - pip
   - pip:
     - pyinstaller
+    - openpyxl
