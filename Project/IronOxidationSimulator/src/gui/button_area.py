@@ -3,6 +3,9 @@ from gui.result_window import ResultWindow
 from gui.visual_window import VisualWindow
 from utils.regression_analysis import calculate_regression, plot_regression
 from utils.save import save
+from PyQt5.QtGui import QPixmap, QPainter
+from matplotlib.figure import Figure
+
 
 
 class ButtonArea(QWidget):
@@ -53,7 +56,7 @@ class ButtonArea(QWidget):
         self.save_button.clicked.connect(self.save_result)
 
     def calculate(self):
-        # 遍历所有选中的功能
+    # 遍历所有选中的功能
         for option, selected in self.main_window.settings.func_current_options.items():
             if selected:
                 # 根据每个功能执行相应的计算
@@ -62,10 +65,10 @@ class ButtonArea(QWidget):
                     dialog = SklearnOptionDialog(self)
                     dialog.exec_()
                     use_sklearn = dialog.use_sklearn()
+                    use_both = dialog.use_both()  # 获取新的选项状态
 
                     # 获取已经读取的数据
                     data = self.main_window.input_window.data[option]
-                    print(data)
                     if data is None:
                         print("No data available")
                         return
@@ -77,13 +80,29 @@ class ButtonArea(QWidget):
                     x, y, sdx_absolute, sdx_upper, sdx_lower, sdy_absolute, sdy_upper, sdy_lower = data
 
                     # 调用 regression_analysis.py 中的函数
-                    slope, intercept, se_slope, se_intercept, r_squared = calculate_regression(
-                        x, y, sdx_absolute, sdy_absolute, use_sklearn=use_sklearn
-                    )
-
-                    # 保存结果
-                    self.result[
-                        option] = x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope, se_intercept, r_squared
+                    if use_both:  # 如果用户选择了"Use both"
+                        # 先使用sklearn进行计算
+                        slope_sklearn, intercept_sklearn, se_slope_sklearn, se_intercept_sklearn, r_squared_sklearn = calculate_regression(
+                            x, y, sdx_absolute, sdy_absolute, use_sklearn=True
+                        )
+                        # 再不使用sklearn进行计算
+                        slope, intercept, se_slope, se_intercept, r_squared = calculate_regression(
+                            x, y, sdx_absolute, sdy_absolute, use_sklearn=False
+                        )
+                        # 保存结果
+                        self.result[option] = {
+                            "sklearn": (x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope_sklearn, intercept_sklearn, se_slope_sklearn, se_intercept_sklearn, r_squared_sklearn),
+                            "no_sklearn": (x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope, se_intercept, r_squared)
+                        }
+                    else:
+                        # 只进行一次计算
+                        slope, intercept, se_slope, se_intercept, r_squared = calculate_regression(
+                            x, y, sdx_absolute, sdy_absolute, use_sklearn=use_sklearn
+                        )
+                        # 保存结果
+                        self.result[option] = {
+                            "sklearn" if use_sklearn else "no_sklearn": (x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope, se_intercept, r_squared)
+                        }
 
                     # 设置右侧部分的按钮为启用状态
                     self.result_button.setEnabled(True)
@@ -93,6 +112,7 @@ class ButtonArea(QWidget):
                 elif option == "example":
                     # 执行 "example" 的计算...
                     ...
+
 
     def reset(self):
         # 设置右侧部分的按钮为禁用状态
@@ -110,23 +130,27 @@ class ButtonArea(QWidget):
         for option, selected in self.main_window.settings.func_current_options.items():
             if selected:
                 if option == "reaction_order_analysis":
-                    # 创建一个 ResultWindow 实例并显示它
-                    print(self.result)
-                    self.result_window = ResultWindow(self.result[option][6:], self)
-                    self.result_window.setWindowTitle("Result Window - Reaction Order Analysis")
-                    self.result_window.show()
+                    # 遍历每种方法的结果
+                    for method, result in self.result[option].items():
+                        # 创建一个 ResultWindow 实例并显示它
+                        self.result_window = ResultWindow(result[6:], self)
+                        self.result_window.setWindowTitle(f"Result Window - Reaction Order Analysis ({method})")
+                        self.result_window.show()
                 elif option == "option2":
                     # 显示 option2 功能的结果...
                     pass
                 # 添加其他功能的处理...
 
     def show_visual(self):
-        # 遍历所有选中的功能
+        fig = Figure()
+        ax = fig.add_subplot(111)
         for option, selected in self.main_window.settings.func_current_options.items():
             if selected:
                 if option == "reaction_order_analysis":
-                    # 先调用 plot_regression 函数获取 QPixmap 对象
-                    pixmap = plot_regression(*self.result)  # plot_regression 函数需要返回一个 QPixmap 对象
+                    # 遍历每种方法的结果
+                    for method, result in self.result[option].items():
+                        # 调用 plot_regression 函数获取 QPixmap 对象
+                        pixmap = plot_regression(*result, ax=ax, fig=fig, label=method)  # 使用 ax 和 fig 参数，并添加 method 作为 label
                     # 创建一个 VisualWindow 实例并显示它
                     self.visual_window = VisualWindow(pixmap, self)
                     self.visual_window.show()
@@ -134,6 +158,15 @@ class ButtonArea(QWidget):
                     # 显示 option2 功能的可视化...
                     pass
                 # 添加其他功能的处理...
+
+
+
+
+
+
+
+
+
 
     def save_result(self):
         # 获取用户选择的文件路径
@@ -160,15 +193,21 @@ class SklearnOptionDialog(QDialog):
 
         self.use_sklearn_button = QRadioButton("Use sklearn")
         self.dont_use_sklearn_button = QRadioButton("Don't use sklearn")
+        self.both_button = QRadioButton("Use both")  # 新增选项
 
         confirm_button = QPushButton("Confirm")
         confirm_button.clicked.connect(self.accept)
 
         layout.addWidget(self.use_sklearn_button)
         layout.addWidget(self.dont_use_sklearn_button)
+        layout.addWidget(self.both_button)  # 新增选项
         layout.addWidget(confirm_button)
 
         self.setLayout(layout)
 
     def use_sklearn(self):
         return self.use_sklearn_button.isChecked()
+
+    def use_both(self):  # 新增函数
+        return self.both_button.isChecked()
+

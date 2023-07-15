@@ -1,0 +1,2 @@
+Now the software could show the img results.
+Add the option of using sklearn and not in the same time, plot two curves in one image.

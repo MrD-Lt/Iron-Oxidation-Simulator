@@ -55,26 +55,39 @@ def calculate_regression(x, y, sdx_absolute=None, sdy_absolute=None, use_sklearn
     return slope, intercept, se_slope, se_intercept, r_squared
 
 def plot_regression(x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope, se_intercept,
-                    r_squared):
-    fig = Figure()
-    ax = fig.add_subplot(111)
+                    r_squared, label, ax, fig):  # 添加 ax 和 fig 作为参数
     ax.errorbar(x, y, yerr=[sdy_lower, sdy_upper], xerr=[sdx_lower, sdx_upper], fmt='ko')
-    ax.plot([np.min(x), np.max(x)], [slope * np.min(x) + intercept, slope * np.max(x) + intercept], 'r-')
+    ax.plot([np.min(x), np.max(x)], [slope * np.min(x) + intercept, slope * np.max(x) + intercept], 'r-', label=label)
+    ax.legend()  # 使用plot函数中的label作为图例
     ax.set_xlabel('log([Fe], μM)')
     ax.set_ylabel('log(R0, μMs^-1)')
-    ax.legend(['Data', 'Weighted linear regression line'], loc='northwest')
+    ax.legend(['Data', 'Weighted linear regression line'], loc='lower right')
+
     xlim = ax.get_xlim()
     ylim = ax.get_ylim()
     text_x = xlim[0] + 0.1 * (xlim[1] - xlim[0])
     text_y1 = ylim[1] - 0.1 * (ylim[1] - ylim[0])
     text_y2 = ylim[1] - 0.15 * (ylim[1] - ylim[0])
-    ax.text(text_x, text_y1, f"log[R0] = ({slope:.2f}±{se_slope:.2f})log[Fe] + ({intercept:.2f}±{se_intercept:.2f})")
+    
+    if se_slope is None:
+        se_slope_str = "N/A"
+    else:
+        se_slope_str = f"{se_slope:.2f}"
+
+    if se_intercept is None:
+        se_intercept_str = "N/A"
+    else:
+        se_intercept_str = f"{se_intercept:.2f}"
+
+    ax.text(text_x, text_y1, f"log[R0] = ({slope:.2f}±{se_slope_str})log[Fe] + ({intercept:.2f}±{se_intercept_str})")
     ax.text(text_x, text_y2, f"R² = {r_squared:.2f}")
+
     canvas = FigureCanvas(fig)
     canvas.draw()
     width, height = fig.get_size_inches() * fig.get_dpi()
     image = QImage(canvas.buffer_rgba(), width, height, QImage.Format_ARGB32)
     pixmap = QPixmap.fromImage(image)
     return pixmap
+
 
 

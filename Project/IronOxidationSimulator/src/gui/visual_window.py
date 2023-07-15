@@ -1,15 +1,19 @@
-from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout
+from PyQt5.QtWidgets import QLabel, QVBoxLayout, QMainWindow, QWidget
 from PyQt5.QtGui import QPixmap
+from PyQt5 import QtCore
 
-
-class VisualWindow(QWidget):
+class VisualWindow(QMainWindow):
     def __init__(self, pixmap, parent=None):
         super().__init__(parent)
-        # 创建 QLabel 来展示图像
+        self.setWindowTitle("Visualisation")
+        
+
         self.image_label = QLabel()
-        self.image_label.setPixmap(pixmap)
-        # 创建 QVBoxLayout 并添加 QLabel
+        self.image_label.setPixmap(pixmap.scaled(self.image_label.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio))
+
         layout = QVBoxLayout()
         layout.addWidget(self.image_label)
-        # 设置布局
-        self.setLayout(layout)
+        
+        self.central_widget = QWidget()
+        self.central_widget.setLayout(layout)
+        self.setCentralWidget(self.central_widget)
