@@ -2,6 +2,7 @@
 from PyQt5.QtGui import QPixmap, QImage
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
+import matplotlib.patches as mpatches
 
 import numpy as np
 import pandas as pd
@@ -51,24 +52,18 @@ def calculate_regression(x, y, sdx_absolute=None, sdy_absolute=None, use_sklearn
         se_slope = np.sqrt(mse / varwx / (len(x) - 2))
         se_intercept = se_slope * np.sqrt(np.sum(w * x ** 2) / np.sum(w))
         r_squared = covwxy ** 2 / (varwx * varwy)
-        print("Result！！",slope, intercept, se_slope, se_intercept, r_squared)
+        print("Result！！", slope, intercept, se_slope, se_intercept, r_squared)
     return slope, intercept, se_slope, se_intercept, r_squared
 
-def plot_regression(x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope, se_intercept,
-                    r_squared, label, ax, fig):  # 添加 ax 和 fig 作为参数
-    ax.errorbar(x, y, yerr=[sdy_lower, sdy_upper], xerr=[sdx_lower, sdx_upper], fmt='ko')
-    ax.plot([np.min(x), np.max(x)], [slope * np.min(x) + intercept, slope * np.max(x) + intercept], 'r-', label=label)
-    ax.legend()  # 使用plot函数中的label作为图例
-    ax.set_xlabel('log([Fe], μM)')
-    ax.set_ylabel('log(R0, μMs^-1)')
-    ax.legend(['Data', 'Weighted linear regression line'], loc='lower right')
 
-    xlim = ax.get_xlim()
-    ylim = ax.get_ylim()
-    text_x = xlim[0] + 0.1 * (xlim[1] - xlim[0])
-    text_y1 = ylim[1] - 0.1 * (ylim[1] - ylim[0])
-    text_y2 = ylim[1] - 0.15 * (ylim[1] - ylim[0])
-    
+def plot_regression(x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope, se_intercept,
+                    r_squared, label, color, ax, fig):  # 添加 color 参数
+
+    ax.errorbar(x, y, yerr=[sdy_lower, sdy_upper], xerr=[sdx_lower, sdx_upper], fmt='o', color=color)  # 使用 color 参数
+
+    line, = ax.plot([np.min(x), np.max(x)], [slope * np.min(x) + intercept, slope * np.max(x) + intercept], '-',
+                    color=color)  # 使用 color 参数
+
     if se_slope is None:
         se_slope_str = "N/A"
     else:
@@ -79,15 +74,21 @@ def plot_regression(x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, int
     else:
         se_intercept_str = f"{se_intercept:.2f}"
 
-    ax.text(text_x, text_y1, f"log[R0] = ({slope:.2f}±{se_slope_str})log[Fe] + ({intercept:.2f}±{se_intercept_str})")
-    ax.text(text_x, text_y2, f"R² = {r_squared:.2f}")
+    # 在每一行的文本中添加方法名称
+    text_str = f"{label}: log[R0] = ({slope:.2f}±{se_slope_str})log[Fe] + ({intercept:.2f}±{se_intercept_str})"
+    ax.text(0.02, 0.98 - 0.06 * len(ax.texts), text_str, transform=ax.transAxes, verticalalignment='top',
+            color=color)  # 修改 Y 坐标，避免重叠，并添加 color 参数
 
+    ax.set_xlabel('log([Fe], μM)')
+    ax.set_ylabel('log(R0, μMs^-1)')
+
+    # 创建一个QPixmap实例
     canvas = FigureCanvas(fig)
     canvas.draw()
     width, height = fig.get_size_inches() * fig.get_dpi()
     image = QImage(canvas.buffer_rgba(), width, height, QImage.Format_ARGB32)
     pixmap = QPixmap.fromImage(image)
-    return pixmap
 
+    return pixmap  # 返回图像
 
 

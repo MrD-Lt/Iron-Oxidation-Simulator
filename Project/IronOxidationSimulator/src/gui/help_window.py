@@ -10,7 +10,10 @@ class HelpWindow(QMainWindow):
         super().__init__(parent)
 
         # 使用uic模块动态加载ui文件
-        uic.loadUi('src/ui/welcome.ui', self)
+        try:
+            uic.loadUi('src/ui/welcome.ui', self)
+        except:
+            uic.loadUi('ui/welcome.ui', self)
 
         self.setFixedSize(450, 300)
 

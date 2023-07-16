@@ -17,7 +17,7 @@ class InputWindow(QWidget):
 
         # 创建输入方法字典
         self.data_readers = {
-            "reaction_order_analysis": read_data,
+            "reaction order analysis": read_data,
             # "other_function": other_data_reader,
         }
 

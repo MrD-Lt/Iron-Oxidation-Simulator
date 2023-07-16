@@ -7,6 +7,10 @@ from gui.settings_window import SettingsWindow
 from gui.input_window import InputWindow
 from gui.button_area import ButtonArea
 from gui.help_window import HelpWindow
+from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtCore import QUrl
+from PyQt5.QtGui import QDesktopServices
+
 
 
 class MainWindow(QMainWindow):
@@ -23,7 +27,7 @@ class MainWindow(QMainWindow):
         self.settings = Settings()
 
         self.feature_actions = {
-            "reaction_order_analysis": QAction("reaction_order_analysis", self, checkable=True),
+            "reaction order analysis": QAction("reaction order analysis", self, checkable=True),
             "option2": QAction("option2", self, checkable=True),
             "option3": QAction("option3", self, checkable=True),
             "option4": QAction("option4", self, checkable=True),
@@ -98,7 +102,7 @@ class MainWindow(QMainWindow):
         pass  # 占位函数
 
     def select_option1(self):
-        self.settings.set_func_option("reaction_order_analysis")
+        self.settings.set_func_option("reaction order analysis")
 
     def select_option2(self):
         self.settings.set_func_option("Option2")
@@ -127,7 +131,26 @@ class MainWindow(QMainWindow):
         self.help_window.show()
 
     def open_contact(self):
-        pass
+        # 获取发送信号的 QAction
+        action = self.sender()
+        # 获取 QAction 的名字
+        option = action.text()
+
+        if option == "Github":
+            url = "https://github.com/edsml-dd1522"  # 替换为你的Github链接
+        elif option == "Email":
+            url = "mailto:dongzi.ding22@imperial.ac.uk"  # 替换为你的Email
+        else:  # option == "Website"
+            url = "https://edsml-dd1522.github.io/"  # 替换为你的网站链接
+
+        msg_box = QMessageBox()
+        msg_box.setWindowTitle("Open External Application")
+        msg_box.setText("You are about to open an external resources. Do you wish to continue?")
+        msg_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        msg_box.setDefaultButton(QMessageBox.Cancel)
+
+        if msg_box.exec_() == QMessageBox.Ok:
+            QDesktopServices.openUrl(QUrl(url))
 
     def toggle_option(self, checked, option):
         if checked:
@@ -144,7 +167,7 @@ class Settings(QObject):
         super().__init__()
 
         self.func_current_options = {option: False for option in
-                                     ["reaction_order_analysis", "option2", "option3", "option4"]}
+                                     ["reaction order analysis", "option2", "option3", "option4"]}
 
         # 其余代码
         self.func_current_option = "None"

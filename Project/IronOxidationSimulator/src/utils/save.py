@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 
 def save(result, filename):
     dict_for_save = {
-        "reaction_order_analysis":["Slope", "Intercept", "SE Slope", "SE Intercept", "R Squared"]
+        "reaction_order_analysis": ["Slope", "Intercept", "SE Slope", "SE Intercept", "R Squared"]
     }
     # 保存计算结果
     for option in result:

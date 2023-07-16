@@ -60,7 +60,7 @@ class ButtonArea(QWidget):
         for option, selected in self.main_window.settings.func_current_options.items():
             if selected:
                 # 根据每个功能执行相应的计算
-                if option == "reaction_order_analysis":
+                if option == "reaction order analysis":
                     # 打开 SklearnOptionDialog 并获取用户的选择
                     dialog = SklearnOptionDialog(self)
                     dialog.exec_()
@@ -129,7 +129,7 @@ class ButtonArea(QWidget):
         # 遍历所有选中的功能
         for option, selected in self.main_window.settings.func_current_options.items():
             if selected:
-                if option == "reaction_order_analysis":
+                if option == "reaction order analysis":
                     # 遍历每种方法的结果
                     for method, result in self.result[option].items():
                         # 创建一个 ResultWindow 实例并显示它
@@ -142,30 +142,29 @@ class ButtonArea(QWidget):
                 # 添加其他功能的处理...
 
     def show_visual(self):
+        colors = {'no_sklearn': 'red', 'sklearn': 'blue'}  # 创建一个颜色字典，键是方法的名字，值是颜色
+
         fig = Figure()
         ax = fig.add_subplot(111)
+        legend_lines = []  # 用于保存所有图例的列表
+
+        # 遍历所有选中的功能
         for option, selected in self.main_window.settings.func_current_options.items():
             if selected:
-                if option == "reaction_order_analysis":
+                if option == "reaction order analysis":
                     # 遍历每种方法的结果
                     for method, result in self.result[option].items():
-                        # 调用 plot_regression 函数获取 QPixmap 对象
-                        pixmap = plot_regression(*result, ax=ax, fig=fig, label=method)  # 使用 ax 和 fig 参数，并添加 method 作为 label
-                    # 创建一个 VisualWindow 实例并显示它
-                    self.visual_window = VisualWindow(pixmap, self)
-                    self.visual_window.show()
+                        # 调用 plot_regression 函数获取图例对象和 QPixmap 对象
+                        pixmap = plot_regression(*result, ax=ax, fig=fig, label=method,
+                                                              color=colors[method])  # 使用 color 参数
+
                 elif option == "option2":
-                    # 显示 option2 功能的可视化...
+                    # 显示 option2 功能的结果...
                     pass
                 # 添加其他功能的处理...
 
-
-
-
-
-
-
-
+        self.visual_window = VisualWindow(pixmap, self)
+        self.visual_window.show()
 
 
     def save_result(self):
