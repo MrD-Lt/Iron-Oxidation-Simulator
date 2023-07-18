@@ -1,5 +1,4 @@
 import os
-
 from PyQt5.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QWidget, QAction, QFileDialog
 from PyQt5.QtCore import pyqtSignal, QObject
 import sys

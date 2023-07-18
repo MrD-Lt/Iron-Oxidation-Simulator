@@ -1,15 +1,30 @@
-# regression_analysis.py
+"""
+regression_analysis.py
+----------------------
+Author: Dongzi Ding
+Created: 2023-06-28
+Modified: 2023-07-18
+
+This file contains functions for performing regression analysis on data. 
+It includes functions for reading data, calculating linear regression, 
+and plotting the regression line.
+"""
 from PyQt5.QtGui import QPixmap, QImage
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-from matplotlib.figure import Figure
-import matplotlib.patches as mpatches
-
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 
 
 def read_data(filename):
+    """Reads data from an Excel file.
+
+    Parameters:
+    filename (str): The path to the Excel file.
+
+    Returns:
+    tuple: The data extracted from the file, or None if an error occurred.
+    """
     try:
         data = pd.read_excel(filename)
         y = data.iloc[:, 0].values
@@ -27,6 +42,18 @@ def read_data(filename):
 
 
 def calculate_regression(x, y, sdx_absolute=None, sdy_absolute=None, use_sklearn=False):
+    """Calculates the linear regression of the data.
+
+    Parameters:
+    x (array-like): The x data.
+    y (array-like): The y data.
+    sdx_absolute (array-like, optional): The absolute standard deviations of the x data.
+    sdy_absolute (array-like, optional): The absolute standard deviations of the y data.
+    use_sklearn (bool, optional): Whether to use sklearn for the regression.
+
+    Returns:
+    tuple: The slope, intercept, standard error of the slope, standard error of the intercept, and the R-squared value.
+    """
     if use_sklearn:
         model = LinearRegression()
         model.fit(x.reshape(-1, 1), y)
@@ -57,38 +84,51 @@ def calculate_regression(x, y, sdx_absolute=None, sdy_absolute=None, use_sklearn
 
 
 def plot_regression(x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope, se_intercept,
-                    r_squared, label, color, ax, fig):  # 添加 color 参数
+                    r_squared, label, color, ax, fig):
+    """Plots the data and the regression line.
 
-    ax.errorbar(x, y, yerr=[sdy_lower, sdy_upper], xerr=[sdx_lower, sdx_upper], fmt='o', color=color)  # 使用 color 参数
+    Parameters:
+    x (array-like): The x data.
+    y (array-like): The y data.
+    sdx_lower (array-like): The lower standard deviations of the x data.
+    sdx_upper (array-like): The upper standard deviations of the x data.
+    sdy_lower (array-like): The lower standard deviations of the y data.
+    sdy_upper (array-like): The upper standard deviations of the y data.
+    slope (float): The slope of the regression line.
+    intercept (float): The intercept of the regression line.
+    se_slope (float): The standard error of the slope.
+    se_intercept (float): The standard error of the intercept.
+    r_squared (float): The R-squared value.
+    label (str): The label for the plot.
+    color (str): The color for the plot.
+    ax (matplotlib.axes.Axes): The Axes object to draw the plot onto.
+    fig (matplotlib.figure.Figure): The Figure object containing the Axes.
 
-    line, = ax.plot([np.min(x), np.max(x)], [slope * np.min(x) + intercept, slope * np.max(x) + intercept], '-',
-                    color=color)  # 使用 color 参数
-
-    if se_slope is None:
-        se_slope_str = "N/A"
-    else:
-        se_slope_str = f"{se_slope:.2f}"
-
-    if se_intercept is None:
-        se_intercept_str = "N/A"
-    else:
-        se_intercept_str = f"{se_intercept:.2f}"
-
-    # 在每一行的文本中添加方法名称
-    text_str = f"{label}: log[R0] = ({slope:.2f}±{se_slope_str})log[Fe] + ({intercept:.2f}±{se_intercept_str})"
-    ax.text(0.02, 0.98 - 0.06 * len(ax.texts), text_str, transform=ax.transAxes, verticalalignment='top',
-            color=color)  # 修改 Y 坐标，避免重叠，并添加 color 参数
+    Returns:
+    QPixmap: The QPixmap object of the plot.
+    """
+    ax.errorbar(x, y, yerr=[sdy_lower, sdy_upper], xerr=[sdx_lower, sdx_upper], fmt='o', color=color)
+    ax.plot([np.min(x), np.max(x)], [slope * np.min(x) + intercept, slope * np.max(x) + intercept], '-', color=color)
+    try:
+        ax.text(0.02, 0.98 - 0.06 * len(ax.texts), 
+                f"{label}: log[R0] = ({slope:.2f}±{se_slope:.4f})log[Fe] + ({intercept:.2f}±{se_intercept:.4f})",
+                transform=ax.transAxes, verticalalignment='top', color=color)
+    except:
+        ax.text(0.02, 0.98 - 0.06 * len(ax.texts), 
+                f"{label}: log[R0] = ({slope:.2f}±{se_slope})log[Fe] + ({intercept:.2f}±{se_intercept})",
+                transform=ax.transAxes, verticalalignment='top', color=color)
 
     ax.set_xlabel('log([Fe], μM)')
     ax.set_ylabel('log(R0, μMs^-1)')
 
-    # 创建一个QPixmap实例
+    # Convert the matplotlib figure to a QPixmap
     canvas = FigureCanvas(fig)
     canvas.draw()
     width, height = fig.get_size_inches() * fig.get_dpi()
     image = QImage(canvas.buffer_rgba(), width, height, QImage.Format_ARGB32)
     pixmap = QPixmap.fromImage(image)
 
-    return pixmap  # 返回图像
+    return pixmap
+
 
 
