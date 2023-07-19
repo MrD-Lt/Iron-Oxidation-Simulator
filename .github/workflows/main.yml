@@ -22,8 +22,12 @@ jobs:
       - name: Cache conda
         uses: actions/cache@v2
         with:
-          path: ~/miniconda3/pkgs
+          path: |
+            ~/miniconda3/pkgs
+            ~/miniconda3/envs
           key: ${{ runner.os }}-conda-${{ hashFiles('Project/IronOxidationSimulator/config/environment.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-conda-
 
       - name: Set up Miniconda
         uses: conda-incubator/setup-miniconda@v2.2.0
