@@ -71,10 +71,15 @@ jobs:
         run: |
           rm -rf build dist
           if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
-            rm .\\Project\\IronOxidationSimulator\\src\\mainwindow.spec
+            if [[ -f ".\\Project\\IronOxidationSimulator\\src\\mainwindow.spec" ]]; then
+              rm .\\Project\\IronOxidationSimulator\\src\\mainwindow.spec
+            fi
           else
-            rm ./Project/IronOxidationSimulator/src/mainwindow.spec
+            if [[ -f "./Project/IronOxidationSimulator/src/mainwindow.spec" ]]; then
+              rm ./Project/IronOxidationSimulator/src/mainwindow.spec
+            fi
           fi
+
 
       - name: Build with PyInstaller (noconsole and noupx)
         shell: bash -l {0}
