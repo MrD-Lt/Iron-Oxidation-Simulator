@@ -22,12 +22,8 @@ jobs:
       - name: Cache conda
         uses: actions/cache@v2
         with:
-          path: |
-            ~/miniconda3/pkgs
-            ~/miniconda3/envs
+          path: ~/miniconda3/pkgs
           key: ${{ runner.os }}-conda-${{ hashFiles('Project/IronOxidationSimulator/config/environment.yml') }}
-          restore-keys: |
-            ${{ runner.os }}-conda-
 
       - name: Set up Miniconda
         uses: conda-incubator/setup-miniconda@v2.2.0
@@ -42,7 +38,6 @@ jobs:
         run: |
           conda env update --file Project/IronOxidationSimulator/config/environment.yml --prune
           conda list
-
       - name: Show Python version
         shell: bash -l {0}
         run: python --version
@@ -51,7 +46,7 @@ jobs:
         shell: bash -l {0}
         run: pip install pyinstaller
 
-      - name: Build with PyInstaller (default)
+      - name: Build with PyInstaller
         shell: bash -l {0}
         run: |
           if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
@@ -59,39 +54,8 @@ jobs:
           else
             pyinstaller --onefile --paths "./Project/IronOxidationSimulator/src" --add-data "./Project/IronOxidationSimulator/assets:./assets" --add-data "./Project/IronOxidationSimulator/src/ui:./ui" ./Project/IronOxidationSimulator/src/mainwindow.py
           fi
-
-      - name: Upload artifact (default)
+      - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ddz-default-${{ matrix.os }}
-          path: dist/
-
-      - name: Clean up
-        shell: bash -l {0}
-        run: |
-          rm -rf build dist
-          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
-            if [[ -f ".\\Project\\IronOxidationSimulator\\src\\mainwindow.spec" ]]; then
-              rm .\\Project\\IronOxidationSimulator\\src\\mainwindow.spec
-            fi
-          else
-            if [[ -f "./Project/IronOxidationSimulator/src/mainwindow.spec" ]]; then
-              rm ./Project/IronOxidationSimulator/src/mainwindow.spec
-            fi
-          fi
-
-
-      - name: Build with PyInstaller (noconsole and noupx)
-        shell: bash -l {0}
-        run: |
-          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
-            pyinstaller --onefile --noconsole --noupx --paths ".\\Project\\IronOxidationSimulator\\src" --add-data ".\\Project\\IronOxidationSimulator\\assets;./assets" --add-data ".\\Project\\IronOxidationSimulator\\src\\ui;./ui" .\\Project\\IronOxidationSimulator\\src\\mainwindow.py
-          else
-            pyinstaller --onefile --windowed --noupx --paths "./Project/IronOxidationSimulator/src" --add-data "./Project/IronOxidationSimulator/assets:./assets" --add-data "./Project/IronOxidationSimulator/src/ui:./ui" ./Project/IronOxidationSimulator/src/mainwindow.py
-          fi
-
-      - name: Upload artifact (noconsole and noupx)
-        uses: actions/upload-artifact@v2
-        with:
-          name: ddz-noconsole-noupx-${{ matrix.os }}
+          name: ddz-${{ matrix.os }}
           path: dist/
