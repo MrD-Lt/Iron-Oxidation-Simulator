@@ -47,7 +47,7 @@ jobs:
         shell: bash -l {0}
         run: pip install pyinstaller
 
-      - name: Build with PyInstaller
+      - name: Build with PyInstaller (default)
         shell: bash -l {0}
         run: |
           if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
@@ -56,8 +56,33 @@ jobs:
             pyinstaller --onefile --paths "./Project/IronOxidationSimulator/src" --add-data "./Project/IronOxidationSimulator/assets:./assets" --add-data "./Project/IronOxidationSimulator/src/ui:./ui" ./Project/IronOxidationSimulator/src/mainwindow.py
           fi
 
-      - name: Upload artifact
+      - name: Upload artifact (default)
         uses: actions/upload-artifact@v2
         with:
-          name: ddz-${{ matrix.os }}
+          name: ddz-default-${{ matrix.os }}
+          path: dist/
+
+      - name: Clean up
+        shell: bash -l {0}
+        run: |
+          rm -rf build dist
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            rm .\\Project\\IronOxidationSimulator\\src\\mainwindow.spec
+          else
+            rm ./Project/IronOxidationSimulator/src/mainwindow.spec
+          fi
+
+      - name: Build with PyInstaller (noconsole and noupx)
+        shell: bash -l {0}
+        run: |
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            pyinstaller --onefile --noconsole --noupx --paths ".\\Project\\IronOxidationSimulator\\src" --add-data ".\\Project\\IronOxidationSimulator\\assets;./assets" --add-data ".\\Project\\IronOxidationSimulator\\src\\ui;./ui" .\\Project\\IronOxidationSimulator\\src\\mainwindow.py
+          else
+            pyinstaller --onefile --windowed --noupx --paths "./Project/IronOxidationSimulator/src" --add-data "./Project/IronOxidationSimulator/assets:./assets" --add-data "./Project/IronOxidationSimulator/src/ui:./ui" ./Project/IronOxidationSimulator/src/mainwindow.py
+          fi
+
+      - name: Upload artifact (noconsole and noupx)
+        uses: actions/upload-artifact@v2
+        with:
+          name: ddz-noconsole-noupx-${{ matrix.os }}
           path: dist/
