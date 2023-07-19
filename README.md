@@ -50,6 +50,8 @@ Development_Log
    |   |-- log08_0807_FinishTestReactionOrder.txt
    |   |-- log09_1007_AddGithubAction.txt
    |   |-- log10_1507_ReactionOrder.txt
+   |   |-- log11_1607_Debug.txt
+   |   |-- log12_1807_AddComments&Docstrings.txt
 LICENSE
 Project
    |-- IronOxidationSimulator
@@ -86,6 +88,7 @@ Project
    |-- SoftWare
    |   |-- README.md
 README.md
+
 
 ```
 

@@ -3,9 +3,7 @@ from gui.result_window import ResultWindow
 from gui.visual_window import VisualWindow
 from utils.regression_analysis import calculate_regression, plot_regression
 from utils.save import save
-from PyQt5.QtGui import QPixmap, QPainter
 from matplotlib.figure import Figure
-
 
 
 class ButtonArea(QWidget):
@@ -13,6 +11,7 @@ class ButtonArea(QWidget):
         super().__init__(parent)
 
         self.result = {}
+        self.figures = {}
         self.main_window = parent
 
         layout = QHBoxLayout()
@@ -56,7 +55,7 @@ class ButtonArea(QWidget):
         self.save_button.clicked.connect(self.save_result)
 
     def calculate(self):
-    # 遍历所有选中的功能
+        # 遍历所有选中的功能
         for option, selected in self.main_window.settings.func_current_options.items():
             if selected:
                 # 根据每个功能执行相应的计算
@@ -91,8 +90,12 @@ class ButtonArea(QWidget):
                         )
                         # 保存结果
                         self.result[option] = {
-                            "sklearn": (x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope_sklearn, intercept_sklearn, se_slope_sklearn, se_intercept_sklearn, r_squared_sklearn),
-                            "no_sklearn": (x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope, se_intercept, r_squared)
+                            "sklearn": (
+                            x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope_sklearn, intercept_sklearn,
+                            se_slope_sklearn, se_intercept_sklearn, r_squared_sklearn),
+                            "no_sklearn": (
+                            x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope, se_intercept,
+                            r_squared)
                         }
                     else:
                         # 只进行一次计算
@@ -101,7 +104,9 @@ class ButtonArea(QWidget):
                         )
                         # 保存结果
                         self.result[option] = {
-                            "sklearn" if use_sklearn else "no_sklearn": (x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope, se_intercept, r_squared)
+                            "sklearn" if use_sklearn else "no_sklearn": (
+                            x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope, se_intercept,
+                            r_squared)
                         }
 
                     # 设置右侧部分的按钮为启用状态
@@ -112,7 +117,6 @@ class ButtonArea(QWidget):
                 elif option == "example":
                     # 执行 "example" 的计算...
                     ...
-
 
     def reset(self):
         # 设置右侧部分的按钮为禁用状态
@@ -144,35 +148,34 @@ class ButtonArea(QWidget):
     def show_visual(self):
         colors = {'no_sklearn': 'red', 'sklearn': 'blue'}  # 创建一个颜色字典，键是方法的名字，值是颜色
 
-        fig = Figure()
-        ax = fig.add_subplot(111)
-        legend_lines = []  # 用于保存所有图例的列表
-
         # 遍历所有选中的功能
         for option, selected in self.main_window.settings.func_current_options.items():
             if selected:
+                fig = Figure()  # 创建一个新的 Figure 对象
+                ax = fig.add_subplot(111)
+                legend_lines = []  # 用于保存所有图例的列表
+
                 if option == "reaction order analysis":
                     # 遍历每种方法的结果
                     for method, result in self.result[option].items():
                         # 调用 plot_regression 函数获取图例对象和 QPixmap 对象
-                        pixmap = plot_regression(*result, ax=ax, fig=fig, label=method,
-                                                              color=colors[method])  # 使用 color 参数
+                        pixmap = plot_regression(*result, ax=ax, fig=fig, label=method, color=colors[method])
 
                 elif option == "option2":
                     # 显示 option2 功能的结果...
                     pass
                 # 添加其他功能的处理...
 
-        self.visual_window = VisualWindow(pixmap, self)
-        self.visual_window.show()
-
+                self.figures[option] = fig  # 保存 Figure 对象
+                self.visual_window = VisualWindow(pixmap, self)
+                self.visual_window.show()
 
     def save_result(self):
         # 获取用户选择的文件路径
-        filename, _ = QFileDialog.getSaveFileName(self, "Save file", "", "All Files (*)")
-        if filename:
+        dirname = QFileDialog.getExistingDirectory(self, "Select directory")
+        if dirname:
             # 保存结果和图像
-            save(self.result, filename)
+            save(self.result, dirname, self.figures)  # 修改为 self.figures
 
     def update_start_button(self):
         func_option = self.main_window.settings.func_current_option
@@ -209,4 +212,3 @@ class SklearnOptionDialog(QDialog):
 
     def use_both(self):  # 新增函数
         return self.both_button.isChecked()
-

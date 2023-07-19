@@ -1,5 +1,4 @@
 from PyQt5.QtWidgets import QLabel, QVBoxLayout, QMainWindow, QWidget
-from PyQt5.QtGui import QPixmap
 from PyQt5 import QtCore
 
 class VisualWindow(QMainWindow):
