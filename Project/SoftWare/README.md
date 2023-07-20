@@ -7,7 +7,8 @@ This README guides you through downloading and running the Software.
 1. **macOS Users:** Download `ddz-macOS-latest.zip`
 2. **Windows Users:** Download `ddz-windows-latest.zip`
 
-The software packages are available in this repository. Click on the appropriate file and hit the `Download` button.
+The software packages are available in this [link](https://github.com/edsml-dd1522/Iron-Oxidation-Simulator/actions). 
+Click on the latest workflow run with a green mark, scroll down the page and in the end, you will find the download links.
 
 ## Extracting the Software
 
