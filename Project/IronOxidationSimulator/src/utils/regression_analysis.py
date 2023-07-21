@@ -6,7 +6,7 @@ Created: 2023-06-28
 Modified: 2023-07-18
 
 This file contains functions for performing regression analysis on data. 
-It includes functions for reading data, calculating linear regression, 
+It includes functions for reading data, calculating LINEAR regression,
 and plotting the regression line.
 """
 from PyQt5.QtGui import QPixmap, QImage
@@ -110,11 +110,11 @@ def plot_regression(x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, int
     ax.errorbar(x, y, yerr=[sdy_lower, sdy_upper], xerr=[sdx_lower, sdx_upper], fmt='o', color=color)
     ax.plot([np.min(x), np.max(x)], [slope * np.min(x) + intercept, slope * np.max(x) + intercept], '-', color=color)
     try:
-        ax.text(0.02, 0.98 - 0.06 * len(ax.texts), 
+        ax.text(0.02, 0.98 - 0.06 * len(ax.texts),
                 f"{label}: log[R0] = ({slope:.2f}±{se_slope:.4f})log[Fe] + ({intercept:.2f}±{se_intercept:.4f})",
                 transform=ax.transAxes, verticalalignment='top', color=color)
     except:
-        ax.text(0.02, 0.98 - 0.06 * len(ax.texts), 
+        ax.text(0.02, 0.98 - 0.06 * len(ax.texts),
                 f"{label}: log[R0] = ({slope:.2f}±{se_slope})log[Fe] + ({intercept:.2f}±{se_intercept})",
                 transform=ax.transAxes, verticalalignment='top', color=color)
 
@@ -129,6 +129,3 @@ def plot_regression(x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, int
     pixmap = QPixmap.fromImage(image)
 
     return pixmap
-
-
-

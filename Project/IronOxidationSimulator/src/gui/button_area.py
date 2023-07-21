@@ -130,20 +130,24 @@ class ButtonArea(QWidget):
         self.update_start_button()
 
     def show_result(self):
+        # 创建一个 ResultWindow 实例
+        self.result_window = ResultWindow(self)
+
         # 遍历所有选中的功能
         for option, selected in self.main_window.settings.func_current_options.items():
             if selected:
                 if option == "reaction order analysis":
                     # 遍历每种方法的结果
                     for method, result in self.result[option].items():
-                        # 创建一个 ResultWindow 实例并显示它
-                        self.result_window = ResultWindow(result[6:], self)
-                        self.result_window.setWindowTitle(f"Result Window - Reaction Order Analysis ({method})")
-                        self.result_window.show()
+                        # 将结果添加到 ResultWindow
+                        self.result_window.add_result(f"Reaction Order Analysis ({method})", result[6:])
                 elif option == "option2":
                     # 显示 option2 功能的结果...
                     pass
                 # 添加其他功能的处理...
+
+        # 显示 ResultWindow
+        self.result_window.show()
 
     def show_visual(self):
         colors = {'no_sklearn': 'red', 'sklearn': 'blue'}  # 创建一个颜色字典，键是方法的名字，值是颜色
