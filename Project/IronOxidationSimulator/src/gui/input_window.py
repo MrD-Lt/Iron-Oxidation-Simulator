@@ -1,5 +1,7 @@
 from PyQt5.QtCore import pyqtSignal
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QGroupBox, QPushButton, QFileDialog, QLabel, QTextEdit
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QGroupBox, QPushButton, QFileDialog, QLabel, QDialog
+
+from utils.input_help import DataInputDialog
 from utils.regression_analysis import read_data
 
 
@@ -24,9 +26,7 @@ class InputWindow(QWidget):
         # 创建手动输入部分
         self.manual_input_group = QGroupBox("Manual Input")
         manual_input_layout = QVBoxLayout()
-        self.manual_input_text = QTextEdit()
         self.manual_input_button = QPushButton("Confirm")
-        manual_input_layout.addWidget(self.manual_input_text)
         manual_input_layout.addWidget(self.manual_input_button)
         self.manual_input_group.setLayout(manual_input_layout)
         layout.addWidget(self.manual_input_group)
@@ -46,7 +46,7 @@ class InputWindow(QWidget):
         self.main_window.settings.settings_changed.connect(self.update_content)
 
         # 连接按钮点击事件
-        self.manual_input_button.clicked.connect(self.manual_input_confirmed)
+        self.manual_input_button.clicked.connect(self.manual_input)
         self.file_browse_button.clicked.connect(self.browse_file)
 
         # 初始化
@@ -65,13 +65,17 @@ class InputWindow(QWidget):
             self.manual_input_group.setEnabled(False)
             self.file_input_group.setEnabled(False)
 
-    def manual_input_confirmed(self):
-        text = self.manual_input_text.toPlainText()
-        # 解析文本并转化为数据
-        lines = text.splitlines()
-        self.data = [list(map(float, line.split(' '))) for line in lines if line]
-        self.emit_input_changed()  # 在这里发出 input_changed 信号
-        self.manual_input_text.clear()
+    def manual_input(self):
+        dialog = DataInputDialog(self)
+        if dialog.exec_() == QDialog.Accepted:
+            for index in range(dialog.tab_widget.count()):
+                tab = dialog.tab_widget.widget(index)
+                function = self.main_window.settings.func_current_options.keys()[index]
+                if self.main_window.settings.func_current_options[function]:
+                    self.data[function] = tab.get_input_data()  # 获取用户输入的数据
+                    self.emit_input_changed()  # 在这里发出 input_changed 信号
+        else:
+            self.data = {}
 
     def browse_file(self):
         file_path, _ = QFileDialog.getOpenFileName()

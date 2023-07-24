@@ -1,0 +1,8 @@
+/Users/leslieting/opt/anaconda3/envs/irp/bin/python /Users/leslieting/Documents/GitHub/master/Iron-Oxidation-Simulator/Project/IronOxidationSimulator/src/mainwindow.py
+QLayout::addChildLayout: layout "" already has a parent
+QLayout::addChildLayout: layout "" already has a parent
+QLayout::addChildLayout: layout "" already has a parent
+QLayout::addChildLayout: layout "" already has a parent
+QLayout::addChildLayout: layout "" already has a parent
+QLayout::addChildLayout: layout "" already has a parent
+QLayout::addChildLayout: layout "" already has a parent
