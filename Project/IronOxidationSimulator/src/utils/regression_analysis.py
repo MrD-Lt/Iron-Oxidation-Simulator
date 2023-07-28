@@ -54,6 +54,17 @@ def calculate_regression(x, y, sdx_absolute=None, sdy_absolute=None, use_sklearn
     Returns:
     tuple: The slope, intercept, standard error of the slope, standard error of the intercept, and the R-squared value.
     """
+    # Convert input data to NumPy arrays if they are not already
+    x = np.array(x)
+    y = np.array(y)
+    if sdx_absolute is not None:
+        sdx_absolute = np.array(sdx_absolute)
+    if sdy_absolute is not None:
+        sdy_absolute = np.array(sdy_absolute)
+
+    print("X:", x)  # Add this line
+    print("Y:", y)  # Add this line
+
     if use_sklearn:
         model = LinearRegression()
         model.fit(x.reshape(-1, 1), y)

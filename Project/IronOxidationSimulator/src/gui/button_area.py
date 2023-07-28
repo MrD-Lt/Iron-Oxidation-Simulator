@@ -67,16 +67,20 @@ class ButtonArea(QWidget):
                     use_both = dialog.use_both()  # 获取新的选项状态
 
                     # 获取已经读取的数据
+                    print(self.main_window.input_window.data)
                     data = self.main_window.input_window.data[option]
                     if data is None:
                         print("No data available")
                         return
                     try:
-                        x, y, sdx_absolute, sdx_upper, sdx_lower, sdy_absolute, sdy_upper, sdy_lower = data
-                    except ValueError:
-                        print("Invalid data format")
-                        return
-                    x, y, sdx_absolute, sdx_upper, sdx_lower, sdy_absolute, sdy_upper, sdy_lower = data
+                        x, y, sdx_absolute, sdx_upper, sdx_lower, sdy_absolute, sdy_upper, sdy_lower = data.values()
+                    except:
+                        try:
+                            x, y, sdx_absolute, sdx_upper, sdx_lower, sdy_absolute, sdy_upper, sdy_lower = data
+                        except ValueError:
+                            print("Invalid data format")
+                            return
+                    # x, y, sdx_absolute, sdx_upper, sdx_lower, sdy_absolute, sdy_upper, sdy_lower = data.values()
 
                     # 调用 regression_analysis.py 中的函数
                     if use_both:  # 如果用户选择了"Use both"
@@ -91,22 +95,25 @@ class ButtonArea(QWidget):
                         # 保存结果
                         self.result[option] = {
                             "sklearn": (
-                            x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope_sklearn, intercept_sklearn,
-                            se_slope_sklearn, se_intercept_sklearn, r_squared_sklearn),
+                                x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope_sklearn, intercept_sklearn,
+                                se_slope_sklearn, se_intercept_sklearn, r_squared_sklearn),
                             "no_sklearn": (
-                            x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope, se_intercept,
-                            r_squared)
+                                x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope,
+                                se_intercept,
+                                r_squared)
                         }
                     else:
                         # 只进行一次计算
+                        print(use_sklearn)
                         slope, intercept, se_slope, se_intercept, r_squared = calculate_regression(
                             x, y, sdx_absolute, sdy_absolute, use_sklearn=use_sklearn
                         )
                         # 保存结果
                         self.result[option] = {
                             "sklearn" if use_sklearn else "no_sklearn": (
-                            x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope, se_intercept,
-                            r_squared)
+                                x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope,
+                                se_intercept,
+                                r_squared)
                         }
 
                     # 设置右侧部分的按钮为启用状态

@@ -65,18 +65,21 @@ class InputWindow(QWidget):
             self.manual_input_group.setEnabled(False)
             self.file_input_group.setEnabled(False)
 
+    # 在 InputWindow 类的 manual_input 方法中
     def manual_input(self):
         dialog = DataInputDialog(self)
         if dialog.exec_() == QDialog.Accepted:
-            for index in range(dialog.tab_widget.count()):
-                tab = dialog.tab_widget.widget(index)
-                function = self.main_window.settings.func_current_options.keys()[index]
-                if self.main_window.settings.func_current_options[function]:
-                    self.data[function] = tab.get_input_data()  # 获取用户输入的数据
-                    self.emit_input_changed()  # 在这里发出 input_changed 信号
+            user_input_data = dialog.input_data
+            print("user_input_data: ", user_input_data)
+            selected_functions = [func for func, selected in self.main_window.settings.func_current_options.items() if
+                                  selected]
+            print("selected_functions: ", selected_functions)
+            for func in self.data_readers.keys():
+                if user_input_data[func]:
+                    self.data[func] = user_input_data[func]
+                    self.input_changed.emit()
         else:
             self.data = {}
-
     def browse_file(self):
         file_path, _ = QFileDialog.getOpenFileName()
         if file_path:

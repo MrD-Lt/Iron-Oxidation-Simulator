@@ -92,7 +92,7 @@ class MainWindow(QMainWindow):
 
     def check_calculate_button_state(self):
         # 如果有数据输入并且至少有一个功能被选中，就启用 "开始计算" 按钮
-        has_input = bool(self.input_window.data)
+        has_input = any(self.input_window.data.values())  # 检查输入窗口中是否有数据
         func_selected = any(self.settings.func_current_options.values())
         self.button_area.calculate_button.setEnabled(has_input and func_selected)
 
@@ -188,7 +188,7 @@ class Settings(QObject):
         self.save_current_option = "No"
         self.input_current_option = "None"
         self.func_current_options = {option: False for option in
-                                     ["reaction_order_analysis", "option2", "option3", "option4"]}
+                                     ["reaction order analysis", "option2", "option3", "option4"]}
         self.settings_changed.emit()
 
 
