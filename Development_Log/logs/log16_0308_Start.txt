@@ -1,0 +1,2 @@
+Changed the dialog when pressing the 'Start' so it could show different tabs.
+Tested the manual input and import data for 'reaction order analysis' and succeed.

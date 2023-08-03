@@ -80,6 +80,7 @@ class InputWindow(QWidget):
                     self.input_changed.emit()
         else:
             self.data = {}
+
     def browse_file(self):
         file_path, _ = QFileDialog.getOpenFileName()
         if file_path:
@@ -92,6 +93,7 @@ class InputWindow(QWidget):
                     if data_reader is not None:
                         # 读取文件数据
                         self.data[func_option] = data_reader(file_path)  # 直接使用相应的数据读取函数
+                        print(self.data)  # 打印 self.data
                         self.emit_input_changed()  # 发出 input_changed 信号
             # Update the "Start" button status
             self.main_window.button_area.update_start_button()

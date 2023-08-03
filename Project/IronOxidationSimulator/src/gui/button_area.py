@@ -1,4 +1,6 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QRadioButton, QDialog, QFileDialog
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QRadioButton, QDialog, QFileDialog, \
+    QTabWidget, QMessageBox, QErrorMessage
+from PyQt5.QtCore import Qt
 from gui.result_window import ResultWindow
 from gui.visual_window import VisualWindow
 from utils.regression_analysis import calculate_regression, plot_regression
@@ -55,19 +57,33 @@ class ButtonArea(QWidget):
         self.save_button.clicked.connect(self.save_result)
 
     def calculate(self):
+        # 执行计算前先判断是否有数据
+        if not self.main_window.input_window.data:
+            QMessageBox.critical(self, "Error", "No data loaded.", QMessageBox.Ok)
+            return
+
+        # 创建一个空列表来收集选中的功能
+        selected_features = []
+        for option, selected in self.main_window.settings.func_current_options.items():
+            if selected:
+                selected_features.append(option)
+
+        # 创建 OptionDialog 对象，将选中的功能列表作为参数传递
+        dialog = OptionDialog(selected_features, self)
+        if not dialog.exec():
+            return  # 用户点击了取消，所以我们不做任何事情
+
         # 遍历所有选中的功能
         for option, selected in self.main_window.settings.func_current_options.items():
             if selected:
                 # 根据每个功能执行相应的计算
                 if option == "reaction order analysis":
-                    # 打开 SklearnOptionDialog 并获取用户的选择
-                    dialog = SklearnOptionDialog(self)
-                    dialog.exec_()
-                    use_sklearn = dialog.use_sklearn()
-                    use_both = dialog.use_both()  # 获取新的选项状态
+                    # 从 dialog 对象中获取功能的选项状态
+                    options = dialog.get_options("reaction order analysis")
+                    use_sklearn = options.get("use_sklearn", False)
+                    use_both = options.get("use_both", False)
 
                     # 获取已经读取的数据
-                    print(self.main_window.input_window.data)
                     data = self.main_window.input_window.data[option]
                     if data is None:
                         print("No data available")
@@ -80,7 +96,6 @@ class ButtonArea(QWidget):
                         except ValueError:
                             print("Invalid data format")
                             return
-                    # x, y, sdx_absolute, sdx_upper, sdx_lower, sdy_absolute, sdy_upper, sdy_lower = data.values()
 
                     # 调用 regression_analysis.py 中的函数
                     if use_both:  # 如果用户选择了"Use both"
@@ -104,7 +119,6 @@ class ButtonArea(QWidget):
                         }
                     else:
                         # 只进行一次计算
-                        print(use_sklearn)
                         slope, intercept, se_slope, se_intercept, r_squared = calculate_regression(
                             x, y, sdx_absolute, sdy_absolute, use_sklearn=use_sklearn
                         )
@@ -126,40 +140,31 @@ class ButtonArea(QWidget):
                     ...
 
     def reset(self):
-        # 设置右侧部分的按钮为禁用状态
         self.result_button.setEnabled(False)
         self.visual_button.setEnabled(False)
         self.save_button.setEnabled(False)
-        # 重置 MainWindow 中的 Settings
         self.main_window.settings.reset()
-        # 重置 InputWindow
         self.main_window.input_window.reset()
         self.update_start_button()
 
     def show_result(self):
-        # 创建一个 ResultWindow 实例
         self.result_window = ResultWindow(self)
 
-        # 遍历所有选中的功能
         for option, selected in self.main_window.settings.func_current_options.items():
             if selected:
                 if option == "reaction order analysis":
-                    # 遍历每种方法的结果
                     for method, result in self.result[option].items():
-                        # 将结果添加到 ResultWindow
                         self.result_window.add_result(f"Reaction Order Analysis ({method})", result[6:])
                 elif option == "option2":
                     # 显示 option2 功能的结果...
                     pass
                 # 添加其他功能的处理...
 
-        # 显示 ResultWindow
         self.result_window.show()
 
     def show_visual(self):
         colors = {'no_sklearn': 'red', 'sklearn': 'blue'}  # 创建一个颜色字典，键是方法的名字，值是颜色
 
-        # 遍历所有选中的功能
         for option, selected in self.main_window.settings.func_current_options.items():
             if selected:
                 fig = Figure()  # 创建一个新的 Figure 对象
@@ -167,9 +172,7 @@ class ButtonArea(QWidget):
                 legend_lines = []  # 用于保存所有图例的列表
 
                 if option == "reaction order analysis":
-                    # 遍历每种方法的结果
                     for method, result in self.result[option].items():
-                        # 调用 plot_regression 函数获取图例对象和 QPixmap 对象
                         pixmap = plot_regression(*result, ax=ax, fig=fig, label=method, color=colors[method])
 
                 elif option == "option2":
@@ -182,44 +185,65 @@ class ButtonArea(QWidget):
                 self.visual_window.show()
 
     def save_result(self):
-        # 获取用户选择的文件路径
         dirname = QFileDialog.getExistingDirectory(self, "Select directory")
         if dirname:
-            # 保存结果和图像
             save(self.result, dirname, self.figures)  # 修改为 self.figures
 
     def update_start_button(self):
         func_option = self.main_window.settings.func_current_option
         input_option = self.main_window.settings.input_current_option
 
-        if func_option is not None and input_option is not None and self.main_window.input_window.data != {}:
+        if func_option is not None and input_option is not None:
             self.calculate_button.setEnabled(True)
         else:
             self.calculate_button.setEnabled(False)
 
 
-class SklearnOptionDialog(QDialog):
-    def __init__(self, parent=None):
+class OptionDialog(QDialog):
+    def __init__(self, selected_features, parent=None):
         super().__init__(parent)
 
-        layout = QVBoxLayout()
+        self.setWindowTitle("Options")
 
-        self.use_sklearn_button = QRadioButton("Use sklearn")
-        self.dont_use_sklearn_button = QRadioButton("Don't use sklearn")
-        self.both_button = QRadioButton("Use both")  # 新增选项
+        layout = QVBoxLayout()
+        self.tab_widget = QTabWidget()
+
+        self.tabs = {}
+        for feature in selected_features:
+            if feature == "reaction order analysis":
+                # 创建 Reaction Order Analysis 选项对话框并添加到标签页
+                tab = QWidget()
+                self.use_sklearn_button = QRadioButton("Use sklearn")
+                self.use_sklearn_button.setChecked(True)  # 设置为默认选项
+                self.dont_use_sklearn_button = QRadioButton("Don't use sklearn")
+                self.both_button = QRadioButton("Use both")
+
+                tab_layout = QVBoxLayout()
+                tab_layout.addWidget(self.use_sklearn_button)
+                tab_layout.addWidget(self.dont_use_sklearn_button)
+                tab_layout.addWidget(self.both_button)
+                tab.setLayout(tab_layout)
+
+                self.tabs[feature] = {"widget": tab,
+                                      "options": {"use_sklearn": self.use_sklearn_button, "use_both": self.both_button}}
+
+        for feature, tab in self.tabs.items():
+            self.tab_widget.addTab(tab["widget"], feature)
+
+        layout.addWidget(self.tab_widget)
 
         confirm_button = QPushButton("Confirm")
         confirm_button.clicked.connect(self.accept)
-
-        layout.addWidget(self.use_sklearn_button)
-        layout.addWidget(self.dont_use_sklearn_button)
-        layout.addWidget(self.both_button)  # 新增选项
         layout.addWidget(confirm_button)
 
         self.setLayout(layout)
+
+    def get_options(self, feature):
+        return {option: button.isChecked() for option, button in self.tabs[feature]["options"].items()}
 
     def use_sklearn(self):
         return self.use_sklearn_button.isChecked()
 
     def use_both(self):  # 新增函数
         return self.both_button.isChecked()
+

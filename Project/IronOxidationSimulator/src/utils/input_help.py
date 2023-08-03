@@ -12,7 +12,8 @@ class DataInputDialog(QDialog):
         # 输入数据的类型列表
         self.input_data = None
         self.data_types = {
-            'reaction order analysis': ['log[Fe]', 'logR0', 'Δlog[Fe] absolute', 'Δlog[Fe] upper', 'Δlog[Fe] lower', 'ΔlogR0 absolute', 'ΔlogR0 upper', 'ΔlogR0 lower'],
+            'reaction order analysis': ['log[Fe]', 'logR0', 'Δlog[Fe] absolute', 'Δlog[Fe] upper', 'Δlog[Fe] lower',
+                                        'ΔlogR0 absolute', 'ΔlogR0 upper', 'ΔlogR0 lower'],
             'other function': ['different', 'list', 'of', 'data', 'types']
         }
 
@@ -24,6 +25,11 @@ class DataInputDialog(QDialog):
             layout = QHBoxLayout()
 
             v_layout = QVBoxLayout()
+
+            # 创建全选/反选的复选框
+            select_all_checkbox = QCheckBox("Select all")
+            select_all_checkbox.stateChanged.connect(self.select_all)
+            v_layout.addWidget(select_all_checkbox)
 
             self.list_widget = QListWidget()
             for data_type in data_types:  # Create list widget items according to data types
@@ -39,6 +45,8 @@ class DataInputDialog(QDialog):
 
             for data_type in data_types:  # Add input fields and checkboxes according to data types
                 self.input_fields[data_type].setEnabled(False)
+                self.input_fields[data_type].textChanged.connect(
+                    lambda text, data_type=data_type: self.check_boxes[data_type].setChecked(bool(text)))
                 self.check_boxes[data_type].setEnabled(False)
                 h_layout = QHBoxLayout()  # 在每次添加之前重新创建 h_layout
                 h_layout.addWidget(QLabel(data_type))
@@ -60,6 +68,13 @@ class DataInputDialog(QDialog):
         main_layout.addWidget(self.tab_widget)
         self.setLayout(main_layout)
 
+    def select_all(self, state):
+        for index in range(self.list_widget.count()):
+            item = self.list_widget.item(index)
+            item.setCheckState(QtCore.Qt.Checked if state == QtCore.Qt.Checked else QtCore.Qt.Unchecked)
+            self.input_fields[item.text()].setEnabled(state == QtCore.Qt.Checked)
+            self.check_boxes[item.text()].setEnabled(state == QtCore.Qt.Checked)
+
     def update_input_fields(self, item):
         data_type = item.text()
         if item.checkState() == QtCore.Qt.Checked:
@@ -71,12 +86,16 @@ class DataInputDialog(QDialog):
             self.check_boxes[data_type].setChecked(False)
 
     def confirm_input(self):
-        for data_type in self.data_types[self.tab_widget.tabText(self.tab_widget.currentIndex())]:
+        selected_data_types = [self.list_widget.item(i).text() for i in range(self.list_widget.count())
+                               if self.list_widget.item(i).checkState() == QtCore.Qt.Checked]
+
+        # 在检查时，只检查那些被选中的数据类型
+        for data_type in selected_data_types:
             # Only check the check box if the input field text is not empty
             if self.input_fields[data_type].text():
                 print(f"{data_type} input field text: {self.input_fields[data_type].text()}")  # Added print statement
                 self.check_boxes[data_type].setChecked(True)
-        if all(check_box.isChecked() for check_box in self.check_boxes.values()):
+        if all(self.check_boxes[data_type].isChecked() for data_type in selected_data_types):
             self.input_data = self.get_input_data()  # Save the input data
             print(f"input_data: {self.input_data}")  # Print the input_data right after getting it
             self.accept()
@@ -85,6 +104,7 @@ class DataInputDialog(QDialog):
         else:
             QMessageBox.critical(self, "Invalid input", "Please input all the required data.", QMessageBox.Ok)
             self.input_data = None  # Set self.data to None instead of an empty dict
+
     def get_input_data(self):
         input_data = {
             self.tab_widget.tabText(i): {
