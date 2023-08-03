@@ -26,7 +26,7 @@ class MainWindow(QMainWindow):
 
         self.feature_actions = {
             "reaction order analysis": QAction("reaction order analysis", self, checkable=True),
-            "option2": QAction("option2", self, checkable=True),
+            "initial rate analysis": QAction("initial rate analysis", self, checkable=True),
             "option3": QAction("option3", self, checkable=True),
             "option4": QAction("option4", self, checkable=True),
         }
@@ -103,7 +103,7 @@ class MainWindow(QMainWindow):
         self.settings.set_func_option("reaction order analysis")
 
     def select_option2(self):
-        self.settings.set_func_option("Option2")
+        self.settings.set_func_option("initial rate analysis")
 
     def select_option3(self):
         self.settings.set_func_option("Option3")
@@ -165,7 +165,7 @@ class Settings(QObject):
         super().__init__()
 
         self.func_current_options = {option: False for option in
-                                     ["reaction order analysis", "option2", "option3", "option4"]}
+                                     ["reaction order analysis", "initial rate analysis", "option3", "option4"]}
 
         # 其余代码
         self.func_current_option = "None"
@@ -188,7 +188,7 @@ class Settings(QObject):
         self.save_current_option = "No"
         self.input_current_option = "None"
         self.func_current_options = {option: False for option in
-                                     ["reaction order analysis", "option2", "option3", "option4"]}
+                                     ["reaction order analysis", "initial rate analysis", "option3", "option4"]}
         self.settings_changed.emit()
 
 

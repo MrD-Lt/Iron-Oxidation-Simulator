@@ -1,0 +1,3 @@
+Began to add new feature "initial rate analysis"
+
+Trying to add the codes in different files. I have alreay left many interfaces for them.

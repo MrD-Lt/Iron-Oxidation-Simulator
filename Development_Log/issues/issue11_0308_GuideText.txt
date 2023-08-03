@@ -1,0 +1,3 @@
+Still having problems when displaying the guide text if the user choose more than one features.
+Maybe could try to use a scroll bar in guide area. Will solve this problem after finishing
+other parts of functions development.

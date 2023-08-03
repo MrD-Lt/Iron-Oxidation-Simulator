@@ -39,7 +39,13 @@ class SettingsWindow(QWidget):
         # 添加功能相关的提示文字
         func_guide_text = []
         if 'reaction order analysis' in selected_options:
-            func_guide_text.append("For reaction order analysis, please input your data in format A.")
+            func_guide_text.append("For reaction order analysis, please input your data in:\n"
+                                   "If import file: Excel format,\n"
+                                   "log[Fe], logR0, Δlog[Fe] absolute,\n"
+                                   "Δlog[Fe] upper, Δlog[Fe] lower,\n" 
+                                   "ΔlogR0 absolute, ΔlogR0 upper, ΔlogR0 lower\n"
+                                   "in different columns.\n"
+                                   "If manually input: follow the instructions.")
         if 'option2' in selected_options:
             func_guide_text.append("For Option 2, please input your data in format B.")
         if 'option3' in selected_options:

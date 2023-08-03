@@ -2,7 +2,8 @@ from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QGroupBox, QPushButton, QFileDialog, QLabel, QDialog
 
 from utils.input_help import DataInputDialog
-from utils.regression_analysis import read_data
+import utils.regression_analysis
+import utils.initial_rate
 
 
 class InputWindow(QWidget):
@@ -19,7 +20,8 @@ class InputWindow(QWidget):
 
         # 创建输入方法字典
         self.data_readers = {
-            "reaction order analysis": read_data,
+            "reaction order analysis": utils.regression_analysis.read_data,
+            "initial rate analysis":utils.initial_rate.read_data,
             # "other_function": other_data_reader,
         }
 
@@ -65,7 +67,7 @@ class InputWindow(QWidget):
             self.manual_input_group.setEnabled(False)
             self.file_input_group.setEnabled(False)
 
-    # 在 InputWindow 类的 manual_input 方法中
+
     def manual_input(self):
         dialog = DataInputDialog(self)
         if dialog.exec_() == QDialog.Accepted:

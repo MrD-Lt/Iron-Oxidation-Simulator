@@ -9,17 +9,25 @@ class DataInputDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
 
+        #用于展示需要哪些tabs
+        self.main_window = parent.main_window
         # 输入数据的类型列表
         self.input_data = None
         self.data_types = {
             'reaction order analysis': ['log[Fe]', 'logR0', 'Δlog[Fe] absolute', 'Δlog[Fe] upper', 'Δlog[Fe] lower',
                                         'ΔlogR0 absolute', 'ΔlogR0 upper', 'ΔlogR0 lower'],
+            'initial rate analysis':['Time (seconds)', '[Fe2+] (uM)', 'Threshold (10%-50%)'],
             'other function': ['different', 'list', 'of', 'data', 'types']
         }
 
         self.tab_widget = QTabWidget()
 
-        for function in parent.data_readers.keys():
+        selected_features = []
+        for option, selected in self.main_window.settings.func_current_options.items():
+            if selected:
+                selected_features.append(option)
+
+        for function in selected_features:
             data_types = self.data_types[function]  # Get data types for this function
             tab = QWidget()
             layout = QHBoxLayout()
@@ -91,7 +99,6 @@ class DataInputDialog(QDialog):
 
         # 在检查时，只检查那些被选中的数据类型
         for data_type in selected_data_types:
-            # Only check the check box if the input field text is not empty
             if self.input_fields[data_type].text():
                 print(f"{data_type} input field text: {self.input_fields[data_type].text()}")  # Added print statement
                 self.check_boxes[data_type].setChecked(True)
@@ -114,7 +121,7 @@ class DataInputDialog(QDialog):
             }
             for i in range(self.tab_widget.count())
         }
-        print(f"input_data: {input_data}")  # Added print statement
+        print(f"input_data: {input_data}")
         numeric_data = {
             func: {
                 data_type: list(map(float, values))
@@ -123,3 +130,5 @@ class DataInputDialog(QDialog):
             for func in input_data.keys()
         }
         return numeric_data
+
+

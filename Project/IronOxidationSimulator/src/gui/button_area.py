@@ -4,6 +4,7 @@ from PyQt5.QtCore import Qt
 from gui.result_window import ResultWindow
 from gui.visual_window import VisualWindow
 from utils.regression_analysis import calculate_regression, plot_regression
+from utils.initial_rate import calculate_rate_compare,calculate_rate
 from utils.save import save
 from matplotlib.figure import Figure
 
@@ -135,9 +136,39 @@ class ButtonArea(QWidget):
                     self.visual_button.setEnabled(True)
                     if self.main_window.settings.save_current_option == "Yes":
                         self.save_button.setEnabled(True)
-                elif option == "example":
-                    # 执行 "example" 的计算...
-                    ...
+                elif option == "initial rate analysis":
+                    # 从 dialog 对象中获取功能的选项状态
+                    options = dialog.get_options("initial rate analysiss")
+                    use_specific_threshold = options.get("Use specific threshold", False)
+                    dont_use_specific_threshold = options.get("Use a range between 10% to 50%", False)
+
+                    # 获取已经读取的数据
+                    data = self.main_window.input_window.data[option]
+                    if data is None:
+                        print("No data available")
+                        return
+                    try:
+                        time,conc,threshold = data.values()
+                    except:
+                        try:
+                            t,conc,threshold = data
+                        except ValueError:
+                            print("Invalid data format")
+                            return
+                    if use_specific_threshold:
+                        """
+                        未完成
+                        calculate_rate(time,conc,threshold)
+                        
+                        """
+
+                    else:
+                        """
+                        未完成
+                        calculate_rate_compare(time,conc)
+
+                        """
+
 
     def reset(self):
         self.result_button.setEnabled(False)
@@ -226,6 +257,21 @@ class OptionDialog(QDialog):
 
                 self.tabs[feature] = {"widget": tab,
                                       "options": {"use_sklearn": self.use_sklearn_button, "use_both": self.both_button}}
+
+            if feature == "initial rate analysis":
+                tab = QWidget()
+                self.use_specific_threshold = QRadioButton("Use specific threshold")
+                self.use_specific_threshold.setChecked(True)  # 设置为默认选项
+                self.dont_use_specific_threshold = QRadioButton("Use a range between 10% to 50%")
+
+                tab_layout = QVBoxLayout()
+                tab_layout.addWidget(self.use_specific_threshold)
+                tab_layout.addWidget(self.dont_use_specific_threshold)
+                tab.setLayout(tab_layout)
+
+                self.tabs[feature] = {"widget": tab,
+                                      "options": {"Use specific threshold": self.use_specific_threshold,
+                                                  "Use a range between 10% to 50%":self.dont_use_specific_threshold}}
 
         for feature, tab in self.tabs.items():
             self.tab_widget.addTab(tab["widget"], feature)
