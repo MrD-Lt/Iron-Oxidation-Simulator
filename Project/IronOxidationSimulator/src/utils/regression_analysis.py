@@ -62,9 +62,6 @@ def calculate_regression(x, y, sdx_absolute=None, sdy_absolute=None, use_sklearn
     if sdy_absolute is not None:
         sdy_absolute = np.array(sdy_absolute)
 
-    print("X:", x)  # Add this line
-    print("Y:", y)  # Add this line
-
     if use_sklearn:
         model = LinearRegression()
         model.fit(x.reshape(-1, 1), y)

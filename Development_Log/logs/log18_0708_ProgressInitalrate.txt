@@ -1,0 +1,2 @@
+Made some progress in developing the initial_rate.py.
+But haven't tested it for now.
