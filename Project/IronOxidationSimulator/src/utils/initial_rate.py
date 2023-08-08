@@ -1,6 +1,9 @@
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from PyQt5.QtGui import QPixmap, QImage
 
 
 # Plan to use the top threshold% data to do Linear regression
@@ -44,14 +47,57 @@ def calculate_rate_compare(time, conc):
 
 
 def cut_data(time, conc, threshold):
-    time_cutted = []
-    conc_cutted = []
-    conc_h = conc[-1]
-    conc_l = conc[0]
-    index = 0
-    for data_point in conc:
-        if (data_point - conc_l) <= (conc_h - conc_l) * threshold:
-            conc_cutted.append(data_point)
-            time_cutted.append(time[index])
-        index += 1
-    return time_cutted, conc_cutted
+    time = np.array(time)
+    conc = np.array(conc)
+    conc_l, conc_h = conc[0], conc[-1]
+    mask = (conc - conc_l) <= (conc_h - conc_l) * threshold
+    return time[mask], conc[mask]
+
+
+def plot_initial_rate(time, conc, slope, intercept, r_squared):
+    fig, ax = plt.subplots(figsize=(6, 4))
+
+    ax.scatter(time, conc, label="Data points", color="blue")
+    ax.plot(time, slope * time + intercept, '-', color="red",
+            label=f"Fit: y = {slope:.2f}x + {intercept:.2f}, R^2 = {r_squared:.2f}")
+
+    ax.set_xlabel('Time')
+    ax.set_ylabel('Concentration')
+    ax.legend(loc="best")
+
+    # Convert the matplotlib figure to a QPixmap
+    canvas = FigureCanvas(fig)
+    canvas.draw()
+    width, height = fig.get_size_inches() * fig.get_dpi()
+    image = QImage(canvas.buffer_rgba(), width, height, QImage.Format_ARGB32)
+    pixmap = QPixmap.fromImage(image)
+
+    return pixmap
+
+
+def plot_rate_comparison(time, conc, slopes, r_squared_values):
+    fig, ax = plt.subplots(figsize=(6, 4))
+
+    threshold_array = np.arange(0.1, 0.51, 0.05)
+    max_r2_index = np.argmax(r_squared_values)
+    min_r2_index = np.argmin(r_squared_values)
+
+    for i, slope in enumerate(slopes):
+        if i == max_r2_index or i == min_r2_index:
+            ax.plot(time, slope * time, label=f"Threshold: {threshold_array[i]:.2f}, R^2 = {r_squared_values[i]:.2f}")
+        else:
+            ax.plot(time, slope * time, alpha=0.5)  # Use lower alpha for other lines
+
+    ax.scatter(time, conc, label="Data points", color="blue")
+    ax.legend(loc="best")
+    ax.set_xlabel('Time')
+    ax.set_ylabel('Concentration')
+
+    # Convert the matplotlib figure to a QPixmap
+    canvas = FigureCanvas(fig)
+    canvas.draw()
+    width, height = fig.get_size_inches() * fig.get_dpi()
+    image = QImage(canvas.buffer_rgba(), width, height, QImage.Format_ARGB32)
+    pixmap = QPixmap.fromImage(image)
+
+    return pixmap

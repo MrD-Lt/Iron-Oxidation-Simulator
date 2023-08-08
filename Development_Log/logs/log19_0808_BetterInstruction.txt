@@ -1,0 +1,2 @@
+Created a better widget to display the instruction.
+Now no matter how long the text is, it could still display properly.
