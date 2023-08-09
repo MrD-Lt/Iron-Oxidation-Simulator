@@ -55,6 +55,7 @@ class InputWindow(QWidget):
         self.manual_input_group.setEnabled(False)
         self.file_input_group.setEnabled(False)
 
+
     def update_content(self):
         input_option = self.main_window.settings.input_current_option
         if input_option == "Manual Input":
@@ -77,11 +78,15 @@ class InputWindow(QWidget):
                                   selected]
             print("selected_functions: ", selected_functions)
             for func in self.data_readers.keys():
-                if user_input_data[func]:
+                try:
                     self.data[func] = user_input_data[func]
                     self.input_changed.emit()
+                except:
+                    continue
         else:
             self.data = {}
+        # Update the "Start" button status
+        self.main_window.button_area.update_start_button()
 
     def browse_file(self):
         file_path, _ = QFileDialog.getOpenFileName()

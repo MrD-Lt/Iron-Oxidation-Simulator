@@ -10,15 +10,28 @@ class ResultWindow(QMainWindow):
         self.tab_widget = QTabWidget(self)
         self.setCentralWidget(self.tab_widget)
 
-    def add_result(self, title, result):
-        slope, intercept, se_slope, se_intercept, r_squared = result
-        result_str = (
-            f"Slope: {slope}\n"
-            f"Intercept: {intercept}\n"
-            f"Standard error of slope: {se_slope}\n"
-            f"Standard error of intercept: {se_intercept}\n"
-            f"R Squared: {r_squared}"
-        )
+    def add_result(self, title, result, feature_name):
+        if feature_name == "Initial Rate Analysis":
+            try:
+                slope, intercept, r_squared = result['slopes'], result['intercepts'], result['r_squared_values']
+            except:
+                slope, intercept, r_squared = result['slope'],result['intercept'],result['r_squared']
+            result_str = (
+                f"Slope: {slope}\n"
+                f"Intercept: {intercept}\n"
+                f"R Squared: {r_squared}"
+            )
+        elif feature_name == "Reaction Order Analysis":
+            slope, intercept, se_slope, se_intercept, r_squared = result
+            result_str = (
+                f"Slope: {slope}\n"
+                f"Intercept: {intercept}\n"
+                f"Standard error of slope: {se_slope}\n"
+                f"Standard error of intercept: {se_intercept}\n"
+                f"R Squared: {r_squared}"
+            )
+        else:
+            result_str = "Invalid feature name or result format"
 
         # 创建一个新的标签页
         tab = QWidget(self.tab_widget)
@@ -30,3 +43,4 @@ class ResultWindow(QMainWindow):
 
         # 将标签页添加到 QTabWidget
         self.tab_widget.addTab(tab, title)
+

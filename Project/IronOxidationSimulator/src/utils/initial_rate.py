@@ -21,40 +21,67 @@ def read_data(filename):
 
 def calculate_rate(time, conc, threshold):
     cur_time, cur_conc = cut_data(time, conc, threshold)
+    time_2d = np.array(time).reshape(-1, 1)
+    cur_time = np.array(cur_time).reshape(-1, 1)
     model = LinearRegression()
     model.fit(cur_time, cur_conc)
     slope = model.coef_[0]
     intercept = model.intercept_
-    # Here the r squared we should use all the data, not the cutted data.
-    r_squared = model.score(time, conc)
+    r_squared = model.score(time_2d, conc)
 
-    return slope, intercept, r_squared
+    return {
+        'time': time,
+        'conc': conc,
+        'slope': slope,
+        'intercept': intercept,
+        'r_squared': r_squared
+    }
+
 
 
 def calculate_rate_compare(time, conc):
-    threshold_array = np.arange(0.1, 0.51, 0.05)
-    slope, intercept, r_squared = [], [], []
+    threshold_array = np.arange(0.1, 1., 0.05)
+    slopes, intercepts, r_squared_values = [], [], []
+    time_2d = np.array(time).reshape(-1, 1)
     for threshold in threshold_array:
-        cur_time, cur_conc = cut_data(time, conc,threshold)
+        cur_time, cur_conc = cut_data(time, conc, threshold)
+        cur_time = np.array(cur_time).reshape(-1, 1)
         model = LinearRegression()
         model.fit(cur_time, cur_conc)
-        slope.append(model.coef_[0])
-        intercept.append(model.intercept_)
-        # Here the r squared we should use all the data, not the cutted data.
-        r_squared.append(model.score(time, conc))
+        slopes.append(model.coef_[0])
+        intercepts.append(model.intercept_)
+        r_squared_values.append(model.score(time_2d, conc))
 
-    return slope, intercept, r_squared
+    return {
+        'time': time,
+        'conc': conc,
+        'slopes': slopes,
+        'intercepts': intercepts,
+        'r_squared_values': r_squared_values
+    }
 
 
 def cut_data(time, conc, threshold):
-    time = np.array(time)
     conc = np.array(conc)
+    time = np.array(time)
     conc_l, conc_h = conc[0], conc[-1]
-    mask = (conc - conc_l) <= (conc_h - conc_l) * threshold
+    try:
+        if conc_h > conc_l:  # 如果浓度是上升的
+            mask = (conc - conc_l) <= (conc_h - conc_l) * threshold[0]
+        else:  # 如果浓度是下降的
+            mask = (conc_l - conc) <= (conc_l - conc_h) * threshold[0]
+    except:
+        if conc_h > conc_l:  # 如果浓度是上升的
+            mask = (conc - conc_l) <= (conc_h - conc_l) * threshold
+        else:  # 如果浓度是下降的
+            mask = (conc_l - conc) <= (conc_l - conc_h) * threshold
+
     return time[mask], conc[mask]
 
 
 def plot_initial_rate(time, conc, slope, intercept, r_squared):
+    time = np.array(time)
+
     fig, ax = plt.subplots(figsize=(6, 4))
 
     ax.scatter(time, conc, label="Data points", color="blue")
@@ -75,18 +102,20 @@ def plot_initial_rate(time, conc, slope, intercept, r_squared):
     return pixmap
 
 
-def plot_rate_comparison(time, conc, slopes, r_squared_values):
+def plot_rate_comparison(time, conc, slopes, intercepts, r_squared_values):
+    time = np.array(time)
+
     fig, ax = plt.subplots(figsize=(6, 4))
 
-    threshold_array = np.arange(0.1, 0.51, 0.05)
+    threshold_array = np.arange(0.1, 1., 0.05)
     max_r2_index = np.argmax(r_squared_values)
     min_r2_index = np.argmin(r_squared_values)
 
-    for i, slope in enumerate(slopes):
+    for i, (slope, intercept) in enumerate(zip(slopes, intercepts)):
         if i == max_r2_index or i == min_r2_index:
-            ax.plot(time, slope * time, label=f"Threshold: {threshold_array[i]:.2f}, R^2 = {r_squared_values[i]:.2f}")
+            ax.plot(time, slope * time + intercept, label=f"Threshold: {threshold_array[i]:.2f}, R^2 = {r_squared_values[i]:.2f}")
         else:
-            ax.plot(time, slope * time, alpha=0.5)  # Use lower alpha for other lines
+            ax.plot(time, slope * time + intercept, alpha=0.5)  # Use lower alpha for other lines
 
     ax.scatter(time, conc, label="Data points", color="blue")
     ax.legend(loc="best")
