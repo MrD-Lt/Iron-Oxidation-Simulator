@@ -13,7 +13,7 @@ class DataInputDialog(QDialog):
         self.data_types = {
             'reaction order analysis': ['log[Fe]', 'logR0', 'Δlog[Fe] absolute', 'Δlog[Fe] upper', 'Δlog[Fe] lower',
                                         'ΔlogR0 absolute', 'ΔlogR0 upper', 'ΔlogR0 lower'],
-            'initial rate analysis': ['Time (seconds)', 'ln[Fe2+] (uM)', 'Threshold (10%-50%)'],
+            'initial rate analysis': ['Time (seconds)', 'ln[Fe2+] (uM)', 'Threshold (5%-20%)'],
             'other function': ['different', 'list', 'of', 'data', 'types']
         }
 

@@ -38,9 +38,8 @@ def calculate_rate(time, conc, threshold):
     }
 
 
-
 def calculate_rate_compare(time, conc):
-    threshold_array = np.arange(0.1, 1., 0.05)
+    threshold_array = np.arange(0.05, 0.2, 0.01)
     slopes, intercepts, r_squared_values = [], [], []
     time_2d = np.array(time).reshape(-1, 1)
     for threshold in threshold_array:
@@ -107,15 +106,16 @@ def plot_rate_comparison(time, conc, slopes, intercepts, r_squared_values):
 
     fig, ax = plt.subplots(figsize=(6, 4))
 
-    threshold_array = np.arange(0.1, 1., 0.05)
+    threshold_array = np.arange(0.05, 0.2, 0.01)
     max_r2_index = np.argmax(r_squared_values)
     min_r2_index = np.argmin(r_squared_values)
 
     for i, (slope, intercept) in enumerate(zip(slopes, intercepts)):
         if i == max_r2_index or i == min_r2_index:
-            ax.plot(time, slope * time + intercept, label=f"Threshold: {threshold_array[i]:.2f}, R^2 = {r_squared_values[i]:.2f}")
+            ax.plot(time, slope * time + intercept,
+                    label=f"Threshold: {threshold_array[i]:.2f}, R^2 = {r_squared_values[i]:.2f}")
         else:
-            ax.plot(time, slope * time + intercept, alpha=0.5)  # Use lower alpha for other lines
+            ax.plot(time, slope * time + intercept, alpha=0.6)  # Use lower alpha for other lines
 
     ax.scatter(time, conc, label="Data points", color="blue")
     ax.legend(loc="best")

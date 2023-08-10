@@ -1,11 +1,9 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QRadioButton, QDialog, QFileDialog, \
-    QTabWidget, QMessageBox, QErrorMessage
-from PyQt5.QtCore import Qt
+    QTabWidget, QMessageBox
+
 from gui.result_window import ResultWindow
 from gui.visual_window import VisualWindow
-from utils.regression_analysis import calculate_regression, plot_regression
-
-from utils.initial_rate import calculate_rate_compare,calculate_rate, plot_initial_rate, plot_rate_comparison
+from utils import regression_analysis, initial_rate, rate_const
 from utils.save import save
 from matplotlib.figure import Figure
 
@@ -102,11 +100,11 @@ class ButtonArea(QWidget):
                     # 调用 regression_analysis.py 中的函数
                     if use_both:  # 如果用户选择了"Use both"
                         # 先使用sklearn进行计算
-                        slope_sklearn, intercept_sklearn, se_slope_sklearn, se_intercept_sklearn, r_squared_sklearn = calculate_regression(
+                        slope_sklearn, intercept_sklearn, se_slope_sklearn, se_intercept_sklearn, r_squared_sklearn = regression_analysis.calculate_regression(
                             x, y, sdx_absolute, sdy_absolute, use_sklearn=True
                         )
                         # 再不使用sklearn进行计算
-                        slope, intercept, se_slope, se_intercept, r_squared = calculate_regression(
+                        slope, intercept, se_slope, se_intercept, r_squared = regression_analysis.calculate_regression(
                             x, y, sdx_absolute, sdy_absolute, use_sklearn=False
                         )
                         # 保存结果
@@ -121,7 +119,7 @@ class ButtonArea(QWidget):
                         }
                     else:
                         # 只进行一次计算
-                        slope, intercept, se_slope, se_intercept, r_squared = calculate_regression(
+                        slope, intercept, se_slope, se_intercept, r_squared = regression_analysis.calculate_regression(
                             x, y, sdx_absolute, sdy_absolute, use_sklearn=use_sklearn
                         )
                         # 保存结果
@@ -142,7 +140,7 @@ class ButtonArea(QWidget):
                     # 从 dialog 对象中获取功能的选项状态
                     options = dialog.get_options("initial rate analysis")
                     use_specific_threshold = options.get("Use specific threshold")
-                    dont_use_specific_threshold = options.get("Use a range between 10% to 50%")
+                    dont_use_specific_threshold = options.get("Use a range between 5% to 20%")
 
                     # 获取已经读取的数据
                     data = self.main_window.input_window.data[option]
@@ -157,11 +155,32 @@ class ButtonArea(QWidget):
                         return
 
                     if use_specific_threshold:
-                        rate_result = calculate_rate(time, conc, threshold)
+                        rate_result = initial_rate.calculate_rate(time, conc, threshold)
                         self.result[option] = {"Use specific threshold": rate_result}
                     else:
-                        rate_results = calculate_rate_compare(time, conc)
-                        self.result[option] = {"Use a range between 10% to 50%": rate_results}
+                        rate_results = initial_rate.calculate_rate_compare(time, conc)
+                        self.result[option] = {"Use a range between 5% to 20%": rate_results}
+
+                    # 设置右侧部分的按钮为启用状态
+                    self.result_button.setEnabled(True)
+                    self.visual_button.setEnabled(True)
+                    if self.main_window.settings.save_current_option == "Yes":
+                        self.save_button.setEnabled(True)
+
+                elif option == "rate const analysis":
+                    data = self.main_window.input_window.data[option]
+                    if data is None:
+                        print("No data available")
+                        return
+
+                    try:
+                        time, conc, threshold = data.values()
+                    except ValueError:
+                        print("Invalid data format")
+                        return
+
+                    rate_result = rate_const.calculate_rate(time, conc)
+                    self.result[option] = {"": rate_result}
 
                     # 设置右侧部分的按钮为启用状态
                     self.result_button.setEnabled(True)
@@ -184,10 +203,15 @@ class ButtonArea(QWidget):
             if selected:
                 if option == "reaction order analysis":
                     for method, result in self.result[option].items():
-                        self.result_window.add_result(f"Reaction Order Analysis ({method})", result[6:],"Reaction Order Analysis")
+                        self.result_window.add_result(f"Reaction Order Analysis ({method})", result[6:],
+                                                      "Reaction Order Analysis")
                 elif option == "initial rate analysis":
                     for method, result in self.result[option].items():
-                        self.result_window.add_result(f"Initial Rate Analysis ({method})", result,"Initial Rate Analysis")
+                        self.result_window.add_result(f"Initial Rate Analysis ({method})", result,
+                                                      "Initial Rate Analysis")
+                elif option == "rate const analysis":
+                    for method, result in self.result[option].items():
+                        self.result_window.add_result(f"Rate Const Analysis ({method})", result, "Rate Const Analysis")
 
             # 添加其他功能的处理...
 
@@ -205,12 +229,13 @@ class ButtonArea(QWidget):
 
                 if option == "reaction order analysis":
                     for method, result in self.result[option].items():
-                        pixmap = plot_regression(*result, ax=ax, fig=fig, label=method, color=colors[method])
+                        pixmap = regression_analysis.plot_regression(*result, ax=ax, fig=fig, label=method,
+                                                                     color=colors[method])
 
                 elif option == "initial rate analysis":
 
                     for method, result in self.result[option].items():
-                        print("Check!!Here!!!!",method,result)
+
                         time = result['time']
                         conc = result['conc']
 
@@ -218,14 +243,23 @@ class ButtonArea(QWidget):
                             slope = result['slope']
                             intercept = result['intercept']
                             r_squared = result['r_squared']
-                            pixmap = plot_initial_rate(time, conc, slope, intercept, r_squared)
+                            pixmap = initial_rate.plot_initial_rate(time, conc, slope, intercept, r_squared)
 
-                        elif method == "Use a range between 10% to 100%":
-                            print("这次看这里！！！！\n\n",result)
+                        elif method == "Use a range between 5% to 20%":
                             slopes = result['slopes']
                             intercepts = result['intercepts']
                             r_squared_values = result['r_squared_values']
-                            pixmap = plot_rate_comparison(time, conc, slopes, intercepts, r_squared_values)
+                            pixmap = initial_rate.plot_rate_comparison(time, conc, slopes, intercepts, r_squared_values)
+
+
+                elif option == "rate const analysis":
+                    for method, result in self.result[option].items():
+                        time = result['time']
+                        conc = result['conc']
+                        slope = result['slope']
+                        intercept = result['intercept']
+                        r_squared = result['r_squared']
+                        pixmap = rate_const.plot(time, conc, slope, intercept, r_squared)
 
                 self.figures[option] = fig  # 保存 Figure 对象
 
@@ -243,7 +277,7 @@ class ButtonArea(QWidget):
     def update_start_button(self):
         func_option = self.main_window.settings.func_current_option
         input_option = self.main_window.settings.input_current_option
-        print("func_option: ",func_option,"\ninput_option: ",input_option)
+        print("func_option: ", func_option, "\ninput_option: ", input_option)
         if func_option is not None and input_option is not None:
             self.calculate_button.setEnabled(True)
         else:
@@ -282,7 +316,7 @@ class OptionDialog(QDialog):
                 tab = QWidget()
                 self.use_specific_threshold = QRadioButton("Use specific threshold")
                 self.use_specific_threshold.setChecked(True)  # 设置为默认选项
-                self.dont_use_specific_threshold = QRadioButton("Use a range between 10% to 50%")
+                self.dont_use_specific_threshold = QRadioButton("Use a range between 5% to 20%")
 
                 tab_layout = QVBoxLayout()
                 tab_layout.addWidget(self.use_specific_threshold)
@@ -291,7 +325,7 @@ class OptionDialog(QDialog):
 
                 self.tabs[feature] = {"widget": tab,
                                       "options": {"Use specific threshold": self.use_specific_threshold,
-                                                  "Use a range between 10% to 50%":self.dont_use_specific_threshold}}
+                                                  "Use a range between 5% to 20%": self.dont_use_specific_threshold}}
 
         for feature, tab in self.tabs.items():
             self.tab_widget.addTab(tab["widget"], feature)
@@ -312,4 +346,3 @@ class OptionDialog(QDialog):
 
     def use_both(self):  # 新增函数
         return self.both_button.isChecked()
-
