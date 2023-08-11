@@ -1,6 +1,3 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QHBoxLayout
-
-
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QScrollArea, QTextEdit
 
 
@@ -69,8 +66,11 @@ class SettingsWindow(QWidget):
                                    "If import file: Excel format,\n"
                                    "If manually input: follow the instructions.")
 
-        if 'option3' in selected_options:
-            func_guide_text.append("For Option 3, please input your data in format C.")
+        if 'rate const analysis' in selected_options:
+            func_guide_text.append("For rate const analysis, please input your data in format C.")
+
+        if '3D plane plot' in selected_options:
+            func_guide_text.append("For 3D plane plot, please input your data in format C.")
 
         # 如果有功能相关的提示文字，则添加到 guide_text，并添加分界线
         divider = "\n" + "-" * 30 + "\n"  # 分界线

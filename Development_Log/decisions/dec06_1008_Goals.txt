@@ -1,6 +1,6 @@
 Planned to complete these features:
-1. reaction order analysis
-2. initial rate analysis
-3. rate constant analysis
+1. reaction order analysis ✅
+2. initial rate analysis ✅
+3. rate constant analysis ✅
 4. 3D plot (PH, time, conc)
 5. basic display of data

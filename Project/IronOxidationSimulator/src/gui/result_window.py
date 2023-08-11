@@ -38,6 +38,10 @@ class ResultWindow(QMainWindow):
                 f"R Squared: {r_squared}"
             )
 
+        elif feature_name == "3D plane plot":
+            # TODO
+            pass
+
         else:
             result_str = "Invalid feature name or result format"
 

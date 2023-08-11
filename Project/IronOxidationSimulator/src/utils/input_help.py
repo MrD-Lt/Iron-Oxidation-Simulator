@@ -2,6 +2,7 @@ from PyQt5 import QtCore
 from PyQt5.QtWidgets import QWidget, QDialog, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QListWidget, \
     QListWidgetItem, QCheckBox, QMessageBox, QTabWidget
 
+
 class DataInputDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -15,6 +16,7 @@ class DataInputDialog(QDialog):
                                         'ΔlogR0 absolute', 'ΔlogR0 upper', 'ΔlogR0 lower'],
             'initial rate analysis': ['Time (seconds)', '[Fe2+] (uM)', 'Threshold (5%-20%)'],
             'rate const analysis': ['Time (seconds)', '[Fe2+] (uM)'],
+            '3D plane plot': ['pH', 'ΔpH', 'logFe', 'ΔlogFe', 'logR', 'ΔlogR'],
             'other function': ['different', 'list', 'of', 'data', 'types']
         }
 
@@ -111,8 +113,10 @@ class DataInputDialog(QDialog):
 
     def confirm_input(self):
         selected_data_types = [self.list_widgets[self.tab_widget.tabText(self.tab_widget.currentIndex())].item(i).text()
-                               for i in range(self.list_widgets[self.tab_widget.tabText(self.tab_widget.currentIndex())].count())
-                               if self.list_widgets[self.tab_widget.tabText(self.tab_widget.currentIndex())].item(i).checkState() == QtCore.Qt.Checked]
+                               for i in
+                               range(self.list_widgets[self.tab_widget.tabText(self.tab_widget.currentIndex())].count())
+                               if self.list_widgets[self.tab_widget.tabText(self.tab_widget.currentIndex())].item(
+                i).checkState() == QtCore.Qt.Checked]
 
         current_tab = self.tab_widget.tabText(self.tab_widget.currentIndex())
         for data_type in selected_data_types:

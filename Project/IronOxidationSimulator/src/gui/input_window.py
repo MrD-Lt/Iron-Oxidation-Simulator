@@ -5,6 +5,7 @@ from utils.input_help import DataInputDialog
 import utils.regression_analysis
 import utils.initial_rate
 import utils.rate_const
+import utils.plane3D_plot
 
 
 class InputWindow(QWidget):
@@ -19,11 +20,14 @@ class InputWindow(QWidget):
 
         layout = QVBoxLayout()
 
+        self.plane3D_plotter = utils.plane3D_plot.Plane3DPlotter()
+
         # 创建输入方法字典
         self.data_readers = {
             "reaction order analysis": utils.regression_analysis.read_data,
-            "initial rate analysis":utils.initial_rate.read_data,
-            "rate const analysis":utils.rate_const.read_data,
+            "initial rate analysis": utils.initial_rate.read_data,
+            "rate const analysis": utils.rate_const.read_data,
+            "3D plane plot": self.plane3D_plotter.read_data,
             # "other_function": other_data_reader,
         }
 
@@ -57,7 +61,6 @@ class InputWindow(QWidget):
         self.manual_input_group.setEnabled(False)
         self.file_input_group.setEnabled(False)
 
-
     def update_content(self):
         input_option = self.main_window.settings.input_current_option
         if input_option == "Manual Input":
@@ -69,7 +72,6 @@ class InputWindow(QWidget):
         else:  # 无
             self.manual_input_group.setEnabled(False)
             self.file_input_group.setEnabled(False)
-
 
     def manual_input(self):
         dialog = DataInputDialog(self)

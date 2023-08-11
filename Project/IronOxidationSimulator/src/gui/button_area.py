@@ -1,9 +1,9 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QRadioButton, QDialog, QFileDialog, \
     QTabWidget, QMessageBox
-
 from gui.result_window import ResultWindow
 from gui.visual_window import VisualWindow
-from utils import regression_analysis, initial_rate, rate_const
+from utils import regression_analysis, initial_rate, rate_const, plane3D_plot
+from utils.plane3D_plot import Plane3DPlotter
 from utils.save import save
 from matplotlib.figure import Figure
 
@@ -187,6 +187,34 @@ class ButtonArea(QWidget):
                     self.visual_button.setEnabled(True)
                     if self.main_window.settings.save_current_option == "Yes":
                         self.save_button.setEnabled(True)
+                elif option == "3D plane plot":
+                    # 获取已经读取的数据
+                    data = self.main_window.input_window.data[option]
+                    if data is None:
+                        print("No data available")
+                        return
+                    try:
+                        pH, deltapH, logFe, deltalogFe, logR, deltalogR = data.values()
+                    except:
+                        try:
+                            pH, deltapH, logFe, deltalogFe, logR, deltalogR = data
+                        except ValueError:
+                            print("Invalid data format")
+                            return
+
+                    # 调用 plane3D_plot.py 中的函数
+                    plane_plotter = Plane3DPlotter()  # 创建实例
+                    params, r_squared = plane_plotter.perform_analysis(pH, logFe, logR)
+                    # 保存结果
+                    self.result[option] = {
+                        "Default": (pH, logFe, logR, params, r_squared)
+                    }
+
+                    # 设置右侧部分的按钮为启用状态
+                    self.result_button.setEnabled(True)
+                    self.visual_button.setEnabled(True)
+                    if self.main_window.settings.save_current_option == "Yes":
+                        self.save_button.setEnabled(True)
 
     def reset(self):
         self.result_button.setEnabled(False)
@@ -211,8 +239,11 @@ class ButtonArea(QWidget):
                                                       "Initial Rate Analysis")
                 elif option == "rate const analysis":
                     for method, result in self.result[option].items():
-                        print("查看此处！！！\n\n", result)
                         self.result_window.add_result(f"Rate Const Analysis ({method})", result, "Rate Const Analysis")
+                elif option == "3D plane plot":
+                    for method, result in self.result[option].items():
+                        print("查看此处！！！\n\n", result)
+                        self.result_window.add_result(f"3D Plane Plot ({method})", result, "3D Plane Plot")
 
             # 添加其他功能的处理...
 
@@ -264,6 +295,36 @@ class ButtonArea(QWidget):
                         r_squared = result['r_squared']
                         pixmap = rate_const.plot(time, conc, slope, intercept, r_squared)
 
+
+                elif option == "3D plane plot":
+                    for method, result in self.result[option].items():
+                        fig = Figure()  # 创建一个新的 Figure 对象
+
+                        ax = fig.add_subplot(111, projection='3d')
+
+                        # 从结果中解压数据
+
+                        pH, logFe, logR, params, r_squared = result
+
+                        plane_plotter = Plane3DPlotter()
+                        plane_plotter.plot_3D_data(pH, logFe, logR, ax=ax)  # 创建3D散点图
+
+                        plane_plotter.plot_fitted_plane(ax, pH, logFe, params)  # 添加拟合的平面
+
+                        # 显示方程和R^2值
+
+                        equation_str = f"logR_0 = {params[1]:.2f}pH + {params[2]:.2f}logFe_0 + {params[0]:.2f}"
+
+                        ax.set_title(equation_str)
+
+                        ax.text(0.02, 0.98, 0.02, s=f'R^2={r_squared:.2f}', transform=ax.transAxes, verticalalignment='top')
+
+
+                        pixmap = plane_plotter.fig_to_pixmap(fig)  # 转换Figure为QPixmap
+
+                        self.visual_window = VisualWindow(pixmap, self)
+
+
                 self.figures[option] = fig  # 保存 Figure 对象
 
                 if pixmap is not None:
@@ -285,7 +346,6 @@ class ButtonArea(QWidget):
             self.calculate_button.setEnabled(True)
         else:
             self.calculate_button.setEnabled(False)
-
 
 class OptionDialog(QDialog):
     def __init__(self, selected_features, parent=None):
@@ -332,15 +392,27 @@ class OptionDialog(QDialog):
 
             if feature == "rate const analysis":
                 tab = QWidget()
-                self.default = QRadioButton("Default")
-                self.default.setChecked(True)  # 设置为默认选项
+                self.default1 = QRadioButton("Default")
+                self.default1.setChecked(True)  # 设置为默认选项
 
                 tab_layout = QVBoxLayout()
-                tab_layout.addWidget(self.default)
+                tab_layout.addWidget(self.default1)
                 tab.setLayout(tab_layout)
 
                 self.tabs[feature] = {"widget": tab,
-                                      "options": {"Default": self.default}}
+                                      "options": {"Default": self.default1}}
+
+            if feature == "3D plane plot":
+                tab = QWidget()
+                self.default2 = QRadioButton("Default")
+                self.default2.setChecked(True)  # 设置为默认选项
+
+                tab_layout = QVBoxLayout()
+                tab_layout.addWidget(self.default2)
+                tab.setLayout(tab_layout)
+
+                self.tabs[feature] = {"widget": tab,
+                                      "options": {"Default": self.default2}}
 
 
         for feature, tab in self.tabs.items():

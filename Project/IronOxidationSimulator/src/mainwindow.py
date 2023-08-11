@@ -28,7 +28,7 @@ class MainWindow(QMainWindow):
             "reaction order analysis": QAction("reaction order analysis", self, checkable=True),
             "initial rate analysis": QAction("initial rate analysis", self, checkable=True),
             "rate const analysis": QAction("rate const analysis", self, checkable=True),
-            "option4": QAction("option4", self, checkable=True),
+            "3D plane plot": QAction("3D plane plot", self, checkable=True),
         }
         self.func_menu = self.menu.addMenu("Feature selections")
         for action in self.feature_actions.values():
@@ -109,7 +109,7 @@ class MainWindow(QMainWindow):
         self.settings.set_func_option("rate const analysis")
 
     def select_option4(self):
-        self.settings.set_func_option("Option4")
+        self.settings.set_func_option("3D plane plot")
 
     def select_option5(self):
         self.settings.set_input_option("Manual Input")
@@ -165,7 +165,8 @@ class Settings(QObject):
         super().__init__()
 
         self.func_current_options = {option: False for option in
-                                     ["reaction order analysis", "initial rate analysis", "rate const analysis", "option4"]}
+                                     ["reaction order analysis", "initial rate analysis",
+                                      "rate const analysis", "3D plane plot"]}
 
         # 其余代码
         self.func_current_option = "None"
@@ -188,7 +189,8 @@ class Settings(QObject):
         self.save_current_option = "No"
         self.input_current_option = "None"
         self.func_current_options = {option: False for option in
-                                     ["reaction order analysis", "initial rate analysis", "rate const analysis", "option4"]}
+                                     ["reaction order analysis", "initial rate analysis",
+                                      "rate const analysis", "3D plane plot"]}
         self.settings_changed.emit()
 
 
