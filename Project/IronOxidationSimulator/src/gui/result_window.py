@@ -24,12 +24,20 @@ class ResultWindow(QMainWindow):
         elif feature_name == "Reaction Order Analysis":
             slope, intercept, se_slope, se_intercept, r_squared = result
             result_str = (
-                f"Slope: {slope}\n"
-                f"Intercept: {intercept}\n"
-                f"Standard error of slope: {se_slope}\n"
-                f"Standard error of intercept: {se_intercept}\n"
+                f"initial rate: {slope}\n"
+                f"initial conc: {intercept}\n"
+                f"Standard error of the initial rate: {se_slope}\n"
+                f"Standard error of the initial conc: {se_intercept}\n"
                 f"R Squared: {r_squared}"
             )
+        elif feature_name == "Rate Const Analysis":
+            slope, intercept, r_squared = result['slope'], result['intercept'],result['r_squared']
+            result_str = (
+                f"rate constant: {slope}\n"
+                f"Intercept: {intercept}\n"
+                f"R Squared: {r_squared}"
+            )
+
         else:
             result_str = "Invalid feature name or result format"
 

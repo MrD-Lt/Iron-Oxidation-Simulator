@@ -6,7 +6,6 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from PyQt5.QtGui import QPixmap, QImage
 
 
-
 def read_data(filename):
     try:
         data = pd.read_excel(filename)
@@ -19,7 +18,6 @@ def read_data(filename):
 
 
 def calculate_rate(time, conc):
-
     conc = np.log(conc)
 
     time_2d = np.array(time).reshape(-1, 1)
@@ -39,8 +37,6 @@ def calculate_rate(time, conc):
     }
 
 
-
-
 def plot(time, conc, slope, intercept, r_squared):
     time = np.array(time)
 
@@ -51,7 +47,7 @@ def plot(time, conc, slope, intercept, r_squared):
             label=f"Fit: y = {slope:.2f}x + {intercept:.2f}, R^2 = {r_squared:.2f}")
 
     ax.set_xlabel('Time')
-    ax.set_ylabel('Concentration')
+    ax.set_ylabel('ln_Concentration')
     ax.legend(loc="best")
 
     # Convert the matplotlib figure to a QPixmap
@@ -62,4 +58,3 @@ def plot(time, conc, slope, intercept, r_squared):
     pixmap = QPixmap.fromImage(image)
 
     return pixmap
-

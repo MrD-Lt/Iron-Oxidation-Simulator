@@ -174,13 +174,13 @@ class ButtonArea(QWidget):
                         return
 
                     try:
-                        time, conc, threshold = data.values()
+                        time, conc = data.values()
                     except ValueError:
                         print("Invalid data format")
                         return
 
                     rate_result = rate_const.calculate_rate(time, conc)
-                    self.result[option] = {"": rate_result}
+                    self.result[option] = {"Default": rate_result}
 
                     # 设置右侧部分的按钮为启用状态
                     self.result_button.setEnabled(True)
@@ -211,6 +211,7 @@ class ButtonArea(QWidget):
                                                       "Initial Rate Analysis")
                 elif option == "rate const analysis":
                     for method, result in self.result[option].items():
+                        print("查看此处！！！\n\n", result)
                         self.result_window.add_result(f"Rate Const Analysis ({method})", result, "Rate Const Analysis")
 
             # 添加其他功能的处理...
@@ -253,9 +254,11 @@ class ButtonArea(QWidget):
 
 
                 elif option == "rate const analysis":
+
                     for method, result in self.result[option].items():
+
                         time = result['time']
-                        conc = result['conc']
+                        conc = result['ln_conc']
                         slope = result['slope']
                         intercept = result['intercept']
                         r_squared = result['r_squared']
@@ -326,6 +329,19 @@ class OptionDialog(QDialog):
                 self.tabs[feature] = {"widget": tab,
                                       "options": {"Use specific threshold": self.use_specific_threshold,
                                                   "Use a range between 5% to 20%": self.dont_use_specific_threshold}}
+
+            if feature == "rate const analysis":
+                tab = QWidget()
+                self.default = QRadioButton("Default")
+                self.default.setChecked(True)  # 设置为默认选项
+
+                tab_layout = QVBoxLayout()
+                tab_layout.addWidget(self.default)
+                tab.setLayout(tab_layout)
+
+                self.tabs[feature] = {"widget": tab,
+                                      "options": {"Default": self.default}}
+
 
         for feature, tab in self.tabs.items():
             self.tab_widget.addTab(tab["widget"], feature)

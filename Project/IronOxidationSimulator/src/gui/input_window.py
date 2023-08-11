@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QGroupBox, QPushButton, QFileD
 from utils.input_help import DataInputDialog
 import utils.regression_analysis
 import utils.initial_rate
+import utils.rate_const
 
 
 class InputWindow(QWidget):
@@ -22,6 +23,7 @@ class InputWindow(QWidget):
         self.data_readers = {
             "reaction order analysis": utils.regression_analysis.read_data,
             "initial rate analysis":utils.initial_rate.read_data,
+            "rate const analysis":utils.rate_const.read_data,
             # "other_function": other_data_reader,
         }
 
