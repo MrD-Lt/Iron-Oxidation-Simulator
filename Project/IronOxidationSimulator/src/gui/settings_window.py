@@ -37,8 +37,7 @@ class SettingsWindow(QWidget):
 
     def update_content(self):
         # 更新窗口内容
-        selected_options = [option for option, selected in self.main_window.settings.func_current_options.items() if
-                            selected]
+        selected_options = [option for option, selected in self.main_window.settings.func_current_options.items() if selected]
         input_option = self.main_window.settings.input_current_option
         save_option = self.main_window.settings.save_current_option
 
@@ -49,6 +48,12 @@ class SettingsWindow(QWidget):
             guide_text = "Please select an input method.\n"
         else:
             guide_text = "You can now input your data.\n"
+
+        # Check if multiple features are selected and update the guide text accordingly
+        if len(selected_options) > 1:
+            guide_text += '\nPlease note: \nWhen multiple features are selected, ' \
+                          'you can only use manual input and cannot upload files.\n'
+
 
         # 添加功能相关的提示文字
         func_guide_text = []

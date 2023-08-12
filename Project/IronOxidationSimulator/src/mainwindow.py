@@ -1,6 +1,12 @@
+"""
+Main window for the application.
+
+This module provides the main application window for the PyQt5-based GUI application.
+It includes menu bars for feature selections, input settings, save settings, help, and developer contact.
+"""
 import os
 from PyQt5.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QWidget, QAction
-from PyQt5.QtCore import pyqtSignal, QObject
+from PyQt5.QtCore import pyqtSignal, QObject, QTimer
 import sys
 from gui.settings_window import SettingsWindow
 from gui.input_window import InputWindow
@@ -13,6 +19,7 @@ from PyQt5.QtGui import QDesktopServices
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
+        """Initialize the main window."""
         super().__init__(parent)
 
         # 布局设置
@@ -33,13 +40,12 @@ class MainWindow(QMainWindow):
         self.func_menu = self.menu.addMenu("Feature selections")
         for action in self.feature_actions.values():
             self.func_menu.addAction(action)
-            # 连接 triggered 信号到新的槽函数
             action.triggered.connect(self.update_func_option)
 
         # 输入设置
         self.input_menu = self.menu.addMenu("Input settings")
         self.input_menu.addAction("Manual Input", self.select_option5)
-        self.input_menu.addAction("Import File", self.select_option6)
+        self.import_file_action = self.input_menu.addAction("Import File", self.select_option6)
 
         # 是否保存内容
         self.save_menu = self.menu.addMenu("Save settings")
@@ -65,7 +71,7 @@ class MainWindow(QMainWindow):
         self.settings.settings_changed.connect(self.check_calculate_button_state)
         self.input_window.input_changed.connect(self.check_calculate_button_state)
 
-        self.check_calculate_button_state()  # 检查 "开始计算" 按钮的状态
+        self.check_calculate_button_state()
 
         # Create a central widget to hold the layout
         self.central_widget = QWidget()
@@ -79,20 +85,16 @@ class MainWindow(QMainWindow):
         self.central_widget.setLayout(self.layout)
 
     def update_func_option(self, checked):
-        # 获取发送信号的 QAction
         action = self.sender()
-        # 获取 QAction 的名字
         option = action.text()
-        # 更新 func_current_options 字典
         self.settings.func_current_options[option] = checked
-        # 触发 settings_changed 信号
         self.settings.settings_changed.emit()
-        # 检查 "开始计算" 按钮的状态
+        selected_features = sum(self.settings.func_current_options.values())
+        self.import_file_action.setEnabled(selected_features <= 1)
         self.check_calculate_button_state()
 
     def check_calculate_button_state(self):
-        # 如果有数据输入并且至少有一个功能被选中，就启用 "开始计算" 按钮
-        has_input = any(self.input_window.data.values())  # 检查输入窗口中是否有数据
+        has_input = any(self.input_window.data.values())
         func_selected = any(self.settings.func_current_options.values())
         self.button_area.calculate_button.setEnabled(has_input and func_selected)
 
@@ -208,5 +210,6 @@ if __name__ == "__main__":
     app.setStyleSheet(qss)
 
     main_window = MainWindow()
-    main_window.show()
+    QTimer.singleShot(100, main_window.show)  # Delay the window show by 100ms
+
     sys.exit(app.exec_())

@@ -242,7 +242,6 @@ class ButtonArea(QWidget):
                         self.result_window.add_result(f"Rate Const Analysis ({method})", result, "Rate Const Analysis")
                 elif option == "3D plane plot":
                     for method, result in self.result[option].items():
-                        print("查看此处！！！\n\n", result)
                         self.result_window.add_result(f"3D Plane Plot ({method})", result, "3D Plane Plot")
 
             # 添加其他功能的处理...

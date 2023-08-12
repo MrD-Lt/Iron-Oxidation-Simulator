@@ -1,0 +1,2 @@
+Did many tests on software.
+Use Qtimer to solve some bugs.
