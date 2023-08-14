@@ -5,10 +5,8 @@ This folder contains all the codes of this IRP.
 ## Structure:
 
 - [`src/`](./src/): This directory contains all the source code for the project.
-- [`data/`](./data/): This directory contains any necessary data files used by the project.
 - [`assets/`](./assets/): This directory contains any images, references, or other files used in the project.
 - [`config/`](./config/): This directory contains configuration files and environmental variables.
-- [`ui/`](./ui/): This directory contains all the ui files created.
 - [`docs/`](./docs/): This directory contains all the docs created.
 
 ## Getting Started
