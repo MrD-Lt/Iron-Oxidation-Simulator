@@ -14,7 +14,6 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from PyQt5.QtGui import QPixmap, QImage
 
 
-
 def read_data(filename):
     """
     Reads experimental data from an Excel file.

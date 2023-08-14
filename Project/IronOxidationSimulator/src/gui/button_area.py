@@ -1,3 +1,10 @@
+"""
+button_area.py
+----------------------
+Author: Dongzi Ding
+Created: 2023-06-25
+Modified: 2023-08-14
+"""
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QRadioButton, QDialog, QFileDialog, \
     QTabWidget, QMessageBox
 from gui.result_window import ResultWindow
@@ -9,7 +16,22 @@ from matplotlib.figure import Figure
 
 
 class ButtonArea(QWidget):
+    """
+    Main button area of the application which provides the necessary buttons for the user to interact with the application.
+
+    Attributes:
+    - result: A dictionary storing the results.
+    - figures: A dictionary storing the generated figures.
+    - main_window: Reference to the main application window.
+    """
+
     def __init__(self, parent=None):
+        """
+        Initialize the ButtonArea with necessary widgets and layouts.
+
+        Args:
+            parent (QWidget, optional): The parent widget. Defaults to None.
+        """
         super().__init__(parent)
 
         self.result = {}
@@ -18,38 +40,31 @@ class ButtonArea(QWidget):
 
         layout = QHBoxLayout()
 
-        # 创建左侧部分的按钮
         self.calculate_button = QPushButton("Start")
         self.reset_button = QPushButton("Cancel and Reset")
 
-        # 创建右侧部分的按钮
         self.result_button = QPushButton("Calculation Results")
         self.visual_button = QPushButton("Visualisation")
         self.save_button = QPushButton("Save Results")
 
-        # 设置右侧部分的按钮为禁用状态
         self.result_button.setEnabled(False)
         self.visual_button.setEnabled(False)
         self.save_button.setEnabled(False)
 
-        # 创建左侧和右侧的布局
         left_layout = QVBoxLayout()
         right_layout = QVBoxLayout()
 
-        # 添加按钮到左侧和右侧的布局
         left_layout.addWidget(self.calculate_button)
         left_layout.addWidget(self.reset_button)
         right_layout.addWidget(self.result_button)
         right_layout.addWidget(self.visual_button)
         right_layout.addWidget(self.save_button)
 
-        # 添加左侧和右侧的布局到主布局
         layout.addLayout(left_layout)
         layout.addLayout(right_layout)
 
         self.setLayout(layout)
 
-        # 连接按钮点击事件
         self.calculate_button.clicked.connect(self.calculate)
         self.reset_button.clicked.connect(self.reset)
         self.result_button.clicked.connect(self.show_result)
@@ -57,33 +72,29 @@ class ButtonArea(QWidget):
         self.save_button.clicked.connect(self.save_result)
 
     def calculate(self):
-        # 执行计算前先判断是否有数据
+        """
+        Calculate functionality of the application.
+        """
         if not self.main_window.input_window.data:
             QMessageBox.critical(self, "Error", "No data loaded.", QMessageBox.Ok)
             return
 
-        # 创建一个空列表来收集选中的功能
         selected_features = []
         for option, selected in self.main_window.settings.func_current_options.items():
             if selected:
                 selected_features.append(option)
 
-        # 创建 OptionDialog 对象，将选中的功能列表作为参数传递
         dialog = OptionDialog(selected_features, self)
         if not dialog.exec():
-            return  # 用户点击了取消，所以我们不做任何事情
+            return
 
-        # 遍历所有选中的功能
         for option, selected in self.main_window.settings.func_current_options.items():
             if selected:
-                # 根据每个功能执行相应的计算
                 if option == "reaction order analysis":
-                    # 从 dialog 对象中获取功能的选项状态
                     options = dialog.get_options("reaction order analysis")
                     use_sklearn = options.get("use_sklearn", False)
                     use_both = options.get("use_both", False)
 
-                    # 获取已经读取的数据
                     data = self.main_window.input_window.data[option]
                     if data is None:
                         print("No data available")
@@ -96,18 +107,13 @@ class ButtonArea(QWidget):
                         except ValueError:
                             print("Invalid data format")
                             return
-
-                    # 调用 regression_analysis.py 中的函数
-                    if use_both:  # 如果用户选择了"Use both"
-                        # 先使用sklearn进行计算
+                    if use_both:
                         slope_sklearn, intercept_sklearn, se_slope_sklearn, se_intercept_sklearn, r_squared_sklearn = regression_analysis.calculate_regression(
                             x, y, sdx_absolute, sdy_absolute, use_sklearn=True
                         )
-                        # 再不使用sklearn进行计算
                         slope, intercept, se_slope, se_intercept, r_squared = regression_analysis.calculate_regression(
                             x, y, sdx_absolute, sdy_absolute, use_sklearn=False
                         )
-                        # 保存结果
                         self.result[option] = {
                             "sklearn": (
                                 x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope_sklearn, intercept_sklearn,
@@ -118,31 +124,24 @@ class ButtonArea(QWidget):
                                 r_squared)
                         }
                     else:
-                        # 只进行一次计算
                         slope, intercept, se_slope, se_intercept, r_squared = regression_analysis.calculate_regression(
                             x, y, sdx_absolute, sdy_absolute, use_sklearn=use_sklearn
                         )
-                        # 保存结果
                         self.result[option] = {
                             "sklearn" if use_sklearn else "no_sklearn": (
                                 x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope,
                                 se_intercept,
                                 r_squared)
                         }
-
-                    # 设置右侧部分的按钮为启用状态
                     self.result_button.setEnabled(True)
                     self.visual_button.setEnabled(True)
                     if self.main_window.settings.save_current_option == "Yes":
                         self.save_button.setEnabled(True)
 
                 elif option == "initial rate analysis":
-                    # 从 dialog 对象中获取功能的选项状态
                     options = dialog.get_options("initial rate analysis")
                     use_specific_threshold = options.get("Use specific threshold")
                     dont_use_specific_threshold = options.get("Use a range between 5% to 20%")
-
-                    # 获取已经读取的数据
                     data = self.main_window.input_window.data[option]
                     if data is None:
                         print("No data available")
@@ -160,8 +159,6 @@ class ButtonArea(QWidget):
                     else:
                         rate_results = initial_rate.calculate_rate_compare(time, conc)
                         self.result[option] = {"Use a range between 5% to 20%": rate_results}
-
-                    # 设置右侧部分的按钮为启用状态
                     self.result_button.setEnabled(True)
                     self.visual_button.setEnabled(True)
                     if self.main_window.settings.save_current_option == "Yes":
@@ -181,14 +178,11 @@ class ButtonArea(QWidget):
 
                     rate_result = rate_const.calculate_rate(time, conc)
                     self.result[option] = {"Default": rate_result}
-
-                    # 设置右侧部分的按钮为启用状态
                     self.result_button.setEnabled(True)
                     self.visual_button.setEnabled(True)
                     if self.main_window.settings.save_current_option == "Yes":
                         self.save_button.setEnabled(True)
                 elif option == "3D plane plot":
-                    # 获取已经读取的数据
                     data = self.main_window.input_window.data[option]
                     if data is None:
                         print("No data available")
@@ -201,22 +195,20 @@ class ButtonArea(QWidget):
                         except ValueError:
                             print("Invalid data format")
                             return
-
-                    # 调用 plane3D_plot.py 中的函数
-                    plane_plotter = Plane3DPlotter()  # 创建实例
+                    plane_plotter = Plane3DPlotter()
                     params, r_squared = plane_plotter.perform_analysis(pH, logFe, logR)
-                    # 保存结果
                     self.result[option] = {
                         "Default": (pH, logFe, logR, params, r_squared)
                     }
-
-                    # 设置右侧部分的按钮为启用状态
                     self.result_button.setEnabled(True)
                     self.visual_button.setEnabled(True)
                     if self.main_window.settings.save_current_option == "Yes":
                         self.save_button.setEnabled(True)
 
     def reset(self):
+        """
+        Reset functionality of the application.
+        """
         self.result_button.setEnabled(False)
         self.visual_button.setEnabled(False)
         self.save_button.setEnabled(False)
@@ -225,6 +217,9 @@ class ButtonArea(QWidget):
         self.update_start_button()
 
     def show_result(self):
+        """
+        Show result functionality of the application.
+        """
         self.result_window = ResultWindow(self)
 
         for option, selected in self.main_window.settings.func_current_options.items():
@@ -244,17 +239,19 @@ class ButtonArea(QWidget):
                     for method, result in self.result[option].items():
                         self.result_window.add_result(f"3D Plane Plot ({method})", result, "3D Plane Plot")
 
-
         self.result_window.show()
 
     def show_visual(self):
+        """
+        Show visual functionality of the application.
+        """
         colors = {'no_sklearn': 'red', 'sklearn': 'blue'}
 
         for option, selected in self.main_window.settings.func_current_options.items():
             if selected:
-                fig = Figure()  # 创建一个新的 Figure 对象
+                fig = Figure()
                 ax = fig.add_subplot(111)
-                legend_lines = []  # 用于保存所有图例的列表
+                legend_lines = []
                 pixmap = None
 
                 if option == "reaction order analysis":
@@ -285,7 +282,6 @@ class ButtonArea(QWidget):
                 elif option == "rate const analysis":
 
                     for method, result in self.result[option].items():
-
                         time = result['time']
                         conc = result['ln_conc']
                         slope = result['slope']
@@ -296,34 +292,29 @@ class ButtonArea(QWidget):
 
                 elif option == "3D plane plot":
                     for method, result in self.result[option].items():
-                        fig = Figure()  # 创建一个新的 Figure 对象
+                        fig = Figure()
 
                         ax = fig.add_subplot(111, projection='3d')
-
-                        # 从结果中解压数据
 
                         pH, logFe, logR, params, r_squared = result
 
                         plane_plotter = Plane3DPlotter()
-                        plane_plotter.plot_3D_data(pH, logFe, logR, ax=ax)  # 创建3D散点图
+                        plane_plotter.plot_3D_data(pH, logFe, logR, ax=ax)
 
-                        plane_plotter.plot_fitted_plane(ax, pH, logFe, params)  # 添加拟合的平面
-
-                        # 显示方程和R^2值
+                        plane_plotter.plot_fitted_plane(ax, pH, logFe, params)
 
                         equation_str = f"logR_0 = {params[1]:.2f}pH + {params[2]:.2f}logFe_0 + {params[0]:.2f}"
 
                         ax.set_title(equation_str)
 
-                        ax.text(0.02, 0.98, 0.02, s=f'R^2={r_squared:.2f}', transform=ax.transAxes, verticalalignment='top')
+                        ax.text(0.02, 0.98, 0.02, s=f'R^2={r_squared:.2f}', transform=ax.transAxes,
+                                verticalalignment='top')
 
-
-                        pixmap = plane_plotter.fig_to_pixmap(fig)  # 转换Figure为QPixmap
+                        pixmap = plane_plotter.fig_to_pixmap(fig)
 
                         self.visual_window = VisualWindow(pixmap, self)
 
-
-                self.figures[option] = fig  # 保存 Figure 对象
+                self.figures[option] = fig
 
                 if pixmap is not None:
                     self.visual_window = VisualWindow(pixmap, self)
@@ -332,9 +323,12 @@ class ButtonArea(QWidget):
                     print("Error: No valid data found to plot.")
 
     def save_result(self):
+        """
+        Save result functionality of the application.
+        """
         dirname = QFileDialog.getExistingDirectory(self, "Select directory")
         if dirname:
-            save(self.result, dirname, self.figures)  # 修改为 self.figures
+            save(self.result, dirname, self.figures)
 
     def update_start_button(self):
         func_option = self.main_window.settings.func_current_option
@@ -344,6 +338,7 @@ class ButtonArea(QWidget):
             self.calculate_button.setEnabled(True)
         else:
             self.calculate_button.setEnabled(False)
+
 
 class OptionDialog(QDialog):
     def __init__(self, selected_features, parent=None):
@@ -357,10 +352,9 @@ class OptionDialog(QDialog):
         self.tabs = {}
         for feature in selected_features:
             if feature == "reaction order analysis":
-                # 创建 Reaction Order Analysis 选项对话框并添加到标签页
                 tab = QWidget()
                 self.use_sklearn_button = QRadioButton("Use sklearn")
-                self.use_sklearn_button.setChecked(True)  # 设置为默认选项
+                self.use_sklearn_button.setChecked(True)
                 self.dont_use_sklearn_button = QRadioButton("Don't use sklearn")
                 self.both_button = QRadioButton("Use both")
 
@@ -376,7 +370,7 @@ class OptionDialog(QDialog):
             if feature == "initial rate analysis":
                 tab = QWidget()
                 self.use_specific_threshold = QRadioButton("Use specific threshold")
-                self.use_specific_threshold.setChecked(True)  # 设置为默认选项
+                self.use_specific_threshold.setChecked(True)
                 self.dont_use_specific_threshold = QRadioButton("Use a range between 5% to 20%")
 
                 tab_layout = QVBoxLayout()
@@ -391,7 +385,7 @@ class OptionDialog(QDialog):
             if feature == "rate const analysis":
                 tab = QWidget()
                 self.default1 = QRadioButton("Default")
-                self.default1.setChecked(True)  # 设置为默认选项
+                self.default1.setChecked(True)
 
                 tab_layout = QVBoxLayout()
                 tab_layout.addWidget(self.default1)
@@ -403,7 +397,7 @@ class OptionDialog(QDialog):
             if feature == "3D plane plot":
                 tab = QWidget()
                 self.default2 = QRadioButton("Default")
-                self.default2.setChecked(True)  # 设置为默认选项
+                self.default2.setChecked(True)
 
                 tab_layout = QVBoxLayout()
                 tab_layout.addWidget(self.default2)
@@ -411,7 +405,6 @@ class OptionDialog(QDialog):
 
                 self.tabs[feature] = {"widget": tab,
                                       "options": {"Default": self.default2}}
-
 
         for feature, tab in self.tabs.items():
             self.tab_widget.addTab(tab["widget"], feature)
@@ -430,5 +423,5 @@ class OptionDialog(QDialog):
     def use_sklearn(self):
         return self.use_sklearn_button.isChecked()
 
-    def use_both(self):  # 新增函数
+    def use_both(self):
         return self.both_button.isChecked()

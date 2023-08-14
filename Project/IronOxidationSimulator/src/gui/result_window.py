@@ -1,15 +1,44 @@
+"""
+result_window.py
+----------------------
+Author: Dongzi Ding
+Created: 2023-06-28
+Modified: 2023-08-14
+"""
+
 from PyQt5.QtWidgets import QMainWindow, QTabWidget, QWidget, QVBoxLayout, QTextEdit
 
+
 class ResultWindow(QMainWindow):
+    """
+    A QMainWindow class that represents the result window for displaying analysis results.
+
+    Attributes:
+        tab_widget (QTabWidget): Widget to manage multiple result tabs.
+    """
+
     def __init__(self, parent=None):
+        """
+        Initializes the ResultWindow with a parent widget.
+
+        Args:
+            parent (QWidget, optional): The parent widget of the result window. Defaults to None.
+        """
         super().__init__(parent)
         self.setFixedSize(450, 300)
 
-        # 创建一个 QTabWidget 作为中心部件
         self.tab_widget = QTabWidget(self)
         self.setCentralWidget(self.tab_widget)
 
     def add_result(self, title, result, feature_name):
+        """
+        Adds a result to a new tab based on the feature_name.
+
+        Args:
+            title (str): The title for the new tab.
+            result (dict or tuple): The result data.
+            feature_name (str): The name of the analysis feature.
+        """
         if feature_name == "Initial Rate Analysis":
             try:
                 slope, intercept, r_squared = result['slopes'], result['intercepts'], result['r_squared_values']
@@ -46,16 +75,13 @@ class ResultWindow(QMainWindow):
         else:
             result_str = "Invalid feature name or result format"
 
-        # 创建一个新的标签页
         tab = QWidget(self.tab_widget)
 
-        # 在标签页中添加 QTextEdit
         layout = QVBoxLayout(tab)
         text_edit = QTextEdit()
         text_edit.setText(result_str)
-        text_edit.setReadOnly(True)  # 设置为只读，防止用户修改内容
+        text_edit.setReadOnly(True)
         layout.addWidget(text_edit)
         tab.setLayout(layout)
 
-        # 将标签页添加到 QTabWidget
         self.tab_widget.addTab(tab, title)

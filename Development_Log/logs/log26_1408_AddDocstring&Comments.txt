@@ -1,0 +1,2 @@
+Began to add docstrings and comments.
+Plan to use Sphinx to generate a manual in the future.
