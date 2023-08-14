@@ -21,10 +21,10 @@ def read_data(filename):
     Reads data from an Excel file.
 
     Args:
-        filename (str): Path to the Excel file.
+        - filename (str): Path to the Excel file.
 
     Returns:
-        tuple: Data extracted from the file or None if an error occurs.
+        Data extracted from the file or None if an error occurs.
     """
     try:
         data = pd.read_excel(filename)
@@ -47,14 +47,14 @@ def calculate_regression(x, y, sdx_absolute=None, sdy_absolute=None, use_sklearn
     Calculates the linear regression of the data.
 
     Args:
-        x (array-like): The x data.
-        y (array-like): The y data.
-        sdx_absolute (array-like, optional): Absolute standard deviations of the x data. Defaults to None.
-        sdy_absolute (array-like, optional): Absolute standard deviations of the y data. Defaults to None.
-        use_sklearn (bool, optional): Whether to use sklearn for the regression. Defaults to False.
+        - x (array-like): The x data.
+        - y (array-like): The y data.
+        - sdx_absolute (array-like, optional): Absolute standard deviations of the x data. Defaults to None.
+        - sdy_absolute (array-like, optional): Absolute standard deviations of the y data. Defaults to None.
+        - use_sklearn (bool, optional): Whether to use sklearn for the regression. Defaults to False.
 
     Returns:
-        tuple: Slope, intercept, standard error of the slope, standard error of the intercept, and the R-squared value.
+        Slope, intercept, standard error of the slope, standard error of the intercept, and the R-squared value.
     """
     x = np.array(x)
     y = np.array(y)
@@ -97,21 +97,21 @@ def plot_regression(x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, int
     Plots the data and the regression line.
 
     Args:
-        x (array-like): The x data.
-        y (array-like): The y data.
-        sdx_lower (array-like): Lower standard deviations of the x data.
-        sdx_upper (array-like): Upper standard deviations of the x data.
-        sdy_lower (array-like): Lower standard deviations of the y data.
-        sdy_upper (array-like): Upper standard deviations of the y data.
-        slope (float): Slope of the regression line.
-        intercept (float): Intercept of the regression line.
-        se_slope (float): Standard error of the slope.
-        se_intercept (float): Standard error of the intercept.
-        r_squared (float): R-squared value.
-        label (str): Label for the plot.
-        color (str): Color for the plot.
-        ax (matplotlib.axes.Axes): Axes object to draw the plot onto.
-        fig (matplotlib.figure.Figure): Figure object containing the Axes.
+        - x (array-like): The x data.
+        - y (array-like): The y data.
+        - sdx_lower (array-like): Lower standard deviations of the x data.
+        - sdx_upper (array-like): Upper standard deviations of the x data.
+        - sdy_lower (array-like): Lower standard deviations of the y data.
+        - sdy_upper (array-like): Upper standard deviations of the y data.
+        - slope (float): Slope of the regression line.
+        - intercept (float): Intercept of the regression line.
+        - se_slope (float): Standard error of the slope.
+        - se_intercept (float): Standard error of the intercept.
+        - r_squared (float): R-squared value.
+        - label (str): Label for the plot.
+        - color (str): Color for the plot.
+        - ax (matplotlib.axes.Axes): Axes object to draw the plot onto.
+        - fig (matplotlib.figure.Figure): Figure object containing the Axes.
 
     Returns:
         PyQt5.QtGui.QPixmap: QPixmap representation of the plot.

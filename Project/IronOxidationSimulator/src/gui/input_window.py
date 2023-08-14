@@ -20,7 +20,7 @@ class InputWindow(QWidget):
     A QWidget class that represents the input window for user data.
 
     Attributes:
-        :input_changed (pyqtSignal): Signal emitted when the input changes.
+        - input_changed (pyqtSignal): Signal emitted when the input changes.
     """
 
     input_changed = pyqtSignal()
@@ -30,7 +30,7 @@ class InputWindow(QWidget):
         Initializes the InputWindow with a parent widget.
 
         Args:
-            :parent (QWidget, optional): The parent widget of the input window. Defaults to None.
+            - parent (QWidget, optional): The parent widget of the input window. Defaults to None.
         """
         super().__init__(parent)
         self.main_window = parent

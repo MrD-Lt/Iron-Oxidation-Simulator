@@ -15,12 +15,12 @@ def save(result, dirname, figures):
     Saves the result data to CSV files and figures to PNG files.
 
     Parameters:
-    - result (dict): Dictionary containing the analysis results.
-    - dirname (str): Directory path where the results will be saved.
-    - figures (dict): Dictionary containing figures for saving as PNG.
+        - result (dict): Dictionary containing the analysis results.
+        - dirname (str): Directory path where the results will be saved.
+        - figures (dict): Dictionary containing figures for saving as PNG.
 
     Returns:
-    None
+        None
     """
     dict_for_save = {
         "reaction_order_analysis": ["Method", "Slope", "Intercept", "SE Slope", "SE Intercept", "R Squared"],

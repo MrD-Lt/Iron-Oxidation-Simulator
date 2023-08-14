@@ -15,13 +15,13 @@ class DataInputDialog(QDialog):
     A custom dialog for the user to input experimental data.
 
     Attributes:
-    - main_window (QWidget): Reference to the main application window.
-    - input_data (dict): Dictionary storing input data after confirmation.
-    - data_types (dict): Dictionary defining the expected data types for each tab.
-    - tab_widget (QTabWidget): Widget containing tabs for each analysis type.
-    - list_widgets (dict): Dictionary storing list widgets for each tab.
-    - input_fields (dict): Dictionary storing input fields for each data type and tab.
-    - check_boxes (dict): Dictionary storing checkboxes indicating readiness for each data type and tab.
+        - main_window (QWidget): Reference to the main application window.
+        - input_data (dict): Dictionary storing input data after confirmation.
+        - data_types (dict): Dictionary defining the expected data types for each tab.
+        - tab_widget (QTabWidget): Widget containing tabs for each analysis type.
+        - list_widgets (dict): Dictionary storing list widgets for each tab.
+        - input_fields (dict): Dictionary storing input fields for each data type and tab.
+        - check_boxes (dict): Dictionary storing checkboxes indicating readiness for each data type and tab.
     """
 
     def __init__(self, parent=None):

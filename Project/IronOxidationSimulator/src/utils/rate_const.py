@@ -20,10 +20,10 @@ def read_data(filename):
     Reads data from the given filename.
 
     Args:
-        filename (str): Path to the data file.
+        - filename (str): Path to the data file.
 
     Returns:
-        tuple: Time and concentration values or None if an error occurs.
+        Time and concentration values or None if an error occurs.
     """
     try:
         data = pd.read_excel(filename)
@@ -40,11 +40,11 @@ def calculate_rate(time, conc):
     Calculates the reaction rate using regression on logarithmic concentration.
 
     Args:
-        time (array-like): Array of time values.
-        conc (array-like): Array of concentration values.
+        - time (array-like): Array of time values.
+        - conc (array-like): Array of concentration values.
 
     Returns:
-        dict: Calculated values including time, logarithmic concentration, slope, intercept, and R squared value.
+        Calculated values including time, logarithmic concentration, slope, intercept, and R squared value.
     """
     conc = np.log(conc)
 
@@ -70,11 +70,11 @@ def plot(time, conc, slope, intercept, r_squared):
     Plots the given time and logarithmic concentration data with a linear fit.
 
     Args:
-        time (array-like): Array of time values.
-        conc (array-like): Array of logarithmic concentration values.
-        slope (float): Slope from linear regression.
-        intercept (float): Intercept from linear regression.
-        r_squared (float): R squared value from linear regression.
+        - time (array-like): Array of time values.
+        - conc (array-like): Array of logarithmic concentration values.
+        - slope (float): Slope from linear regression.
+        - intercept (float): Intercept from linear regression.
+        - r_squared (float): R squared value from linear regression.
 
     Returns:
         PyQt5.QtGui.QPixmap: Pixmap representation of the plot.

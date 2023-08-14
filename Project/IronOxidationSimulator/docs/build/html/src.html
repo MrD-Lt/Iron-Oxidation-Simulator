@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src package &mdash; Independent Research Project 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="gui package" href="gui.html" />
+    <link rel="prev" title="Welcome to IRP’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Independent Research Project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">src package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.html">gui package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html">utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-src.mainwindow">mainwindow module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mainwindow-py">mainwindow.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#src.mainwindow.MainWindow"><code class="docutils literal notranslate"><span class="pre">MainWindow</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.mainwindow.MainWindow.check_calculate_button_state"><code class="docutils literal notranslate"><span class="pre">MainWindow.check_calculate_button_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.mainwindow.MainWindow.open_contact"><code class="docutils literal notranslate"><span class="pre">MainWindow.open_contact()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.mainwindow.MainWindow.open_help"><code class="docutils literal notranslate"><span class="pre">MainWindow.open_help()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.mainwindow.MainWindow.select_option1"><code class="docutils literal notranslate"><span class="pre">MainWindow.select_option1()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.mainwindow.MainWindow.select_option2"><code class="docutils literal notranslate"><span class="pre">MainWindow.select_option2()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.mainwindow.MainWindow.select_option3"><code class="docutils literal notranslate"><span class="pre">MainWindow.select_option3()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.mainwindow.MainWindow.select_option4"><code class="docutils literal notranslate"><span class="pre">MainWindow.select_option4()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.mainwindow.MainWindow.select_option5"><code class="docutils literal notranslate"><span class="pre">MainWindow.select_option5()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.mainwindow.MainWindow.select_option6"><code class="docutils literal notranslate"><span class="pre">MainWindow.select_option6()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.mainwindow.MainWindow.select_option7"><code class="docutils literal notranslate"><span class="pre">MainWindow.select_option7()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.mainwindow.MainWindow.select_option8"><code class="docutils literal notranslate"><span class="pre">MainWindow.select_option8()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.mainwindow.MainWindow.toggle_option"><code class="docutils literal notranslate"><span class="pre">MainWindow.toggle_option()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.mainwindow.MainWindow.update_func_option"><code class="docutils literal notranslate"><span class="pre">MainWindow.update_func_option()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#src.mainwindow.Settings"><code class="docutils literal notranslate"><span class="pre">Settings</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#src.mainwindow.Settings.reset"><code class="docutils literal notranslate"><span class="pre">Settings.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.mainwindow.Settings.set_func_option"><code class="docutils literal notranslate"><span class="pre">Settings.set_func_option()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.mainwindow.Settings.set_input_option"><code class="docutils literal notranslate"><span class="pre">Settings.set_input_option()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.mainwindow.Settings.set_save_option"><code class="docutils literal notranslate"><span class="pre">Settings.set_save_option()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#src.mainwindow.Settings.settings_changed"><code class="docutils literal notranslate"><span class="pre">Settings.settings_changed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#src.mainwindow.resource_path"><code class="docutils literal notranslate"><span class="pre">resource_path()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Independent Research Project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">src package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/src.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-src">
+<span id="src-package"></span><h1>src package<a class="headerlink" href="#module-src" title="Permalink to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gui.html">gui package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gui.html#module-src.gui.button_area">button_area module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.html#button-area-py">button_area.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.html#src.gui.button_area.ButtonArea"><code class="docutils literal notranslate"><span class="pre">ButtonArea</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.html#src.gui.button_area.ButtonArea.calculate"><code class="docutils literal notranslate"><span class="pre">ButtonArea.calculate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.html#src.gui.button_area.ButtonArea.reset"><code class="docutils literal notranslate"><span class="pre">ButtonArea.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.html#src.gui.button_area.ButtonArea.save_result"><code class="docutils literal notranslate"><span class="pre">ButtonArea.save_result()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.html#src.gui.button_area.ButtonArea.show_result"><code class="docutils literal notranslate"><span class="pre">ButtonArea.show_result()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.html#src.gui.button_area.ButtonArea.show_visual"><code class="docutils literal notranslate"><span class="pre">ButtonArea.show_visual()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.html#src.gui.button_area.ButtonArea.update_start_button"><code class="docutils literal notranslate"><span class="pre">ButtonArea.update_start_button()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gui.html#src.gui.button_area.OptionDialog"><code class="docutils literal notranslate"><span class="pre">OptionDialog</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.html#src.gui.button_area.OptionDialog.get_options"><code class="docutils literal notranslate"><span class="pre">OptionDialog.get_options()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.html#src.gui.button_area.OptionDialog.use_both"><code class="docutils literal notranslate"><span class="pre">OptionDialog.use_both()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.html#src.gui.button_area.OptionDialog.use_sklearn"><code class="docutils literal notranslate"><span class="pre">OptionDialog.use_sklearn()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.html#module-src.gui.help_window">help_window module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.html#help-window-py">help_window.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.html#src.gui.help_window.HelpWindow"><code class="docutils literal notranslate"><span class="pre">HelpWindow</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.html#src.gui.help_window.HelpWindow.open_pdf_manual"><code class="docutils literal notranslate"><span class="pre">HelpWindow.open_pdf_manual()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.html#module-src.gui.input_window">input_window module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.html#input-window-py">input_window.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.html#src.gui.input_window.InputWindow"><code class="docutils literal notranslate"><span class="pre">InputWindow</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.html#src.gui.input_window.InputWindow.browse_file"><code class="docutils literal notranslate"><span class="pre">InputWindow.browse_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.html#src.gui.input_window.InputWindow.clear_data"><code class="docutils literal notranslate"><span class="pre">InputWindow.clear_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.html#src.gui.input_window.InputWindow.emit_input_changed"><code class="docutils literal notranslate"><span class="pre">InputWindow.emit_input_changed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.html#src.gui.input_window.InputWindow.input_changed"><code class="docutils literal notranslate"><span class="pre">InputWindow.input_changed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.html#src.gui.input_window.InputWindow.manual_input"><code class="docutils literal notranslate"><span class="pre">InputWindow.manual_input()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.html#src.gui.input_window.InputWindow.reset"><code class="docutils literal notranslate"><span class="pre">InputWindow.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.html#src.gui.input_window.InputWindow.update_content"><code class="docutils literal notranslate"><span class="pre">InputWindow.update_content()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.html#module-src.gui.result_window">result_window module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.html#result-window-py">result_window.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.html#src.gui.result_window.ResultWindow"><code class="docutils literal notranslate"><span class="pre">ResultWindow</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.html#src.gui.result_window.ResultWindow.add_result"><code class="docutils literal notranslate"><span class="pre">ResultWindow.add_result()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.html#module-src.gui.settings_window">settings_window module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.html#settings-window-py">settings_window.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.html#src.gui.settings_window.SettingsWindow"><code class="docutils literal notranslate"><span class="pre">SettingsWindow</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.html#src.gui.settings_window.SettingsWindow.update_content"><code class="docutils literal notranslate"><span class="pre">SettingsWindow.update_content()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.html#module-src.gui.visual_window">visual_window module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.html#visual-window-py">visual_window.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.html#src.gui.visual_window.VisualWindow"><code class="docutils literal notranslate"><span class="pre">VisualWindow</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-src.utils.initial_rate">initial_rate module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#initial-rate-py">initial_rate.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#src.utils.initial_rate.calculate_rate"><code class="docutils literal notranslate"><span class="pre">calculate_rate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#src.utils.initial_rate.calculate_rate_compare"><code class="docutils literal notranslate"><span class="pre">calculate_rate_compare()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#src.utils.initial_rate.cut_data"><code class="docutils literal notranslate"><span class="pre">cut_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#src.utils.initial_rate.plot_initial_rate"><code class="docutils literal notranslate"><span class="pre">plot_initial_rate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#src.utils.initial_rate.plot_rate_comparison"><code class="docutils literal notranslate"><span class="pre">plot_rate_comparison()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#src.utils.initial_rate.read_data"><code class="docutils literal notranslate"><span class="pre">read_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-src.utils.input_help">input_help module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#input-help-py">input_help.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#src.utils.input_help.DataInputDialog"><code class="docutils literal notranslate"><span class="pre">DataInputDialog</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#src.utils.input_help.DataInputDialog.confirm_input"><code class="docutils literal notranslate"><span class="pre">DataInputDialog.confirm_input()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#src.utils.input_help.DataInputDialog.get_input_data"><code class="docutils literal notranslate"><span class="pre">DataInputDialog.get_input_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#src.utils.input_help.DataInputDialog.select_all"><code class="docutils literal notranslate"><span class="pre">DataInputDialog.select_all()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#src.utils.input_help.DataInputDialog.update_input_fields"><code class="docutils literal notranslate"><span class="pre">DataInputDialog.update_input_fields()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-src.utils.plane3D_plot">plane3D_plot module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#plane3d-plot-py">plane3D_plot.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#src.utils.plane3D_plot.Plane3DPlotter"><code class="docutils literal notranslate"><span class="pre">Plane3DPlotter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#src.utils.plane3D_plot.Plane3DPlotter.create_3D_plot"><code class="docutils literal notranslate"><span class="pre">Plane3DPlotter.create_3D_plot()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#src.utils.plane3D_plot.Plane3DPlotter.fig_to_pixmap"><code class="docutils literal notranslate"><span class="pre">Plane3DPlotter.fig_to_pixmap()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#src.utils.plane3D_plot.Plane3DPlotter.fit_plane"><code class="docutils literal notranslate"><span class="pre">Plane3DPlotter.fit_plane()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#src.utils.plane3D_plot.Plane3DPlotter.get_results"><code class="docutils literal notranslate"><span class="pre">Plane3DPlotter.get_results()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#src.utils.plane3D_plot.Plane3DPlotter.perform_analysis"><code class="docutils literal notranslate"><span class="pre">Plane3DPlotter.perform_analysis()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#src.utils.plane3D_plot.Plane3DPlotter.plot_3D_data"><code class="docutils literal notranslate"><span class="pre">Plane3DPlotter.plot_3D_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#src.utils.plane3D_plot.Plane3DPlotter.plot_fitted_plane"><code class="docutils literal notranslate"><span class="pre">Plane3DPlotter.plot_fitted_plane()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="utils.html#src.utils.plane3D_plot.Plane3DPlotter.read_data"><code class="docutils literal notranslate"><span class="pre">Plane3DPlotter.read_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-src.utils.rate_const">rate_const module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#rate-const-py">rate_const.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#src.utils.rate_const.calculate_rate"><code class="docutils literal notranslate"><span class="pre">calculate_rate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#src.utils.rate_const.plot"><code class="docutils literal notranslate"><span class="pre">plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#src.utils.rate_const.read_data"><code class="docutils literal notranslate"><span class="pre">read_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-src.utils.regression_analysis">regression_analysis module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#regression-analysis-py">regression_analysis.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#src.utils.regression_analysis.calculate_regression"><code class="docutils literal notranslate"><span class="pre">calculate_regression()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#src.utils.regression_analysis.plot_regression"><code class="docutils literal notranslate"><span class="pre">plot_regression()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#src.utils.regression_analysis.read_data"><code class="docutils literal notranslate"><span class="pre">read_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#module-src.utils.save">save module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#save-py">save.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils.html#src.utils.save.save"><code class="docutils literal notranslate"><span class="pre">save()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-src.mainwindow">
+<span id="mainwindow-module"></span><h2>mainwindow module<a class="headerlink" href="#module-src.mainwindow" title="Permalink to this heading">¶</a></h2>
+<section id="mainwindow-py">
+<h3>mainwindow.py<a class="headerlink" href="#mainwindow-py" title="Permalink to this heading">¶</a></h3>
+<p>Author: Dongzi Ding
+Created: 2023-06-25
+Modified: 2023-08-14</p>
+<p>Main window for the application.
+This module provides the main application window for the PyQt5-based GUI application.
+It includes menu bars for feature selections, input settings, save settings, help, and developer contact.</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.mainwindow.MainWindow">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.mainwindow.</span></span><span class="sig-name descname"><span class="pre">MainWindow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.mainwindow.MainWindow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QMainWindow</span></code></p>
+<p>The main window for the PyQt5-based GUI application.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.mainwindow.MainWindow.check_calculate_button_state">
+<span class="sig-name descname"><span class="pre">check_calculate_button_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.mainwindow.MainWindow.check_calculate_button_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the ‘Calculate’ button should be enabled.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.mainwindow.MainWindow.open_contact">
+<span class="sig-name descname"><span class="pre">open_contact</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.mainwindow.MainWindow.open_contact" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens the appropriate contact method based on the menu selection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.mainwindow.MainWindow.open_help">
+<span class="sig-name descname"><span class="pre">open_help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.mainwindow.MainWindow.open_help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens the Help window.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.mainwindow.MainWindow.select_option1">
+<span class="sig-name descname"><span class="pre">select_option1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.mainwindow.MainWindow.select_option1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.mainwindow.MainWindow.select_option2">
+<span class="sig-name descname"><span class="pre">select_option2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.mainwindow.MainWindow.select_option2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.mainwindow.MainWindow.select_option3">
+<span class="sig-name descname"><span class="pre">select_option3</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.mainwindow.MainWindow.select_option3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.mainwindow.MainWindow.select_option4">
+<span class="sig-name descname"><span class="pre">select_option4</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.mainwindow.MainWindow.select_option4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.mainwindow.MainWindow.select_option5">
+<span class="sig-name descname"><span class="pre">select_option5</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.mainwindow.MainWindow.select_option5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.mainwindow.MainWindow.select_option6">
+<span class="sig-name descname"><span class="pre">select_option6</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.mainwindow.MainWindow.select_option6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.mainwindow.MainWindow.select_option7">
+<span class="sig-name descname"><span class="pre">select_option7</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.mainwindow.MainWindow.select_option7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.mainwindow.MainWindow.select_option8">
+<span class="sig-name descname"><span class="pre">select_option8</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.mainwindow.MainWindow.select_option8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.mainwindow.MainWindow.toggle_option">
+<span class="sig-name descname"><span class="pre">toggle_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checked</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">option</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.mainwindow.MainWindow.toggle_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Toggles the current function option.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.mainwindow.MainWindow.update_func_option">
+<span class="sig-name descname"><span class="pre">update_func_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checked</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.mainwindow.MainWindow.update_func_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the current function option based on the menu selection.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.mainwindow.Settings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.mainwindow.</span></span><span class="sig-name descname"><span class="pre">Settings</span></span><a class="headerlink" href="#src.mainwindow.Settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QObject</span></code></p>
+<p>Represents application settings.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><ul class="simple">
+<li><p>func_current_options (dict): Current functional options selected.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.mainwindow.Settings.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.mainwindow.Settings.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the settings to default values.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.mainwindow.Settings.set_func_option">
+<span class="sig-name descname"><span class="pre">set_func_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.mainwindow.Settings.set_func_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the current function option.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.mainwindow.Settings.set_input_option">
+<span class="sig-name descname"><span class="pre">set_input_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.mainwindow.Settings.set_input_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the current input option.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.mainwindow.Settings.set_save_option">
+<span class="sig-name descname"><span class="pre">set_save_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.mainwindow.Settings.set_save_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the current save option.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.mainwindow.Settings.settings_changed">
+<span class="sig-name descname"><span class="pre">settings_changed</span></span><a class="headerlink" href="#src.mainwindow.Settings.settings_changed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.mainwindow.resource_path">
+<span class="sig-prename descclassname"><span class="pre">src.mainwindow.</span></span><span class="sig-name descname"><span class="pre">resource_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.mainwindow.resource_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the absolute path to a resource, works in both development and PyInstaller contexts.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>relative_path (str): The relative path to the resource.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>The absolute path to the resource.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to IRP’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gui.html" class="btn btn-neutral float-right" title="gui package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Dongzi Ding.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

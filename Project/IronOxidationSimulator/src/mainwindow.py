@@ -161,7 +161,7 @@ class Settings(QObject):
         Represents application settings.
 
         Attributes:
-            func_current_options (dict): Current functional options selected.
+            - func_current_options (dict): Current functional options selected.
     """
     settings_changed = pyqtSignal()
 
@@ -207,7 +207,7 @@ def resource_path(relative_path):
     Gets the absolute path to a resource, works in both development and PyInstaller contexts.
 
     Args:
-        :relative_path (str): The relative path to the resource.
+        - relative_path (str): The relative path to the resource.
 
     Returns:
         The absolute path to the resource.

@@ -19,10 +19,10 @@ def read_data(filename):
     Reads experimental data from an Excel file.
 
     Parameters:
-    - filename (str): Path to the Excel file.
+        - filename (str): Path to the Excel file.
 
     Returns:
-    tuple: Arrays of time and concentration values.
+        Arrays of time and concentration values.
     """
     try:
         data = pd.read_excel(filename)
@@ -39,12 +39,12 @@ def calculate_rate(time, conc, threshold):
     Calculates the rate of a reaction using linear regression on a subset of data.
 
     Parameters:
-    - time (array): Time data.
-    - conc (array): Concentration data.
-    - threshold (float): Percentage of data to use for regression.
+        - time (array): Time data.
+        - conc (array): Concentration data.
+        - threshold (float): Percentage of data to use for regression.
 
     Returns:
-    dict: Dictionary containing time, concentration, slope, intercept, and R squared values.
+        Dictionary containing time, concentration, slope, intercept, and R squared values.
     """
     cur_time, cur_conc = cut_data(time, conc, threshold)
     time_2d = np.array(time).reshape(-1, 1)
@@ -69,11 +69,11 @@ def calculate_rate_compare(time, conc):
     Calculates rates using different thresholds and compares the fits.
 
     Parameters:
-    - time (array): Time data.
-    - conc (array): Concentration data.
+        - time (array): Time data.
+        - conc (array): Concentration data.
 
     Returns:
-    dict: Dictionary containing time, concentration, slopes, intercepts, and R squared values for each threshold.
+        Dictionary containing time, concentration, slopes, intercepts, and R squared values for each threshold.
     """
     threshold_array = np.arange(0.05, 0.2, 0.01)
     slopes, intercepts, r_squared_values = [], [], []
@@ -101,12 +101,12 @@ def cut_data(time, conc, threshold):
     Filters time and concentration data based on a threshold.
 
     Parameters:
-    - time (array): Time data.
-    - conc (array): Concentration data.
-    - threshold (float): Threshold value for filtering.
+        - time (array): Time data.
+        - conc (array): Concentration data.
+        - threshold (float): Threshold value for filtering.
 
     Returns:
-    tuple: Filtered arrays of time and concentration values.
+        Filtered arrays of time and concentration values.
     """
     conc = np.array(conc)
     time = np.array(time)
@@ -130,14 +130,14 @@ def plot_initial_rate(time, conc, slope, intercept, r_squared):
     Generates a plot of the initial reaction rate.
 
     Parameters:
-    - time (array): Time data.
-    - conc (array): Concentration data.
-    - slope (float): Slope from linear regression.
-    - intercept (float): Intercept from linear regression.
-    - r_squared (float): R squared value from linear regression.
+        - time (array): Time data.
+        - conc (array): Concentration data.
+        - slope (float): Slope from linear regression.
+        - intercept (float): Intercept from linear regression.
+        - r_squared (float): R squared value from linear regression.
 
     Returns:
-    QPixmap: A QPixmap object containing the plot.
+        A QPixmap object containing the plot.
     """
     time = np.array(time)
 
@@ -165,14 +165,14 @@ def plot_rate_comparison(time, conc, slopes, intercepts, r_squared_values):
     Generates a plot comparing reaction rates for different thresholds.
 
     Parameters:
-    - time (array): Time data.
-    - conc (array): Concentration data.
-    - slopes (list): List of slopes from linear regressions.
-    - intercepts (list): List of intercepts from linear regressions.
-    - r_squared_values (list): List of R squared values from linear regressions.
+        - time (array): Time data.
+        - conc (array): Concentration data.
+        - slopes (list): List of slopes from linear regressions.
+        - intercepts (list): List of intercepts from linear regressions.
+        - r_squared_values (list): List of R squared values from linear regressions.
 
     Returns:
-    QPixmap: A QPixmap object containing the comparison plot.
+        A QPixmap object containing the comparison plot.
     """
     time = np.array(time)
 

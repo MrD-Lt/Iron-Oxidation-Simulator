@@ -46,10 +46,12 @@ class HelpWindow(QMainWindow):
         self.Manual.clicked.connect(self.open_pdf_manual)
 
     def open_pdf_manual(self):
+
         """
         Opens the PDF manual located in the assets directory. The method of opening depends on the OS.
         """
-        pdf_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets", "manual.pdf")
+        pdf_path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../..", "docs/build/latex", "IndependentResearchProject.pdf"))
+
         if not os.path.isfile(pdf_path):
             QMessageBox.critical(self, "File Not Found",
                                  "The manual file does not exist.  Please check the GitHub page or reinstall the "

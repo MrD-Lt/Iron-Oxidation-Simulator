@@ -25,27 +25,27 @@ class Plane3DPlotter:
     A class for performing 3D plotting and regression analysis on data.
 
     Attributes:
-        filename (str): The path to the data file.
-        data (tuple): Data values for pH, deltapH, logFe, deltalogFe, logR, deltalogR.
-        params (tuple): Regression parameters.
-        r_squared (float): R squared value of regression analysis.
+        - filename (str): The path to the data file.
+        - data (tuple): Data values for pH, deltapH, logFe, deltalogFe, logR, deltalogR.
+        - params (tuple): Regression parameters.
+        - r_squared (float): R squared value of regression analysis.
 
     Methods:
-        read_data: Read data from a file.
-        perform_analysis: Perform regression analysis.
-        fit_plane: Fit a plane to the data.
-        plot_3D_data: Plot the 3D data with a fitted plane.
-        create_3D_plot: Create a 3D plot.
-        plot_fitted_plane: Plot a fitted plane on 3D data.
-        get_results: Retrieve analysis results.
-        fig_to_pixmap: Convert a Matplotlib figure to a QPixmap.
+        - read_data: Read data from a file.
+        - perform_analysis: Perform regression analysis.
+        - fit_plane: Fit a plane to the data.
+        - plot_3D_data: Plot the 3D data with a fitted plane.
+        - create_3D_plot: Create a 3D plot.
+        - plot_fitted_plane: Plot a fitted plane on 3D data.
+        - get_results: Retrieve analysis results.
+        - fig_to_pixmap: Convert a Matplotlib figure to a QPixmap.
     """
     def __init__(self, filename=None):
         """
         Initializes the Plane3DPlotter object.
 
         Args:
-            filename (str, optional): Path to the data file. Defaults to None.
+            - filename (str, optional): Path to the data file. Defaults to None.
         """
         self.filename = filename
         self.data = self.read_data(filename)
@@ -59,10 +59,10 @@ class Plane3DPlotter:
         Reads data from a file.
 
         Args:
-            filename (str): Path to the data file.
+            - filename (str): Path to the data file.
 
         Returns:
-            tuple: Data values for pH, deltapH, logFe, deltalogFe, logR, deltalogR or None if an error occurs.
+            Data values for pH, deltapH, logFe, deltalogFe, logR, deltalogR or None if an error occurs.
         """
         try:
             data = pd.read_excel(filename)
@@ -82,12 +82,12 @@ class Plane3DPlotter:
         Perform regression analysis on data.
 
         Args:
-            pH (array-like): pH values.
-            logFe (array-like): logFe values.
-            logR (array-like): logR values.
+            - pH (array-like): pH values.
+            - logFe (array-like): logFe values.
+            - logR (array-like): logR values.
 
         Returns:
-            tuple: Regression parameters and R squared value.
+            Regression parameters and R squared value.
         """
         self.params, self.r_squared = self.fit_plane(pH, logFe, logR)
         return self.params, self.r_squared
@@ -97,12 +97,12 @@ class Plane3DPlotter:
         Fits a plane to the data.
 
         Args:
-            pH (array-like): pH values.
-            logFe (array-like): logFe values.
-            logR (array-like): logR values.
+            - pH (array-like): pH values.
+            - logFe (array-like): logFe values.
+            - logR (array-like): logR values.
 
         Returns:
-            tuple: Regression parameters and R squared value.
+            Regression parameters and R squared value.
         """
         X = np.column_stack((pH, logFe))
         model = LinearRegression().fit(X, logR)
@@ -115,13 +115,13 @@ class Plane3DPlotter:
         Plot the 3D data along with the fitted plane.
 
         Args:
-            pH (array-like): pH values.
-            logFe (array-like): logFe values.
-            logR (array-like): logR values.
-            ax (matplotlib.axes._subplots.Axes3DSubplot, optional): 3D subplot. Defaults to None.
+            - pH (array-like): pH values.
+            - logFe (array-like): logFe values.
+            - logR (array-like): logR values.
+            - ax (matplotlib.axes._subplots.Axes3DSubplot, optional): 3D subplot. Defaults to None.
 
         Returns:
-            tuple: Matplotlib figure and 3D subplot.
+            Matplotlib figure and 3D subplot.
         """
         if self.params is None:
             self.params, _ = self.perform_analysis(pH, logFe, logR)
@@ -140,13 +140,13 @@ class Plane3DPlotter:
         Creates a 3D plot for the given data.
 
         Args:
-            pH (array-like): pH values.
-            logFe (array-like): logFe values.
-            logR (array-like): logR values.
-            ax (matplotlib.axes._subplots.Axes3DSubplot, optional): 3D subplot. Defaults to None.
+            - pH (array-like): pH values.
+            - logFe (array-like): logFe values.
+            - logR (array-like): logR values.
+            - ax (matplotlib.axes._subplots.Axes3DSubplot, optional): 3D subplot. Defaults to None.
 
         Returns:
-            tuple: Matplotlib figure and 3D subplot.
+            Matplotlib figure and 3D subplot.
         """
         if ax is None:
             fig = plt.figure()
@@ -164,10 +164,10 @@ class Plane3DPlotter:
         Plots a fitted plane on the 3D data.
 
         Args:
-            ax (matplotlib.axes._subplots.Axes3DSubplot): 3D subplot.
-            pH (array-like): pH values.
-            logFe (array-like): logFe values.
-            params (tuple): Regression parameters.
+            - ax (matplotlib.axes._subplots.Axes3DSubplot): 3D subplot.
+            - pH (array-like): pH values.
+            - logFe (array-like): logFe values.
+            - params (tuple): Regression parameters.
 
         Returns:
             PyQt5.QtGui.QPixmap: Pixmap representation of the plot.
@@ -203,7 +203,7 @@ class Plane3DPlotter:
         Converts a Matplotlib figure to a QPixmap.
 
         Args:
-            fig (matplotlib.figure.Figure): Matplotlib figure.
+            - fig (matplotlib.figure.Figure): Matplotlib figure.
 
         Returns:
             PyQt5.QtGui.QPixmap: Pixmap representation of the figure.

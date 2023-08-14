@@ -1,0 +1,106 @@
+\indexentry{module@\spxentry{module}!src@\spxentry{src}|hyperpage}{1}
+\indexentry{src@\spxentry{src}!module@\spxentry{module}|hyperpage}{1}
+\indexentry{module@\spxentry{module}!src.gui@\spxentry{src.gui}|hyperpage}{1}
+\indexentry{src.gui@\spxentry{src.gui}!module@\spxentry{module}|hyperpage}{1}
+\indexentry{module@\spxentry{module}!src.gui.button\_area@\spxentry{src.gui.button\_area}|hyperpage}{1}
+\indexentry{src.gui.button\_area@\spxentry{src.gui.button\_area}!module@\spxentry{module}|hyperpage}{1}
+\indexentry{ButtonArea (class in src.gui.button\_area)@\spxentry{ButtonArea}\spxextra{class in src.gui.button\_area}|hyperpage}{1}
+\indexentry{calculate() (src.gui.button\_area.ButtonArea method)@\spxentry{calculate()}\spxextra{src.gui.button\_area.ButtonArea method}|hyperpage}{1}
+\indexentry{reset() (src.gui.button\_area.ButtonArea method)@\spxentry{reset()}\spxextra{src.gui.button\_area.ButtonArea method}|hyperpage}{1}
+\indexentry{save\_result() (src.gui.button\_area.ButtonArea method)@\spxentry{save\_result()}\spxextra{src.gui.button\_area.ButtonArea method}|hyperpage}{1}
+\indexentry{show\_result() (src.gui.button\_area.ButtonArea method)@\spxentry{show\_result()}\spxextra{src.gui.button\_area.ButtonArea method}|hyperpage}{1}
+\indexentry{show\_visual() (src.gui.button\_area.ButtonArea method)@\spxentry{show\_visual()}\spxextra{src.gui.button\_area.ButtonArea method}|hyperpage}{1}
+\indexentry{update\_start\_button() (src.gui.button\_area.ButtonArea method)@\spxentry{update\_start\_button()}\spxextra{src.gui.button\_area.ButtonArea method}|hyperpage}{1}
+\indexentry{OptionDialog (class in src.gui.button\_area)@\spxentry{OptionDialog}\spxextra{class in src.gui.button\_area}|hyperpage}{1}
+\indexentry{get\_options() (src.gui.button\_area.OptionDialog method)@\spxentry{get\_options()}\spxextra{src.gui.button\_area.OptionDialog method}|hyperpage}{1}
+\indexentry{use\_both() (src.gui.button\_area.OptionDialog method)@\spxentry{use\_both()}\spxextra{src.gui.button\_area.OptionDialog method}|hyperpage}{1}
+\indexentry{use\_sklearn() (src.gui.button\_area.OptionDialog method)@\spxentry{use\_sklearn()}\spxextra{src.gui.button\_area.OptionDialog method}|hyperpage}{2}
+\indexentry{module@\spxentry{module}!src.gui.help\_window@\spxentry{src.gui.help\_window}|hyperpage}{2}
+\indexentry{src.gui.help\_window@\spxentry{src.gui.help\_window}!module@\spxentry{module}|hyperpage}{2}
+\indexentry{HelpWindow (class in src.gui.help\_window)@\spxentry{HelpWindow}\spxextra{class in src.gui.help\_window}|hyperpage}{2}
+\indexentry{open\_pdf\_manual() (src.gui.help\_window.HelpWindow method)@\spxentry{open\_pdf\_manual()}\spxextra{src.gui.help\_window.HelpWindow method}|hyperpage}{2}
+\indexentry{module@\spxentry{module}!src.gui.input\_window@\spxentry{src.gui.input\_window}|hyperpage}{2}
+\indexentry{src.gui.input\_window@\spxentry{src.gui.input\_window}!module@\spxentry{module}|hyperpage}{2}
+\indexentry{InputWindow (class in src.gui.input\_window)@\spxentry{InputWindow}\spxextra{class in src.gui.input\_window}|hyperpage}{2}
+\indexentry{browse\_file() (src.gui.input\_window.InputWindow method)@\spxentry{browse\_file()}\spxextra{src.gui.input\_window.InputWindow method}|hyperpage}{2}
+\indexentry{clear\_data() (src.gui.input\_window.InputWindow method)@\spxentry{clear\_data()}\spxextra{src.gui.input\_window.InputWindow method}|hyperpage}{2}
+\indexentry{emit\_input\_changed() (src.gui.input\_window.InputWindow method)@\spxentry{emit\_input\_changed()}\spxextra{src.gui.input\_window.InputWindow method}|hyperpage}{2}
+\indexentry{input\_changed (src.gui.input\_window.InputWindow attribute)@\spxentry{input\_changed}\spxextra{src.gui.input\_window.InputWindow attribute}|hyperpage}{2}
+\indexentry{manual\_input() (src.gui.input\_window.InputWindow method)@\spxentry{manual\_input()}\spxextra{src.gui.input\_window.InputWindow method}|hyperpage}{2}
+\indexentry{reset() (src.gui.input\_window.InputWindow method)@\spxentry{reset()}\spxextra{src.gui.input\_window.InputWindow method}|hyperpage}{2}
+\indexentry{update\_content() (src.gui.input\_window.InputWindow method)@\spxentry{update\_content()}\spxextra{src.gui.input\_window.InputWindow method}|hyperpage}{2}
+\indexentry{module@\spxentry{module}!src.gui.result\_window@\spxentry{src.gui.result\_window}|hyperpage}{3}
+\indexentry{src.gui.result\_window@\spxentry{src.gui.result\_window}!module@\spxentry{module}|hyperpage}{3}
+\indexentry{ResultWindow (class in src.gui.result\_window)@\spxentry{ResultWindow}\spxextra{class in src.gui.result\_window}|hyperpage}{3}
+\indexentry{add\_result() (src.gui.result\_window.ResultWindow method)@\spxentry{add\_result()}\spxextra{src.gui.result\_window.ResultWindow method}|hyperpage}{3}
+\indexentry{module@\spxentry{module}!src.gui.settings\_window@\spxentry{src.gui.settings\_window}|hyperpage}{3}
+\indexentry{src.gui.settings\_window@\spxentry{src.gui.settings\_window}!module@\spxentry{module}|hyperpage}{3}
+\indexentry{SettingsWindow (class in src.gui.settings\_window)@\spxentry{SettingsWindow}\spxextra{class in src.gui.settings\_window}|hyperpage}{3}
+\indexentry{update\_content() (src.gui.settings\_window.SettingsWindow method)@\spxentry{update\_content()}\spxextra{src.gui.settings\_window.SettingsWindow method}|hyperpage}{3}
+\indexentry{module@\spxentry{module}!src.gui.visual\_window@\spxentry{src.gui.visual\_window}|hyperpage}{3}
+\indexentry{src.gui.visual\_window@\spxentry{src.gui.visual\_window}!module@\spxentry{module}|hyperpage}{3}
+\indexentry{VisualWindow (class in src.gui.visual\_window)@\spxentry{VisualWindow}\spxextra{class in src.gui.visual\_window}|hyperpage}{3}
+\indexentry{module@\spxentry{module}!src.utils@\spxentry{src.utils}|hyperpage}{4}
+\indexentry{src.utils@\spxentry{src.utils}!module@\spxentry{module}|hyperpage}{4}
+\indexentry{module@\spxentry{module}!src.utils.initial\_rate@\spxentry{src.utils.initial\_rate}|hyperpage}{4}
+\indexentry{src.utils.initial\_rate@\spxentry{src.utils.initial\_rate}!module@\spxentry{module}|hyperpage}{4}
+\indexentry{calculate\_rate() (in module src.utils.initial\_rate)@\spxentry{calculate\_rate()}\spxextra{in module src.utils.initial\_rate}|hyperpage}{4}
+\indexentry{calculate\_rate\_compare() (in module src.utils.initial\_rate)@\spxentry{calculate\_rate\_compare()}\spxextra{in module src.utils.initial\_rate}|hyperpage}{4}
+\indexentry{cut\_data() (in module src.utils.initial\_rate)@\spxentry{cut\_data()}\spxextra{in module src.utils.initial\_rate}|hyperpage}{4}
+\indexentry{plot\_initial\_rate() (in module src.utils.initial\_rate)@\spxentry{plot\_initial\_rate()}\spxextra{in module src.utils.initial\_rate}|hyperpage}{4}
+\indexentry{plot\_rate\_comparison() (in module src.utils.initial\_rate)@\spxentry{plot\_rate\_comparison()}\spxextra{in module src.utils.initial\_rate}|hyperpage}{4}
+\indexentry{read\_data() (in module src.utils.initial\_rate)@\spxentry{read\_data()}\spxextra{in module src.utils.initial\_rate}|hyperpage}{5}
+\indexentry{module@\spxentry{module}!src.utils.input\_help@\spxentry{src.utils.input\_help}|hyperpage}{5}
+\indexentry{src.utils.input\_help@\spxentry{src.utils.input\_help}!module@\spxentry{module}|hyperpage}{5}
+\indexentry{DataInputDialog (class in src.utils.input\_help)@\spxentry{DataInputDialog}\spxextra{class in src.utils.input\_help}|hyperpage}{5}
+\indexentry{confirm\_input() (src.utils.input\_help.DataInputDialog method)@\spxentry{confirm\_input()}\spxextra{src.utils.input\_help.DataInputDialog method}|hyperpage}{5}
+\indexentry{get\_input\_data() (src.utils.input\_help.DataInputDialog method)@\spxentry{get\_input\_data()}\spxextra{src.utils.input\_help.DataInputDialog method}|hyperpage}{5}
+\indexentry{select\_all() (src.utils.input\_help.DataInputDialog method)@\spxentry{select\_all()}\spxextra{src.utils.input\_help.DataInputDialog method}|hyperpage}{5}
+\indexentry{update\_input\_fields() (src.utils.input\_help.DataInputDialog method)@\spxentry{update\_input\_fields()}\spxextra{src.utils.input\_help.DataInputDialog method}|hyperpage}{5}
+\indexentry{module@\spxentry{module}!src.utils.plane3D\_plot@\spxentry{src.utils.plane3D\_plot}|hyperpage}{6}
+\indexentry{src.utils.plane3D\_plot@\spxentry{src.utils.plane3D\_plot}!module@\spxentry{module}|hyperpage}{6}
+\indexentry{Plane3DPlotter (class in src.utils.plane3D\_plot)@\spxentry{Plane3DPlotter}\spxextra{class in src.utils.plane3D\_plot}|hyperpage}{6}
+\indexentry{create\_3D\_plot() (src.utils.plane3D\_plot.Plane3DPlotter method)@\spxentry{create\_3D\_plot()}\spxextra{src.utils.plane3D\_plot.Plane3DPlotter method}|hyperpage}{6}
+\indexentry{fig\_to\_pixmap() (src.utils.plane3D\_plot.Plane3DPlotter method)@\spxentry{fig\_to\_pixmap()}\spxextra{src.utils.plane3D\_plot.Plane3DPlotter method}|hyperpage}{6}
+\indexentry{fit\_plane() (src.utils.plane3D\_plot.Plane3DPlotter method)@\spxentry{fit\_plane()}\spxextra{src.utils.plane3D\_plot.Plane3DPlotter method}|hyperpage}{6}
+\indexentry{get\_results() (src.utils.plane3D\_plot.Plane3DPlotter method)@\spxentry{get\_results()}\spxextra{src.utils.plane3D\_plot.Plane3DPlotter method}|hyperpage}{7}
+\indexentry{perform\_analysis() (src.utils.plane3D\_plot.Plane3DPlotter method)@\spxentry{perform\_analysis()}\spxextra{src.utils.plane3D\_plot.Plane3DPlotter method}|hyperpage}{7}
+\indexentry{plot\_3D\_data() (src.utils.plane3D\_plot.Plane3DPlotter method)@\spxentry{plot\_3D\_data()}\spxextra{src.utils.plane3D\_plot.Plane3DPlotter method}|hyperpage}{7}
+\indexentry{plot\_fitted\_plane() (src.utils.plane3D\_plot.Plane3DPlotter method)@\spxentry{plot\_fitted\_plane()}\spxextra{src.utils.plane3D\_plot.Plane3DPlotter method}|hyperpage}{7}
+\indexentry{read\_data() (src.utils.plane3D\_plot.Plane3DPlotter method)@\spxentry{read\_data()}\spxextra{src.utils.plane3D\_plot.Plane3DPlotter method}|hyperpage}{7}
+\indexentry{module@\spxentry{module}!src.utils.rate\_const@\spxentry{src.utils.rate\_const}|hyperpage}{8}
+\indexentry{src.utils.rate\_const@\spxentry{src.utils.rate\_const}!module@\spxentry{module}|hyperpage}{8}
+\indexentry{calculate\_rate() (in module src.utils.rate\_const)@\spxentry{calculate\_rate()}\spxextra{in module src.utils.rate\_const}|hyperpage}{8}
+\indexentry{plot() (in module src.utils.rate\_const)@\spxentry{plot()}\spxextra{in module src.utils.rate\_const}|hyperpage}{8}
+\indexentry{read\_data() (in module src.utils.rate\_const)@\spxentry{read\_data()}\spxextra{in module src.utils.rate\_const}|hyperpage}{8}
+\indexentry{module@\spxentry{module}!src.utils.regression\_analysis@\spxentry{src.utils.regression\_analysis}|hyperpage}{8}
+\indexentry{src.utils.regression\_analysis@\spxentry{src.utils.regression\_analysis}!module@\spxentry{module}|hyperpage}{8}
+\indexentry{calculate\_regression() (in module src.utils.regression\_analysis)@\spxentry{calculate\_regression()}\spxextra{in module src.utils.regression\_analysis}|hyperpage}{8}
+\indexentry{plot\_regression() (in module src.utils.regression\_analysis)@\spxentry{plot\_regression()}\spxextra{in module src.utils.regression\_analysis}|hyperpage}{9}
+\indexentry{read\_data() (in module src.utils.regression\_analysis)@\spxentry{read\_data()}\spxextra{in module src.utils.regression\_analysis}|hyperpage}{9}
+\indexentry{module@\spxentry{module}!src.utils.save@\spxentry{src.utils.save}|hyperpage}{10}
+\indexentry{src.utils.save@\spxentry{src.utils.save}!module@\spxentry{module}|hyperpage}{10}
+\indexentry{save() (in module src.utils.save)@\spxentry{save()}\spxextra{in module src.utils.save}|hyperpage}{10}
+\indexentry{module@\spxentry{module}!src.mainwindow@\spxentry{src.mainwindow}|hyperpage}{10}
+\indexentry{src.mainwindow@\spxentry{src.mainwindow}!module@\spxentry{module}|hyperpage}{10}
+\indexentry{MainWindow (class in src.mainwindow)@\spxentry{MainWindow}\spxextra{class in src.mainwindow}|hyperpage}{10}
+\indexentry{check\_calculate\_button\_state() (src.mainwindow.MainWindow method)@\spxentry{check\_calculate\_button\_state()}\spxextra{src.mainwindow.MainWindow method}|hyperpage}{10}
+\indexentry{open\_contact() (src.mainwindow.MainWindow method)@\spxentry{open\_contact()}\spxextra{src.mainwindow.MainWindow method}|hyperpage}{10}
+\indexentry{open\_help() (src.mainwindow.MainWindow method)@\spxentry{open\_help()}\spxextra{src.mainwindow.MainWindow method}|hyperpage}{10}
+\indexentry{select\_option1() (src.mainwindow.MainWindow method)@\spxentry{select\_option1()}\spxextra{src.mainwindow.MainWindow method}|hyperpage}{10}
+\indexentry{select\_option2() (src.mainwindow.MainWindow method)@\spxentry{select\_option2()}\spxextra{src.mainwindow.MainWindow method}|hyperpage}{10}
+\indexentry{select\_option3() (src.mainwindow.MainWindow method)@\spxentry{select\_option3()}\spxextra{src.mainwindow.MainWindow method}|hyperpage}{10}
+\indexentry{select\_option4() (src.mainwindow.MainWindow method)@\spxentry{select\_option4()}\spxextra{src.mainwindow.MainWindow method}|hyperpage}{10}
+\indexentry{select\_option5() (src.mainwindow.MainWindow method)@\spxentry{select\_option5()}\spxextra{src.mainwindow.MainWindow method}|hyperpage}{10}
+\indexentry{select\_option6() (src.mainwindow.MainWindow method)@\spxentry{select\_option6()}\spxextra{src.mainwindow.MainWindow method}|hyperpage}{10}
+\indexentry{select\_option7() (src.mainwindow.MainWindow method)@\spxentry{select\_option7()}\spxextra{src.mainwindow.MainWindow method}|hyperpage}{10}
+\indexentry{select\_option8() (src.mainwindow.MainWindow method)@\spxentry{select\_option8()}\spxextra{src.mainwindow.MainWindow method}|hyperpage}{10}
+\indexentry{toggle\_option() (src.mainwindow.MainWindow method)@\spxentry{toggle\_option()}\spxextra{src.mainwindow.MainWindow method}|hyperpage}{10}
+\indexentry{update\_func\_option() (src.mainwindow.MainWindow method)@\spxentry{update\_func\_option()}\spxextra{src.mainwindow.MainWindow method}|hyperpage}{10}
+\indexentry{Settings (class in src.mainwindow)@\spxentry{Settings}\spxextra{class in src.mainwindow}|hyperpage}{11}
+\indexentry{reset() (src.mainwindow.Settings method)@\spxentry{reset()}\spxextra{src.mainwindow.Settings method}|hyperpage}{11}
+\indexentry{set\_func\_option() (src.mainwindow.Settings method)@\spxentry{set\_func\_option()}\spxextra{src.mainwindow.Settings method}|hyperpage}{11}
+\indexentry{set\_input\_option() (src.mainwindow.Settings method)@\spxentry{set\_input\_option()}\spxextra{src.mainwindow.Settings method}|hyperpage}{11}
+\indexentry{set\_save\_option() (src.mainwindow.Settings method)@\spxentry{set\_save\_option()}\spxextra{src.mainwindow.Settings method}|hyperpage}{11}
+\indexentry{settings\_changed (src.mainwindow.Settings attribute)@\spxentry{settings\_changed}\spxextra{src.mainwindow.Settings attribute}|hyperpage}{11}
+\indexentry{resource\_path() (in module src.mainwindow)@\spxentry{resource\_path()}\spxextra{in module src.mainwindow}|hyperpage}{11}

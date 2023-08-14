@@ -14,7 +14,7 @@ class ResultWindow(QMainWindow):
     A QMainWindow class that represents the result window for displaying analysis results.
 
     Attributes:
-        tab_widget (QTabWidget): Widget to manage multiple result tabs.
+        - tab_widget (QTabWidget): Widget to manage multiple result tabs.
     """
 
     def __init__(self, parent=None):
@@ -22,7 +22,7 @@ class ResultWindow(QMainWindow):
         Initializes the ResultWindow with a parent widget.
 
         Args:
-            parent (QWidget, optional): The parent widget of the result window. Defaults to None.
+            - parent (QWidget, optional): The parent widget of the result window. Defaults to None.
         """
         super().__init__(parent)
         self.setFixedSize(450, 300)

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>utils package &mdash; Independent Research Project 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="gui package" href="gui.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Independent Research Project
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="src.html">src package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="src.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gui.html">gui package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">utils package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#module-src.utils.initial_rate">initial_rate module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-src.utils.input_help">input_help module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-src.utils.plane3D_plot">plane3D_plot module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-src.utils.rate_const">rate_const module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-src.utils.regression_analysis">regression_analysis module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-src.utils.save">save module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src.html#module-src.mainwindow">mainwindow module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Independent Research Project</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="src.html">src package</a></li>
+      <li class="breadcrumb-item active">utils package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-src.utils">
+<span id="utils-package"></span><h1>utils package<a class="headerlink" href="#module-src.utils" title="Permalink to this heading">¶</a></h1>
+<section id="module-src.utils.initial_rate">
+<span id="initial-rate-module"></span><h2>initial_rate module<a class="headerlink" href="#module-src.utils.initial_rate" title="Permalink to this heading">¶</a></h2>
+<section id="initial-rate-py">
+<h3>initial_rate.py<a class="headerlink" href="#initial-rate-py" title="Permalink to this heading">¶</a></h3>
+<p>Author: Dongzi Ding
+Created: 2023-06-25
+Modified: 2023-08-14</p>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.initial_rate.calculate_rate">
+<span class="sig-prename descclassname"><span class="pre">src.utils.initial_rate.</span></span><span class="sig-name descname"><span class="pre">calculate_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.initial_rate.calculate_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the rate of a reaction using linear regression on a subset of data.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><p>time (array): Time data.</p></li>
+<li><p>conc (array): Concentration data.</p></li>
+<li><p>threshold (float): Percentage of data to use for regression.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>Dictionary containing time, concentration, slope, intercept, and R squared values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.initial_rate.calculate_rate_compare">
+<span class="sig-prename descclassname"><span class="pre">src.utils.initial_rate.</span></span><span class="sig-name descname"><span class="pre">calculate_rate_compare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.initial_rate.calculate_rate_compare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates rates using different thresholds and compares the fits.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><p>time (array): Time data.</p></li>
+<li><p>conc (array): Concentration data.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>Dictionary containing time, concentration, slopes, intercepts, and R squared values for each threshold.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.initial_rate.cut_data">
+<span class="sig-prename descclassname"><span class="pre">src.utils.initial_rate.</span></span><span class="sig-name descname"><span class="pre">cut_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.initial_rate.cut_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters time and concentration data based on a threshold.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><p>time (array): Time data.</p></li>
+<li><p>conc (array): Concentration data.</p></li>
+<li><p>threshold (float): Threshold value for filtering.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>Filtered arrays of time and concentration values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.initial_rate.plot_initial_rate">
+<span class="sig-prename descclassname"><span class="pre">src.utils.initial_rate.</span></span><span class="sig-name descname"><span class="pre">plot_initial_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intercept</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_squared</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.initial_rate.plot_initial_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a plot of the initial reaction rate.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><p>time (array): Time data.</p></li>
+<li><p>conc (array): Concentration data.</p></li>
+<li><p>slope (float): Slope from linear regression.</p></li>
+<li><p>intercept (float): Intercept from linear regression.</p></li>
+<li><p>r_squared (float): R squared value from linear regression.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>A QPixmap object containing the plot.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.initial_rate.plot_rate_comparison">
+<span class="sig-prename descclassname"><span class="pre">src.utils.initial_rate.</span></span><span class="sig-name descname"><span class="pre">plot_rate_comparison</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slopes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intercepts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_squared_values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.initial_rate.plot_rate_comparison" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a plot comparing reaction rates for different thresholds.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><p>time (array): Time data.</p></li>
+<li><p>conc (array): Concentration data.</p></li>
+<li><p>slopes (list): List of slopes from linear regressions.</p></li>
+<li><p>intercepts (list): List of intercepts from linear regressions.</p></li>
+<li><p>r_squared_values (list): List of R squared values from linear regressions.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>A QPixmap object containing the comparison plot.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.initial_rate.read_data">
+<span class="sig-prename descclassname"><span class="pre">src.utils.initial_rate.</span></span><span class="sig-name descname"><span class="pre">read_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.initial_rate.read_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads experimental data from an Excel file.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><p>filename (str): Path to the Excel file.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>Arrays of time and concentration values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.utils.input_help">
+<span id="input-help-module"></span><h2>input_help module<a class="headerlink" href="#module-src.utils.input_help" title="Permalink to this heading">¶</a></h2>
+<section id="input-help-py">
+<h3>input_help.py<a class="headerlink" href="#input-help-py" title="Permalink to this heading">¶</a></h3>
+<p>Author: Dongzi Ding
+Created: 2023-07-28
+Modified: 2023-08-14</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.utils.input_help.DataInputDialog">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.utils.input_help.</span></span><span class="sig-name descname"><span class="pre">DataInputDialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.input_help.DataInputDialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">QDialog</span></code></p>
+<p>A custom dialog for the user to input experimental data.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><ul class="simple">
+<li><p>main_window (QWidget): Reference to the main application window.</p></li>
+<li><p>input_data (dict): Dictionary storing input data after confirmation.</p></li>
+<li><p>data_types (dict): Dictionary defining the expected data types for each tab.</p></li>
+<li><p>tab_widget (QTabWidget): Widget containing tabs for each analysis type.</p></li>
+<li><p>list_widgets (dict): Dictionary storing list widgets for each tab.</p></li>
+<li><p>input_fields (dict): Dictionary storing input fields for each data type and tab.</p></li>
+<li><p>check_boxes (dict): Dictionary storing checkboxes indicating readiness for each data type and tab.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.input_help.DataInputDialog.confirm_input">
+<span class="sig-name descname"><span class="pre">confirm_input</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.input_help.DataInputDialog.confirm_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates and confirms the input data from the current tab.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.input_help.DataInputDialog.get_input_data">
+<span class="sig-name descname"><span class="pre">get_input_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.input_help.DataInputDialog.get_input_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts input strings to numeric data and returns a dictionary.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.input_help.DataInputDialog.select_all">
+<span class="sig-name descname"><span class="pre">select_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.input_help.DataInputDialog.select_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selects all items in the current tab’s QListWidget.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.input_help.DataInputDialog.update_input_fields">
+<span class="sig-name descname"><span class="pre">update_input_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.input_help.DataInputDialog.update_input_fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enables or disables the input field and checkbox for a clicked item.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.utils.plane3D_plot">
+<span id="plane3d-plot-module"></span><h2>plane3D_plot module<a class="headerlink" href="#module-src.utils.plane3D_plot" title="Permalink to this heading">¶</a></h2>
+<section id="plane3d-plot-py">
+<h3>plane3D_plot.py<a class="headerlink" href="#plane3d-plot-py" title="Permalink to this heading">¶</a></h3>
+<p>Author: Dongzi Ding
+Created: 2023-08-12
+Modified: 2023-08-14</p>
+<p>This file contains functions for performing 3D plotting and regression analysis on data.
+It includes functions for reading data, plotting 3D scatter points, and fitting a plane to the data.</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.utils.plane3D_plot.Plane3DPlotter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.utils.plane3D_plot.</span></span><span class="sig-name descname"><span class="pre">Plane3DPlotter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class for performing 3D plotting and regression analysis on data.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><ul class="simple">
+<li><p>filename (str): The path to the data file.</p></li>
+<li><p>data (tuple): Data values for pH, deltapH, logFe, deltalogFe, logR, deltalogR.</p></li>
+<li><p>params (tuple): Regression parameters.</p></li>
+<li><p>r_squared (float): R squared value of regression analysis.</p></li>
+</ul>
+</dd>
+<dt>Methods:</dt><dd><ul class="simple">
+<li><p>read_data: Read data from a file.</p></li>
+<li><p>perform_analysis: Perform regression analysis.</p></li>
+<li><p>fit_plane: Fit a plane to the data.</p></li>
+<li><p>plot_3D_data: Plot the 3D data with a fitted plane.</p></li>
+<li><p>create_3D_plot: Create a 3D plot.</p></li>
+<li><p>plot_fitted_plane: Plot a fitted plane on 3D data.</p></li>
+<li><p>get_results: Retrieve analysis results.</p></li>
+<li><p>fig_to_pixmap: Convert a Matplotlib figure to a QPixmap.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.plane3D_plot.Plane3DPlotter.create_3D_plot">
+<span class="sig-name descname"><span class="pre">create_3D_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pH</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logFe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.create_3D_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a 3D plot for the given data.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>pH (array-like): pH values.</p></li>
+<li><p>logFe (array-like): logFe values.</p></li>
+<li><p>logR (array-like): logR values.</p></li>
+<li><p>ax (matplotlib.axes._subplots.Axes3DSubplot, optional): 3D subplot. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>Matplotlib figure and 3D subplot.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.plane3D_plot.Plane3DPlotter.fig_to_pixmap">
+<span class="sig-name descname"><span class="pre">fig_to_pixmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.fig_to_pixmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a Matplotlib figure to a QPixmap.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>fig (matplotlib.figure.Figure): Matplotlib figure.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>PyQt5.QtGui.QPixmap: Pixmap representation of the figure.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.plane3D_plot.Plane3DPlotter.fit_plane">
+<span class="sig-name descname"><span class="pre">fit_plane</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pH</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logFe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logR</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.fit_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fits a plane to the data.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>pH (array-like): pH values.</p></li>
+<li><p>logFe (array-like): logFe values.</p></li>
+<li><p>logR (array-like): logR values.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>Regression parameters and R squared value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.plane3D_plot.Plane3DPlotter.get_results">
+<span class="sig-name descname"><span class="pre">get_results</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.get_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the regression analysis results.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>dict: Regression parameters and R squared value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.plane3D_plot.Plane3DPlotter.perform_analysis">
+<span class="sig-name descname"><span class="pre">perform_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pH</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logFe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logR</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.perform_analysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform regression analysis on data.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>pH (array-like): pH values.</p></li>
+<li><p>logFe (array-like): logFe values.</p></li>
+<li><p>logR (array-like): logR values.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>Regression parameters and R squared value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.plane3D_plot.Plane3DPlotter.plot_3D_data">
+<span class="sig-name descname"><span class="pre">plot_3D_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pH</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logFe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.plot_3D_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the 3D data along with the fitted plane.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>pH (array-like): pH values.</p></li>
+<li><p>logFe (array-like): logFe values.</p></li>
+<li><p>logR (array-like): logR values.</p></li>
+<li><p>ax (matplotlib.axes._subplots.Axes3DSubplot, optional): 3D subplot. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>Matplotlib figure and 3D subplot.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.plane3D_plot.Plane3DPlotter.plot_fitted_plane">
+<span class="sig-name descname"><span class="pre">plot_fitted_plane</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pH</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logFe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.plot_fitted_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a fitted plane on the 3D data.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>ax (matplotlib.axes._subplots.Axes3DSubplot): 3D subplot.</p></li>
+<li><p>pH (array-like): pH values.</p></li>
+<li><p>logFe (array-like): logFe values.</p></li>
+<li><p>params (tuple): Regression parameters.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>PyQt5.QtGui.QPixmap: Pixmap representation of the plot.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.utils.plane3D_plot.Plane3DPlotter.read_data">
+<span class="sig-name descname"><span class="pre">read_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.read_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads data from a file.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>filename (str): Path to the data file.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>Data values for pH, deltapH, logFe, deltalogFe, logR, deltalogR or None if an error occurs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-src.utils.rate_const">
+<span id="rate-const-module"></span><h2>rate_const module<a class="headerlink" href="#module-src.utils.rate_const" title="Permalink to this heading">¶</a></h2>
+<section id="rate-const-py">
+<h3>rate_const.py<a class="headerlink" href="#rate-const-py" title="Permalink to this heading">¶</a></h3>
+<p>Author: Dongzi Ding
+Created: 2023-08-10
+Modified: 2023-08-14</p>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.rate_const.calculate_rate">
+<span class="sig-prename descclassname"><span class="pre">src.utils.rate_const.</span></span><span class="sig-name descname"><span class="pre">calculate_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.rate_const.calculate_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the reaction rate using regression on logarithmic concentration.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>time (array-like): Array of time values.</p></li>
+<li><p>conc (array-like): Array of concentration values.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>Calculated values including time, logarithmic concentration, slope, intercept, and R squared value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.rate_const.plot">
+<span class="sig-prename descclassname"><span class="pre">src.utils.rate_const.</span></span><span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intercept</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_squared</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.rate_const.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the given time and logarithmic concentration data with a linear fit.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>time (array-like): Array of time values.</p></li>
+<li><p>conc (array-like): Array of logarithmic concentration values.</p></li>
+<li><p>slope (float): Slope from linear regression.</p></li>
+<li><p>intercept (float): Intercept from linear regression.</p></li>
+<li><p>r_squared (float): R squared value from linear regression.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>PyQt5.QtGui.QPixmap: Pixmap representation of the plot.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.rate_const.read_data">
+<span class="sig-prename descclassname"><span class="pre">src.utils.rate_const.</span></span><span class="sig-name descname"><span class="pre">read_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.rate_const.read_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads data from the given filename.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>filename (str): Path to the data file.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>Time and concentration values or None if an error occurs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.utils.regression_analysis">
+<span id="regression-analysis-module"></span><h2>regression_analysis module<a class="headerlink" href="#module-src.utils.regression_analysis" title="Permalink to this heading">¶</a></h2>
+<section id="regression-analysis-py">
+<h3>regression_analysis.py<a class="headerlink" href="#regression-analysis-py" title="Permalink to this heading">¶</a></h3>
+<p>Author: Dongzi Ding
+Created: 2023-06-28
+Modified: 2023-08-14</p>
+<p>This file contains functions for performing regression analysis on data. 
+It includes functions for reading data, calculating LINEAR regression,
+and plotting the regression line.</p>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.regression_analysis.calculate_regression">
+<span class="sig-prename descclassname"><span class="pre">src.utils.regression_analysis.</span></span><span class="sig-name descname"><span class="pre">calculate_regression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdx_absolute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdy_absolute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_sklearn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.regression_analysis.calculate_regression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the linear regression of the data.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>x (array-like): The x data.</p></li>
+<li><p>y (array-like): The y data.</p></li>
+<li><p>sdx_absolute (array-like, optional): Absolute standard deviations of the x data. Defaults to None.</p></li>
+<li><p>sdy_absolute (array-like, optional): Absolute standard deviations of the y data. Defaults to None.</p></li>
+<li><p>use_sklearn (bool, optional): Whether to use sklearn for the regression. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>Slope, intercept, standard error of the slope, standard error of the intercept, and the R-squared value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.regression_analysis.plot_regression">
+<span class="sig-prename descclassname"><span class="pre">src.utils.regression_analysis.</span></span><span class="sig-name descname"><span class="pre">plot_regression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdx_lower</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdx_upper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdy_lower</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdy_upper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intercept</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">se_slope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">se_intercept</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_squared</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.regression_analysis.plot_regression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the data and the regression line.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>x (array-like): The x data.</p></li>
+<li><p>y (array-like): The y data.</p></li>
+<li><p>sdx_lower (array-like): Lower standard deviations of the x data.</p></li>
+<li><p>sdx_upper (array-like): Upper standard deviations of the x data.</p></li>
+<li><p>sdy_lower (array-like): Lower standard deviations of the y data.</p></li>
+<li><p>sdy_upper (array-like): Upper standard deviations of the y data.</p></li>
+<li><p>slope (float): Slope of the regression line.</p></li>
+<li><p>intercept (float): Intercept of the regression line.</p></li>
+<li><p>se_slope (float): Standard error of the slope.</p></li>
+<li><p>se_intercept (float): Standard error of the intercept.</p></li>
+<li><p>r_squared (float): R-squared value.</p></li>
+<li><p>label (str): Label for the plot.</p></li>
+<li><p>color (str): Color for the plot.</p></li>
+<li><p>ax (matplotlib.axes.Axes): Axes object to draw the plot onto.</p></li>
+<li><p>fig (matplotlib.figure.Figure): Figure object containing the Axes.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>PyQt5.QtGui.QPixmap: QPixmap representation of the plot.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.regression_analysis.read_data">
+<span class="sig-prename descclassname"><span class="pre">src.utils.regression_analysis.</span></span><span class="sig-name descname"><span class="pre">read_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.regression_analysis.read_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads data from an Excel file.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>filename (str): Path to the Excel file.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>Data extracted from the file or None if an error occurs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-src.utils.save">
+<span id="save-module"></span><h2>save module<a class="headerlink" href="#module-src.utils.save" title="Permalink to this heading">¶</a></h2>
+<section id="save-py">
+<h3>save.py<a class="headerlink" href="#save-py" title="Permalink to this heading">¶</a></h3>
+<p>Author: Dongzi Ding
+Created: 2023-06-25
+Modified: 2023-08-14</p>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.save.save">
+<span class="sig-prename descclassname"><span class="pre">src.utils.save.</span></span><span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dirname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figures</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.save.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the result data to CSV files and figures to PNG files.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><p>result (dict): Dictionary containing the analysis results.</p></li>
+<li><p>dirname (str): Directory path where the results will be saved.</p></li>
+<li><p>figures (dict): Dictionary containing figures for saving as PNG.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gui.html" class="btn btn-neutral float-left" title="gui package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Dongzi Ding.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
