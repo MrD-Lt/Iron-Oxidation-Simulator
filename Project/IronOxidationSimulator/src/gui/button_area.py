@@ -7,12 +7,16 @@ Modified: 2023-08-14
 """
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QRadioButton, QDialog, QFileDialog, \
     QTabWidget, QMessageBox
-from gui.result_window import ResultWindow
-from gui.visual_window import VisualWindow
-from utils import regression_analysis, initial_rate, rate_const, plane3D_plot
-from utils.plane3D_plot import Plane3DPlotter
-from utils.save import save
+
+from .result_window import ResultWindow
+from .visual_window import VisualWindow
+
+from ..utils import regression_analysis, initial_rate, rate_const, plane3D_plot
+from ..utils.plane3D_plot import Plane3DPlotter
+from ..utils.save import save
+
 from matplotlib.figure import Figure
+
 
 
 class ButtonArea(QWidget):
@@ -20,9 +24,9 @@ class ButtonArea(QWidget):
     Main button area of the application which provides the necessary buttons for the user to interact with the application.
 
     Attributes:
-    - result: A dictionary storing the results.
-    - figures: A dictionary storing the generated figures.
-    - main_window: Reference to the main application window.
+        :result: A dictionary storing the results.
+        :figures: A dictionary storing the generated figures.
+        :main_window: Reference to the main application window.
     """
 
     def __init__(self, parent=None):
@@ -30,7 +34,7 @@ class ButtonArea(QWidget):
         Initialize the ButtonArea with necessary widgets and layouts.
 
         Args:
-            parent (QWidget, optional): The parent widget. Defaults to None.
+            :parent (QWidget, optional): The parent widget. Defaults to None.
         """
         super().__init__(parent)
 
@@ -341,7 +345,23 @@ class ButtonArea(QWidget):
 
 
 class OptionDialog(QDialog):
+    """
+        A dialog for selecting analysis options.
+
+        :param selected_features: A list of selected features.
+        :type selected_features: list
+        :param parent: The parent widget (default is None).
+        :type parent: QWidget
+    """
     def __init__(self, selected_features, parent=None):
+        """
+            Initialize the OptionDialog.
+
+            :param selected_features: A list of selected features.
+            :type selected_features: list
+            :param parent: The parent widget (default is None).
+            :type parent: QWidget
+        """
         super().__init__(parent)
 
         self.setWindowTitle("Options")

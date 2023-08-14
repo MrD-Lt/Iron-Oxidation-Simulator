@@ -13,10 +13,10 @@ class SettingsWindow(QWidget):
     A window displaying user settings and associated instructions.
 
     Attributes:
-    - main_window (QWidget): Reference to the main application window.
-    - guide_textedit (QTextEdit): Text area displaying guidance for selected settings.
-    - scroll_area (QScrollArea): Scroll area housing the guide text.
-    - option_label (QLabel): Label showing current selected options.
+        - main_window (QWidget): Reference to the main application window.
+        - guide_textedit (QTextEdit): Text area displaying guidance for selected settings.
+        - scroll_area (QScrollArea): Scroll area housing the guide text.
+        - option_label (QLabel): Label showing current selected options.
     """
 
     def __init__(self, parent=None):

@@ -9,6 +9,7 @@ This folder contains all the codes of this IRP.
 - [`assets/`](./assets/): This directory contains any images, references, or other files used in the project.
 - [`config/`](./config/): This directory contains configuration files and environmental variables.
 - [`ui/`](./ui/): This directory contains all the ui files created.
+- [`docs/`](./docs/): This directory contains all the docs created.
 
 ## Getting Started
 
@@ -67,6 +68,6 @@ To run the project, follow these steps:
 
 Please note that this project is still under development and the structure may change over time.
 
-Version 0.2.0
+Version 0.2.1
 
-12 Aug. 2023
+14 Aug. 2023

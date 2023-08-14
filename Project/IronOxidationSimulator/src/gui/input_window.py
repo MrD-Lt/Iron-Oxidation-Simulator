@@ -5,15 +5,14 @@ Author: Dongzi Ding
 Created: 2023-06-27
 Modified: 2023-08-14
 """
-
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QGroupBox, QPushButton, QFileDialog, QLabel, QDialog
 
-from utils.input_help import DataInputDialog
-import utils.regression_analysis
-import utils.initial_rate
-import utils.rate_const
-import utils.plane3D_plot
+from ..utils.input_help import DataInputDialog
+from ..utils import regression_analysis
+from ..utils import initial_rate
+from ..utils import rate_const
+from ..utils import plane3D_plot
 
 
 class InputWindow(QWidget):
@@ -21,7 +20,7 @@ class InputWindow(QWidget):
     A QWidget class that represents the input window for user data.
 
     Attributes:
-        input_changed (pyqtSignal): Signal emitted when the input changes.
+        :input_changed (pyqtSignal): Signal emitted when the input changes.
     """
 
     input_changed = pyqtSignal()
@@ -31,7 +30,7 @@ class InputWindow(QWidget):
         Initializes the InputWindow with a parent widget.
 
         Args:
-            parent (QWidget, optional): The parent widget of the input window. Defaults to None.
+            :parent (QWidget, optional): The parent widget of the input window. Defaults to None.
         """
         super().__init__(parent)
         self.main_window = parent
@@ -40,11 +39,11 @@ class InputWindow(QWidget):
 
         layout = QVBoxLayout()
 
-        self.plane3D_plotter = utils.plane3D_plot.Plane3DPlotter()
+        self.plane3D_plotter = plane3D_plot.Plane3DPlotter()
         self.data_readers = {
-            "reaction order analysis": utils.regression_analysis.read_data,
-            "initial rate analysis": utils.initial_rate.read_data,
-            "rate const analysis": utils.rate_const.read_data,
+            "reaction order analysis": regression_analysis.read_data,
+            "initial rate analysis": initial_rate.read_data,
+            "rate const analysis": rate_const.read_data,
             "3D plane plot": self.plane3D_plotter.read_data,
         }
 

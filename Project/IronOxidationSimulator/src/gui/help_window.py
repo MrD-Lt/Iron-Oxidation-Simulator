@@ -18,7 +18,7 @@ class HelpWindow(QMainWindow):
     A QMainWindow class that represents the help window.
 
     Attributes:
-        parent (QWidget): The parent widget of the help window.
+        :parent (QWidget): The parent widget of the help window.
     """
 
     def __init__(self, parent=None):
@@ -26,7 +26,7 @@ class HelpWindow(QMainWindow):
         Initializes the HelpWindow with a parent widget.
 
         Args:
-            parent (QWidget, optional): The parent widget of the help window. Defaults to None.
+            :parent (QWidget, optional): The parent widget of the help window. Defaults to None.
         """
         super().__init__(parent)
 

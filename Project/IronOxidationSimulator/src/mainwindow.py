@@ -13,10 +13,10 @@ import os
 from PyQt5.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QWidget, QAction
 from PyQt5.QtCore import pyqtSignal, QObject, QTimer
 import sys
-from gui.settings_window import SettingsWindow
-from gui.input_window import InputWindow
-from gui.button_area import ButtonArea
-from gui.help_window import HelpWindow
+from src.gui.settings_window import SettingsWindow
+from src.gui.input_window import InputWindow
+from src.gui.button_area import ButtonArea
+from src.gui.help_window import HelpWindow
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QDesktopServices
@@ -207,10 +207,10 @@ def resource_path(relative_path):
     Gets the absolute path to a resource, works in both development and PyInstaller contexts.
 
     Args:
-        relative_path (str): The relative path to the resource.
+        :relative_path (str): The relative path to the resource.
 
     Returns:
-        str: The absolute path to the resource.
+        The absolute path to the resource.
     """
     base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(base_path, relative_path)

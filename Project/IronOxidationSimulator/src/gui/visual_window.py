@@ -15,8 +15,8 @@ class VisualWindow(QMainWindow):
     A QMainWindow class to display an image in a window for visualization purposes.
 
     Attributes:
-        image_label (QLabel): A label widget to display the image.
-        central_widget (QWidget): The central widget containing the image label.
+        - image_label (QLabel): A label widget to display the image.
+        - central_widget (QWidget): The central widget containing the image label.
     """
 
     def __init__(self, pixmap, parent=None):
@@ -24,8 +24,8 @@ class VisualWindow(QMainWindow):
         Initializes the VisualWindow with a QPixmap to display and an optional parent widget.
 
         Args:
-            pixmap (QPixmap): The image to be displayed.
-            parent (QWidget, optional): The parent widget of the VisualWindow. Defaults to None.
+            - pixmap (QPixmap): The image to be displayed.
+            - parent (QWidget, optional): The parent widget of the VisualWindow. Defaults to None.
         """
         super().__init__(parent)
         self.setWindowTitle("Visualisation")

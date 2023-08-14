@@ -35,9 +35,9 @@ class ResultWindow(QMainWindow):
         Adds a result to a new tab based on the feature_name.
 
         Args:
-            title (str): The title for the new tab.
-            result (dict or tuple): The result data.
-            feature_name (str): The name of the analysis feature.
+            - title (str): The title for the new tab.
+            - result (dict or tuple): The result data.
+            - feature_name (str): The name of the analysis feature.
         """
         if feature_name == "Initial Rate Analysis":
             try:
