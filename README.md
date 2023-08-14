@@ -4,9 +4,9 @@ This repository is dedicated to the development of a software tool to simulate a
 
 ## Structure:
 
-- `Project/`: This folder contains all the codes and files of this IRP.
-- `Development_Log/`: This folder contains records of the development process.
-- `SoftWare/`: This folder contains the help of how to use the software for users.
+- `Project`: This folder contains all the codes and files of this IRP.
+- `Development_Log`: This folder contains records of the development process.
+- `SoftWare`: This folder contains the help of how to use the software for users.
 
 ## Getting Started
 
