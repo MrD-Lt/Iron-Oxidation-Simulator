@@ -1,0 +1,2 @@
+Began to add docstrings and fix bugs.
+The project is going to be finished.

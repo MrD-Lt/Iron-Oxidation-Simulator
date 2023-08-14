@@ -244,12 +244,11 @@ class ButtonArea(QWidget):
                     for method, result in self.result[option].items():
                         self.result_window.add_result(f"3D Plane Plot ({method})", result, "3D Plane Plot")
 
-            # 添加其他功能的处理...
 
         self.result_window.show()
 
     def show_visual(self):
-        colors = {'no_sklearn': 'red', 'sklearn': 'blue'}  # 创建一个颜色字典，键是方法的名字，值是颜色
+        colors = {'no_sklearn': 'red', 'sklearn': 'blue'}
 
         for option, selected in self.main_window.settings.func_current_options.items():
             if selected:

@@ -1,3 +1,11 @@
+"""
+initial_rate.py
+----------------------
+Author: Dongzi Ding
+Created: 2023-06-25
+Modified: 2023-08-14
+"""
+
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
@@ -6,9 +14,17 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from PyQt5.QtGui import QPixmap, QImage
 
 
-# Plan to use the top threshold% data to do Linear regression
 
 def read_data(filename):
+    """
+    Reads experimental data from an Excel file.
+
+    Parameters:
+    - filename (str): Path to the Excel file.
+
+    Returns:
+    tuple: Arrays of time and concentration values.
+    """
     try:
         data = pd.read_excel(filename)
         time = data.iloc[:, 0].values
@@ -20,6 +36,17 @@ def read_data(filename):
 
 
 def calculate_rate(time, conc, threshold):
+    """
+    Calculates the rate of a reaction using linear regression on a subset of data.
+
+    Parameters:
+    - time (array): Time data.
+    - conc (array): Concentration data.
+    - threshold (float): Percentage of data to use for regression.
+
+    Returns:
+    dict: Dictionary containing time, concentration, slope, intercept, and R squared values.
+    """
     cur_time, cur_conc = cut_data(time, conc, threshold)
     time_2d = np.array(time).reshape(-1, 1)
     cur_time = np.array(cur_time).reshape(-1, 1)
@@ -39,6 +66,16 @@ def calculate_rate(time, conc, threshold):
 
 
 def calculate_rate_compare(time, conc):
+    """
+    Calculates rates using different thresholds and compares the fits.
+
+    Parameters:
+    - time (array): Time data.
+    - conc (array): Concentration data.
+
+    Returns:
+    dict: Dictionary containing time, concentration, slopes, intercepts, and R squared values for each threshold.
+    """
     threshold_array = np.arange(0.05, 0.2, 0.01)
     slopes, intercepts, r_squared_values = [], [], []
     time_2d = np.array(time).reshape(-1, 1)
@@ -61,6 +98,17 @@ def calculate_rate_compare(time, conc):
 
 
 def cut_data(time, conc, threshold):
+    """
+    Filters time and concentration data based on a threshold.
+
+    Parameters:
+    - time (array): Time data.
+    - conc (array): Concentration data.
+    - threshold (float): Threshold value for filtering.
+
+    Returns:
+    tuple: Filtered arrays of time and concentration values.
+    """
     conc = np.array(conc)
     time = np.array(time)
     conc_l, conc_h = conc[0], conc[-1]
@@ -79,6 +127,19 @@ def cut_data(time, conc, threshold):
 
 
 def plot_initial_rate(time, conc, slope, intercept, r_squared):
+    """
+    Generates a plot of the initial reaction rate.
+
+    Parameters:
+    - time (array): Time data.
+    - conc (array): Concentration data.
+    - slope (float): Slope from linear regression.
+    - intercept (float): Intercept from linear regression.
+    - r_squared (float): R squared value from linear regression.
+
+    Returns:
+    QPixmap: A QPixmap object containing the plot.
+    """
     time = np.array(time)
 
     fig, ax = plt.subplots(figsize=(6, 4))
@@ -91,7 +152,6 @@ def plot_initial_rate(time, conc, slope, intercept, r_squared):
     ax.set_ylabel('Concentration')
     ax.legend(loc="best")
 
-    # Convert the matplotlib figure to a QPixmap
     canvas = FigureCanvas(fig)
     canvas.draw()
     width, height = fig.get_size_inches() * fig.get_dpi()
@@ -102,6 +162,19 @@ def plot_initial_rate(time, conc, slope, intercept, r_squared):
 
 
 def plot_rate_comparison(time, conc, slopes, intercepts, r_squared_values):
+    """
+    Generates a plot comparing reaction rates for different thresholds.
+
+    Parameters:
+    - time (array): Time data.
+    - conc (array): Concentration data.
+    - slopes (list): List of slopes from linear regressions.
+    - intercepts (list): List of intercepts from linear regressions.
+    - r_squared_values (list): List of R squared values from linear regressions.
+
+    Returns:
+    QPixmap: A QPixmap object containing the comparison plot.
+    """
     time = np.array(time)
 
     fig, ax = plt.subplots(figsize=(6, 4))
@@ -122,7 +195,6 @@ def plot_rate_comparison(time, conc, slopes, intercepts, r_squared_values):
     ax.set_xlabel('Time')
     ax.set_ylabel('Concentration')
 
-    # Convert the matplotlib figure to a QPixmap
     canvas = FigureCanvas(fig)
     canvas.draw()
     width, height = fig.get_size_inches() * fig.get_dpi()

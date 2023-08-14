@@ -54,28 +54,37 @@ class SettingsWindow(QWidget):
             guide_text += '\nPlease note: \nWhen multiple features are selected, ' \
                           'you can only use manual input and cannot upload files.\n'
 
-
         # 添加功能相关的提示文字
         func_guide_text = []
+
         if 'reaction order analysis' in selected_options:
             func_guide_text.append("For reaction order analysis, please input your data in:\n"
                                    "If import file: Excel format,\n"
-                                   "log[Fe], logR0, Δlog[Fe] absolute,\n"
-                                   "Δlog[Fe] upper, Δlog[Fe] lower,\n"
+                                   "log[Fe], logR0, Δlog[Fe] absolute, Δlog[Fe] upper, Δlog[Fe] lower,\n"
                                    "ΔlogR0 absolute, ΔlogR0 upper, ΔlogR0 lower\n"
                                    "in different columns.\n"
                                    "If manually input: follow the instructions.")
 
-        if 'initial rate analysis' in selected_options:  # 为initial rate analysis添加说明
+        if 'initial rate analysis' in selected_options:
             func_guide_text.append("For initial rate analysis, please input your data in:\n"
                                    "If import file: Excel format,\n"
+                                   "Time (seconds), [Fe2+] (uM), Threshold (5%-20%)\n"
+                                   "in different columns.\n"
                                    "If manually input: follow the instructions.")
 
         if 'rate const analysis' in selected_options:
-            func_guide_text.append("For rate const analysis, please input your data in format C.")
+            func_guide_text.append("For rate const analysis, please input your data in:\n"
+                                   "If import file: Excel format,\n"
+                                   "Time (seconds), [Fe2+] (uM)\n"
+                                   "in different columns.\n"
+                                   "If manually input: follow the instructions.")
 
         if '3D plane plot' in selected_options:
-            func_guide_text.append("For 3D plane plot, please input your data in format C.")
+            func_guide_text.append("For 3D plane plot, please input your data in:\n"
+                                   "If import file: Excel format,\n"
+                                   "pH, ΔpH, logFe, ΔlogFe, logR, ΔlogR\n"
+                                   "in different columns.\n"
+                                   "If manually input: follow the instructions.")
 
         # 如果有功能相关的提示文字，则添加到 guide_text，并添加分界线
         divider = "\n" + "-" * 30 + "\n"  # 分界线

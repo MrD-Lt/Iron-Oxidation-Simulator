@@ -1,6 +1,11 @@
 """
-Main window for the application.
+mainwindow.py
+----------------------
+Author: Dongzi Ding
+Created: 2023-06-25
+Modified: 2023-08-14
 
+Main window for the application.
 This module provides the main application window for the PyQt5-based GUI application.
 It includes menu bars for feature selections, input settings, save settings, help, and developer contact.
 """
@@ -18,17 +23,17 @@ from PyQt5.QtGui import QDesktopServices
 
 
 class MainWindow(QMainWindow):
+    """
+    The main window for the PyQt5-based GUI application.
+    """
     def __init__(self, parent=None):
-        """Initialize the main window."""
+        """Initializes the main window, setting up the layout and components."""
         super().__init__(parent)
 
-        # 布局设置
         self.setFixedSize(1024, 768)
 
-        # 创建菜单栏
         self.menu = self.menuBar()
 
-        # 功能选择
         self.settings = Settings()
 
         self.feature_actions = {
@@ -42,42 +47,34 @@ class MainWindow(QMainWindow):
             self.func_menu.addAction(action)
             action.triggered.connect(self.update_func_option)
 
-        # 输入设置
         self.input_menu = self.menu.addMenu("Input settings")
         self.input_menu.addAction("Manual Input", self.select_option5)
         self.import_file_action = self.input_menu.addAction("Import File", self.select_option6)
 
-        # 是否保存内容
         self.save_menu = self.menu.addMenu("Save settings")
         self.save_menu.addAction("Yes", self.select_option7)
         self.save_menu.addAction("No", self.select_option8)
 
-        # 帮助
         self.help_menu = self.menu.addMenu("Help")
         self.help_menu.addAction("Info and Help", self.open_help)
 
-        # 联系
         self.help_menu = self.menu.addMenu("Contact with developer")
         self.help_menu.addAction("Github", self.open_contact)
         self.help_menu.addAction("Email", self.open_contact)
         self.help_menu.addAction("Website", self.open_contact)
 
-        # 创建其他部件
         self.settings_window = SettingsWindow(self)
         self.input_window = InputWindow(self)
         self.button_area = ButtonArea(self)
 
-        # 检查Input按钮
         self.settings.settings_changed.connect(self.check_calculate_button_state)
         self.input_window.input_changed.connect(self.check_calculate_button_state)
 
         self.check_calculate_button_state()
 
-        # Create a central widget to hold the layout
         self.central_widget = QWidget()
         self.setCentralWidget(self.central_widget)
 
-        # 创建布局并添加组件
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.settings_window)
         self.layout.addWidget(self.input_window)
@@ -85,6 +82,7 @@ class MainWindow(QMainWindow):
         self.central_widget.setLayout(self.layout)
 
     def update_func_option(self, checked):
+        """Updates the current function option based on the menu selection."""
         action = self.sender()
         option = action.text()
         self.settings.func_current_options[option] = checked
@@ -94,12 +92,10 @@ class MainWindow(QMainWindow):
         self.check_calculate_button_state()
 
     def check_calculate_button_state(self):
+        """Checks if the 'Calculate' button should be enabled."""
         has_input = any(self.input_window.data.values())
         func_selected = any(self.settings.func_current_options.values())
         self.button_area.calculate_button.setEnabled(has_input and func_selected)
-
-    def placeholder(self):
-        pass  # 占位函数
 
     def select_option1(self):
         self.settings.set_func_option("reaction order analysis")
@@ -126,22 +122,21 @@ class MainWindow(QMainWindow):
         self.settings.set_save_option("No")
 
     def open_help(self):
-        # 创建一个 HelpWindow 实例并显示它
+        """Opens the Help window."""
         self.help_window = HelpWindow(self)
         self.help_window.show()
 
     def open_contact(self):
-        # 获取发送信号的 QAction
+        """Opens the appropriate contact method based on the menu selection."""
         action = self.sender()
-        # 获取 QAction 的名字
         option = action.text()
 
         if option == "Github":
-            url = "https://github.com/edsml-dd1522"  # 替换为你的Github链接
+            url = "https://github.com/edsml-dd1522"
         elif option == "Email":
-            url = "mailto:dongzi.ding22@imperial.ac.uk"  # 替换为你的Email
+            url = "mailto:dongzi.ding22@imperial.ac.uk"
         else:  # option == "Website"
-            url = "https://edsml-dd1522.github.io/"  # 替换为你的网站链接
+            url = "https://edsml-dd1522.github.io/"
 
         msg_box = QMessageBox()
         msg_box.setWindowTitle("Open External Application")
@@ -153,6 +148,7 @@ class MainWindow(QMainWindow):
             QDesktopServices.openUrl(QUrl(url))
 
     def toggle_option(self, checked, option):
+        """Toggles the current function option."""
         if checked:
             self.settings.func_current_option = option
         else:
@@ -161,33 +157,43 @@ class MainWindow(QMainWindow):
 
 
 class Settings(QObject):
+    """
+        Represents application settings.
+
+        Attributes:
+            func_current_options (dict): Current functional options selected.
+    """
     settings_changed = pyqtSignal()
 
     def __init__(self):
+        """Initializes the application settings with default values."""
         super().__init__()
 
         self.func_current_options = {option: False for option in
                                      ["reaction order analysis", "initial rate analysis",
                                       "rate const analysis", "3D plane plot"]}
 
-        # 其余代码
         self.func_current_option = "None"
         self.input_current_option = "None"
         self.save_current_option = "No"
 
     def set_func_option(self, option):
+        """Sets the current function option."""
         self.func_current_option = option
         self.settings_changed.emit()
 
     def set_input_option(self, option):
+        """Sets the current input option."""
         self.input_current_option = option
         self.settings_changed.emit()
 
     def set_save_option(self, option):
+        """Sets the current save option."""
         self.save_current_option = option
         self.settings_changed.emit()
 
     def reset(self):
+        """Resets the settings to default values."""
         self.save_current_option = "No"
         self.input_current_option = "None"
         self.func_current_options = {option: False for option in
@@ -196,9 +202,16 @@ class Settings(QObject):
         self.settings_changed.emit()
 
 
-# Used for finding path when package the codes:
 def resource_path(relative_path):
-    """ Get absolute path to resource, works for dev and for PyInstaller """
+    """
+    Gets the absolute path to a resource, works in both development and PyInstaller contexts.
+
+    Args:
+        relative_path (str): The relative path to the resource.
+
+    Returns:
+        str: The absolute path to the resource.
+    """
     base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(base_path, relative_path)
 

@@ -7,9 +7,7 @@ class DataInputDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        # 用于展示需要哪些tabs
         self.main_window = parent.main_window
-        # 输入数据的类型列表
         self.input_data = None
         self.data_types = {
             'reaction order analysis': ['log[Fe]', 'logR0', 'Δlog[Fe] absolute', 'Δlog[Fe] upper', 'Δlog[Fe] lower',
@@ -17,7 +15,6 @@ class DataInputDialog(QDialog):
             'initial rate analysis': ['Time (seconds)', '[Fe2+] (uM)', 'Threshold (5%-20%)'],
             'rate const analysis': ['Time (seconds)', '[Fe2+] (uM)'],
             '3D plane plot': ['pH', 'ΔpH', 'logFe', 'ΔlogFe', 'logR', 'ΔlogR'],
-            'other function': ['different', 'list', 'of', 'data', 'types']
         }
 
         self.tab_widget = QTabWidget()
