@@ -94,6 +94,6 @@ Contributions, issues, and feature requests are welcome!
 
 Distributed under the MIT License. See LICENSE for more information.
 
-Version 0.2.0
+Version 1.0.0
 
-12 Aug. 2023
+14 Aug. 2023
