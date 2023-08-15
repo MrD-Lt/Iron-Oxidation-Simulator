@@ -38,6 +38,7 @@ jobs:
         run: |
           conda env update --file Project/IronOxidationSimulator/config/environment.yml --prune
           conda list
+
       - name: Show Python version
         shell: bash -l {0}
         run: python --version
@@ -50,10 +51,11 @@ jobs:
         shell: bash -l {0}
         run: |
           if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
-            pyinstaller --onefile --paths ".\\Project\\IronOxidationSimulator\\src" --add-data ".\\Project\\IronOxidationSimulator\\assets;./assets" --add-data ".\\Project\\IronOxidationSimulator\\src\\ui;./ui" .\\Project\\IronOxidationSimulator\\src\\mainwindow.py
+            pyinstaller --onefile --paths ".\\Project\\IronOxidationSimulator\\src" --add-data ".\\Project\\IronOxidationSimulator\\assets;./assets" --add-data ".\\Project\\IronOxidationSimulator\\src\\ui;./ui" --add-data ".\\Project\\IronOxidationSimulator\\docs;./docs" .\\Project\\IronOxidationSimulator\\src\\mainwindow.py
           else
-            pyinstaller --onefile --paths "./Project/IronOxidationSimulator/src" --add-data "./Project/IronOxidationSimulator/assets:./assets" --add-data "./Project/IronOxidationSimulator/src/ui:./ui" ./Project/IronOxidationSimulator/src/mainwindow.py
+            pyinstaller --onefile --paths "./Project/IronOxidationSimulator/src" --add-data "./Project/IronOxidationSimulator/assets:./assets" --add-data "./Project/IronOxidationSimulator/src/ui:./ui" --add-data "./Project/IronOxidationSimulator/docs:./docs" ./Project/IronOxidationSimulator/src/mainwindow.py
           fi
+
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
