@@ -11,6 +11,8 @@ import os
 import subprocess
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QMessageBox
+from mainwindow import resource_path
+
 
 
 class HelpWindow(QMainWindow):
@@ -32,9 +34,9 @@ class HelpWindow(QMainWindow):
 
         # Dynamically load the UI file using the uic module
         try:
-            uic.loadUi('src/ui/welcome.ui', self)
+            uic.loadUi(resource_path('src/ui/welcome.ui'), self)
         except:
-            uic.loadUi('ui/welcome.ui', self)
+            uic.loadUi(resource_path('ui/welcome.ui'), self)
 
         self.setFixedSize(450, 300)
         self.setWindowTitle("Welcome!")
@@ -50,7 +52,7 @@ class HelpWindow(QMainWindow):
         """
         Opens the PDF manual located in the assets directory. The method of opening depends on the OS.
         """
-        pdf_path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../..", "docs/build/latex", "IndependentResearchProject.pdf"))
+        pdf_path = resource_path(os.path.normpath(os.path.join("docs/build/latex", "IndependentResearchProject.pdf")))
 
         if not os.path.isfile(pdf_path):
             QMessageBox.critical(self, "File Not Found",
