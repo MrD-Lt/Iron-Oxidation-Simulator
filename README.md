@@ -7,7 +7,7 @@ This repository is dedicated to the development of a software tool to simulate a
 - `Project`: This folder contains all the codes and files of this IRP.
 - `Development_Log`: This folder contains records of the development process.
 - `SoftWare`: This folder contains the help of how to use the software for users.
-- `IndependentResearchProject` This is the [manual](/IndependentResearchProject.pdf) of the software.
+- `IndependentResearchProject` This is the manual of the software.
 
 ## Getting Started
 
