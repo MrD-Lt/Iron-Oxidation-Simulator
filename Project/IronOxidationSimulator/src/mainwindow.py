@@ -9,6 +9,7 @@ Main window for the application.
 This module provides the main application window for the PyQt5-based GUI application.
 It includes menu bars for feature selections, input settings, save settings, help, and developer contact.
 """
+
 import os
 from PyQt5.QtWidgets import QMainWindow, QApplication, QVBoxLayout, QWidget, QAction
 from PyQt5.QtCore import pyqtSignal, QObject, QTimer
@@ -16,7 +17,6 @@ import sys
 from src.gui.settings_window import SettingsWindow
 from src.gui.input_window import InputWindow
 from src.gui.button_area import ButtonArea
-from src.gui.help_window import HelpWindow
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QDesktopServices
@@ -55,8 +55,6 @@ class MainWindow(QMainWindow):
         self.save_menu.addAction("Yes", self.select_option7)
         self.save_menu.addAction("No", self.select_option8)
 
-        self.help_menu = self.menu.addMenu("Help")
-        self.help_menu.addAction("Info and Help", self.open_help)
 
         self.help_menu = self.menu.addMenu("Contact with developer")
         self.help_menu.addAction("Github", self.open_contact)
@@ -121,10 +119,6 @@ class MainWindow(QMainWindow):
     def select_option8(self):
         self.settings.set_save_option("No")
 
-    def open_help(self):
-        """Opens the Help window."""
-        self.help_window = HelpWindow(self)
-        self.help_window.show()
 
     def open_contact(self):
         """Opens the appropriate contact method based on the menu selection."""

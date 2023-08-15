@@ -9,6 +9,7 @@ This file contains functions for performing regression analysis on data.
 It includes functions for reading data, calculating LINEAR regression,
 and plotting the regression line.
 """
+
 from PyQt5.QtGui import QPixmap, QImage
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 import numpy as np
