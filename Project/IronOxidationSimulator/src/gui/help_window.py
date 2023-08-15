@@ -11,7 +11,6 @@ import os
 import subprocess
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QMessageBox
-from mainwindow import resource_path
 
 
 
@@ -33,10 +32,7 @@ class HelpWindow(QMainWindow):
         super().__init__(parent)
 
         # Dynamically load the UI file using the uic module
-        try:
-            uic.loadUi(resource_path('src/ui/welcome.ui'), self)
-        except:
-            uic.loadUi(resource_path('ui/welcome.ui'), self)
+        uic.loadUi(resource_path('../ui/welcome.ui'), self)
 
         self.setFixedSize(450, 300)
         self.setWindowTitle("Welcome!")
@@ -52,8 +48,10 @@ class HelpWindow(QMainWindow):
         """
         Opens the PDF manual located in the assets directory. The method of opening depends on the OS.
         """
-        pdf_path = resource_path(os.path.normpath(os.path.join("docs/build/latex", "IndependentResearchProject.pdf")))
 
+        pdf_path = resource_path("../../docs/build/latex/IndependentResearchProject.pdf")
+
+        print(pdf_path)
         if not os.path.isfile(pdf_path):
             QMessageBox.critical(self, "File Not Found",
                                  "The manual file does not exist.  Please check the GitHub page or reinstall the "
@@ -66,3 +64,15 @@ class HelpWindow(QMainWindow):
             subprocess.call(('xdg-open', pdf_path))
         elif sys.platform.startswith('win32'):  # Windows
             os.startfile(pdf_path)
+def resource_path(relative_path):
+    """
+    Gets the absolute path to a resource, works in both development and PyInstaller contexts.
+
+    Args:
+        - relative_path (str): The relative path to the resource.
+
+    Returns:
+        The absolute path to the resource.
+    """
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
