@@ -14,7 +14,6 @@ This repository is dedicated to the development of a software tool to simulate a
 
 1. Clone the repository to your local machine.
 2. Navigate to `Iron-Oxidation-Simulator/Project/IronOxidationSimulator/src`.
-2. Or check the [help](Iron-Oxidation-Simulator/Project/IronOxidationSimulator/README.md)
 3. Ensure you have the required dependencies installed, preferably in a virtual environment. You can use the provided `environment.yml` in the `config` folder to create a conda environment with all necessary dependencies.
 4. Run `mainwindow.py` to launch the application.
 
