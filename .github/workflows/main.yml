@@ -38,6 +38,7 @@ jobs:
         run: |
           conda env update --file Project/IronOxidationSimulator/config/environment.yml --prune
           conda list
+
       - name: Show Python version
         shell: bash -l {0}
         run: python --version
