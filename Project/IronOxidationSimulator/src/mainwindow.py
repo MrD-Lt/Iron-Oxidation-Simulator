@@ -211,8 +211,9 @@ def resource_path(relative_path):
 
 
 if __name__ == "__main__":
-    with open(resource_path("ui/style.qss")) as f:
+    with open(resource_path("ui/style.qss"), encoding="utf-8") as f:
         qss = f.read()
+
     app = QApplication(sys.argv)
     app.setStyleSheet(qss)
 
