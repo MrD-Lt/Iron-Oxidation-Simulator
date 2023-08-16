@@ -7,6 +7,7 @@ This repository is dedicated to the development of a software tool to simulate a
 - `Project`: This folder contains all the codes and files of this IRP.
 - `Development_Log`: This folder contains records of the development process.
 - `SoftWare`: This folder contains the help of how to use the software for users.
+- `IndependentResearchProject` This is the manual of the software.
 
 ## Getting Started
 
@@ -14,7 +15,6 @@ This repository is dedicated to the development of a software tool to simulate a
 
 1. Clone the repository to your local machine.
 2. Navigate to `Iron-Oxidation-Simulator/Project/IronOxidationSimulator/src`.
-2. Or check the [help](Iron-Oxidation-Simulator/Project/IronOxidationSimulator/README.md)
 3. Ensure you have the required dependencies installed, preferably in a virtual environment. You can use the provided `environment.yml` in the `config` folder to create a conda environment with all necessary dependencies.
 4. Run `mainwindow.py` to launch the application.
 
