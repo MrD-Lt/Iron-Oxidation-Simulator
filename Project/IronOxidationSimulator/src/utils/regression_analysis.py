@@ -89,10 +89,10 @@ def plot_regression(log_concentration, log_rate, slope, intercept, r_squared, la
             [slope * np.min(log_concentration) + intercept, slope * np.max(log_concentration) + intercept],
             '-', color=color)
     ax.text(0.02, 0.98,
-            f"{label}: log[R0] = ({slope:.2f})log[Fe] + ({intercept:.2f})",
+            f"{label}: log[R0] = ({slope:.2f})log[X] + ({intercept:.2f})",
             transform=ax.transAxes, verticalalignment='top', color=color)
 
-    ax.set_xlabel('log([Fe], μM)')
+    ax.set_xlabel('log([X], μM)')
     ax.set_ylabel('log(R0, μMs^-1)')
 
     canvas = FigureCanvas(fig)

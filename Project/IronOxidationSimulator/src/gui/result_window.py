@@ -50,7 +50,6 @@ class ResultWindow(QMainWindow):
                 f"R Squared: {r_squared}"
             )
         elif feature_name == "Reaction Order Analysis":
-            print('check here \n\n',result)
             initial_concentration, initial_rate, slope, intercept, r_squared = result
             result_str = (
                 f"Initial concentration: {initial_concentration}\n"
@@ -68,7 +67,7 @@ class ResultWindow(QMainWindow):
             )
         elif feature_name == "3D Plane Plot":
             pH, logFe, logR, params, r_squared = result
-            equation_str = f"logR_0 = {params[1]:.2f}pH + {params[2]:.2f}logFe_0 + {params[0]:.2f}"
+            equation_str = f"logR_0 = {params[1]:.2f}pH + {params[2]:.2f}logX_0 + {params[0]:.2f}"
             result_str = (
                 f"Equation: {equation_str}\n"
                 f"R Squared: {r_squared:.2f}"

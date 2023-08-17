@@ -19,8 +19,6 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 class Plane3DPlotter:
     """
-    A class to perform 3D plotting and analysis of experimental data for Fe2+ oxidation.
-
     Attributes:
         - filename (str): Name of the input Excel file containing data.
         - data (tuple): Processed data from the Excel file.

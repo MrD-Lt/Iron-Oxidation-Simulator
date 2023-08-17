@@ -96,114 +96,120 @@ class ButtonArea(QWidget):
         dialog = OptionDialog(selected_features, self)
         if not dialog.exec():
             return
+        try:
+            for option, selected in self.main_window.settings.func_current_options.items():
+                if selected:
+                    if option == "reaction order analysis":
+                        options = dialog.get_options("reaction order analysis")
 
-        for option, selected in self.main_window.settings.func_current_options.items():
-            if selected:
-                if option == "reaction order analysis":
-                    options = dialog.get_options("reaction order analysis")
-
-                    data = self.main_window.input_window.data[option]
-                    if data is None:
-                        print("No data available")
-                        return
-                    try:
-                        x, y = data.values()
-                    except:
+                        data = self.main_window.input_window.data[option]
+                        if data is None:
+                            print("No data available")
+                            return
                         try:
-                            x, y = data
+                            x, y = data.values()
+                        except:
+                            try:
+                                x, y = data
+                            except ValueError:
+                                print("Invalid data format")
+                                return
+
+                        log_x, log_y = regression_analysis.calculate_log_values(x, y)
+                        slope, intercept, r_squared = regression_analysis.calculate_regression(log_x, log_y)
+
+                        self.result[option] = {
+                            "result": (
+                                x, y, slope, intercept, r_squared
+                            )
+                        }
+
+                        self.result_button.setEnabled(True)
+                        self.visual_button.setEnabled(True)
+                        if self.main_window.settings.save_current_option == "Yes":
+                            self.save_button.setEnabled(True)
+
+
+                    elif option == "initial rate analysis":
+                        options = dialog.get_options("initial rate analysis")
+                        use_specific_threshold = options.get("Use specific threshold")
+                        dont_use_specific_threshold = options.get("Use a range between 5% to 20%")
+                        data = self.main_window.input_window.data[option]
+                        if data is None:
+                            print("No data available")
+                            return
+
+                        try:
+                            time, conc, threshold = data.values()
                         except ValueError:
                             print("Invalid data format")
                             return
 
-                    log_x, log_y = regression_analysis.calculate_log_values(x, y)
-                    slope, intercept, r_squared = regression_analysis.calculate_regression(log_x, log_y)
+                        if use_specific_threshold:
+                            rate_result = initial_rate.calculate_rate(time, conc, threshold)
+                            self.result[option] = {"Use specific threshold": rate_result}
+                        else:
+                            rate_results = initial_rate.calculate_rate_compare(time, conc)
+                            self.result[option] = {"Use a range between 5% to 20%": rate_results}
+                        self.result_button.setEnabled(True)
+                        self.visual_button.setEnabled(True)
+                        if self.main_window.settings.save_current_option == "Yes":
+                            self.save_button.setEnabled(True)
 
-                    self.result[option] = {
-                        "result": (
-                            x, y, slope, intercept, r_squared
-                        )
-                    }
+                    elif option == "rate const analysis":
+                        data = self.main_window.input_window.data[option]
+                        if data is None:
+                            print("No data available")
+                            return
 
-                    self.result_button.setEnabled(True)
-                    self.visual_button.setEnabled(True)
-                    if self.main_window.settings.save_current_option == "Yes":
-                        self.save_button.setEnabled(True)
+                        try:
+                            time, conc = data.values()
+                        except ValueError:
+                            print("Invalid data format")
+                            return
+
+                        rate_result = rate_const.calculate_rate(time, conc)
+                        self.result[option] = {"Default": rate_result}
+                        self.result_button.setEnabled(True)
+                        self.visual_button.setEnabled(True)
+                        if self.main_window.settings.save_current_option == "Yes":
+                            self.save_button.setEnabled(True)
+
+                    elif option == "3D plane plot":
+                        data = self.main_window.input_window.data[option]
+                        if data is None:
+                            print("No data available")
+                            return
+
+                        try:
+                            df = pd.DataFrame(data)
+                            temp_filename = "temp_data_file.xlsx"
+                            df.to_excel(temp_filename, index=False)
+
+                            plane_plotter = Plane3DPlotter(temp_filename)
+                            params, r_squared = plane_plotter.perform_analysis()
+
+                            os.remove(temp_filename)
+
+                        except Exception as e:
+                            print("Error processing data:", e)
+                            return
+
+                        self.result[option] = {
+                            "Default": (
+                                plane_plotter.pH, plane_plotter.log_initial_concentration, plane_plotter.log_initial_rate,
+                                params, r_squared)
+                        }
+                        self.result_button.setEnabled(True)
+                        self.visual_button.setEnabled(True)
+                        if self.main_window.settings.save_current_option == "Yes":
+                            self.save_button.setEnabled(True)
+        except:
+            QMessageBox.critical(self, "Invalid input", "Please check your data.", QMessageBox.Ok)
+            self.main_window.settings.reset()
+            self.main_window.input_window.reset()
 
 
-                elif option == "initial rate analysis":
-                    options = dialog.get_options("initial rate analysis")
-                    use_specific_threshold = options.get("Use specific threshold")
-                    dont_use_specific_threshold = options.get("Use a range between 5% to 20%")
-                    data = self.main_window.input_window.data[option]
-                    if data is None:
-                        print("No data available")
-                        return
-
-                    try:
-                        time, conc, threshold = data.values()
-                    except ValueError:
-                        print("Invalid data format")
-                        return
-
-                    if use_specific_threshold:
-                        rate_result = initial_rate.calculate_rate(time, conc, threshold)
-                        self.result[option] = {"Use specific threshold": rate_result}
-                    else:
-                        rate_results = initial_rate.calculate_rate_compare(time, conc)
-                        self.result[option] = {"Use a range between 5% to 20%": rate_results}
-                    self.result_button.setEnabled(True)
-                    self.visual_button.setEnabled(True)
-                    if self.main_window.settings.save_current_option == "Yes":
-                        self.save_button.setEnabled(True)
-
-                elif option == "rate const analysis":
-                    data = self.main_window.input_window.data[option]
-                    if data is None:
-                        print("No data available")
-                        return
-
-                    try:
-                        time, conc = data.values()
-                    except ValueError:
-                        print("Invalid data format")
-                        return
-
-                    rate_result = rate_const.calculate_rate(time, conc)
-                    self.result[option] = {"Default": rate_result}
-                    self.result_button.setEnabled(True)
-                    self.visual_button.setEnabled(True)
-                    if self.main_window.settings.save_current_option == "Yes":
-                        self.save_button.setEnabled(True)
-
-                elif option == "3D plane plot":
-                    data = self.main_window.input_window.data[option]
-                    if data is None:
-                        print("No data available")
-                        return
-
-                    try:
-                        df = pd.DataFrame(data)
-                        temp_filename = "temp_data_file.xlsx"
-                        df.to_excel(temp_filename, index=False)
-
-                        plane_plotter = Plane3DPlotter(temp_filename)
-                        params, r_squared = plane_plotter.perform_analysis()
-
-                        os.remove(temp_filename)
-
-                    except Exception as e:
-                        print("Error processing data:", e)
-                        return
-
-                    self.result[option] = {
-                        "Default": (
-                            plane_plotter.pH, plane_plotter.log_initial_concentration, plane_plotter.log_initial_rate,
-                            params, r_squared)
-                    }
-                    self.result_button.setEnabled(True)
-                    self.visual_button.setEnabled(True)
-                    if self.main_window.settings.save_current_option == "Yes":
-                        self.save_button.setEnabled(True)
 
     def reset(self):
         """
@@ -258,6 +264,7 @@ class ButtonArea(QWidget):
                     for method, result in self.result[option].items():
                         pixmap = regression_analysis.plot_regression(*result, label=method,
                                                                      color=colors, ax=ax, fig=fig)
+                        self.figures[option] = pixmap
 
                 elif option == "initial rate analysis":
 
@@ -278,6 +285,8 @@ class ButtonArea(QWidget):
                             r_squared_values = result['r_squared_values']
                             pixmap = initial_rate.plot_rate_comparison(time, conc, slopes, intercepts, r_squared_values)
 
+                        self.figures[option] = pixmap
+
 
                 elif option == "rate const analysis":
 
@@ -288,6 +297,7 @@ class ButtonArea(QWidget):
                         intercept = result['intercept']
                         r_squared = result['r_squared']
                         pixmap = rate_const.plot(time, conc, slope, intercept, r_squared)
+                        self.figures[option] = pixmap
 
 
 
@@ -305,7 +315,7 @@ class ButtonArea(QWidget):
                         logFe_grid, pH_grid = np.meshgrid(logFe_range, pH_range)
                         logR_fit = params[0] + params[1] * logFe_grid + params[2] * pH_grid
                         ax.plot_surface(logFe_grid, pH_grid, logR_fit, alpha=0.5)
-                        equation_str = f"logR_0 = {params[1]:.2f}pH + {params[2]:.2f}logFe_0 + {params[0]:.2f}"
+                        equation_str = f"logR_0 = {params[1]:.2f}pH + {params[2]:.2f}logX_0 + {params[0]:.2f}"
                         ax.set_title(equation_str)
                         ax.text(0.02, 0.98, 0.02, s=f'R^2={r_squared:.2f}', transform=ax.transAxes,
                                 verticalalignment='top')
@@ -317,7 +327,7 @@ class ButtonArea(QWidget):
                         image = QImage(buf, width, height, QImage.Format_RGBA8888)
                         pixmap = QPixmap.fromImage(image)
                         self.visual_window = VisualWindow(pixmap, self)
-                self.figures[option] = fig
+                        self.figures[option] = pixmap
 
                 if pixmap is not None:
                     self.visual_window = VisualWindow(pixmap, self)
