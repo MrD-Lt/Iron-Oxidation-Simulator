@@ -5,18 +5,23 @@ Author: Dongzi Ding
 Created: 2023-06-25
 Modified: 2023-08-14
 """
+import os
+
+import numpy as np
+import pandas as pd
+from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QRadioButton, QDialog, QFileDialog, \
     QTabWidget, QMessageBox
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 from .result_window import ResultWindow
 from .visual_window import VisualWindow
 
-from ..utils import regression_analysis, initial_rate, rate_const, plane3D_plot
+from ..utils import regression_analysis, initial_rate, rate_const
 from ..utils.plane3D_plot import Plane3DPlotter
 from ..utils.save import save
 
 from matplotlib.figure import Figure
-
 
 
 class ButtonArea(QWidget):
@@ -96,51 +101,34 @@ class ButtonArea(QWidget):
             if selected:
                 if option == "reaction order analysis":
                     options = dialog.get_options("reaction order analysis")
-                    use_sklearn = options.get("use_sklearn", False)
-                    use_both = options.get("use_both", False)
 
                     data = self.main_window.input_window.data[option]
                     if data is None:
                         print("No data available")
                         return
                     try:
-                        x, y, sdx_absolute, sdx_upper, sdx_lower, sdy_absolute, sdy_upper, sdy_lower = data.values()
+                        x, y = data.values()
                     except:
                         try:
-                            x, y, sdx_absolute, sdx_upper, sdx_lower, sdy_absolute, sdy_upper, sdy_lower = data
+                            x, y = data
                         except ValueError:
                             print("Invalid data format")
                             return
-                    if use_both:
-                        slope_sklearn, intercept_sklearn, se_slope_sklearn, se_intercept_sklearn, r_squared_sklearn = regression_analysis.calculate_regression(
-                            x, y, sdx_absolute, sdy_absolute, use_sklearn=True
+
+                    log_x, log_y = regression_analysis.calculate_log_values(x, y)
+                    slope, intercept, r_squared = regression_analysis.calculate_regression(log_x, log_y)
+
+                    self.result[option] = {
+                        "result": (
+                            x, y, slope, intercept, r_squared
                         )
-                        slope, intercept, se_slope, se_intercept, r_squared = regression_analysis.calculate_regression(
-                            x, y, sdx_absolute, sdy_absolute, use_sklearn=False
-                        )
-                        self.result[option] = {
-                            "sklearn": (
-                                x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope_sklearn, intercept_sklearn,
-                                se_slope_sklearn, se_intercept_sklearn, r_squared_sklearn),
-                            "no_sklearn": (
-                                x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope,
-                                se_intercept,
-                                r_squared)
-                        }
-                    else:
-                        slope, intercept, se_slope, se_intercept, r_squared = regression_analysis.calculate_regression(
-                            x, y, sdx_absolute, sdy_absolute, use_sklearn=use_sklearn
-                        )
-                        self.result[option] = {
-                            "sklearn" if use_sklearn else "no_sklearn": (
-                                x, y, sdx_lower, sdx_upper, sdy_lower, sdy_upper, slope, intercept, se_slope,
-                                se_intercept,
-                                r_squared)
-                        }
+                    }
+
                     self.result_button.setEnabled(True)
                     self.visual_button.setEnabled(True)
                     if self.main_window.settings.save_current_option == "Yes":
                         self.save_button.setEnabled(True)
+
 
                 elif option == "initial rate analysis":
                     options = dialog.get_options("initial rate analysis")
@@ -186,23 +174,31 @@ class ButtonArea(QWidget):
                     self.visual_button.setEnabled(True)
                     if self.main_window.settings.save_current_option == "Yes":
                         self.save_button.setEnabled(True)
+
                 elif option == "3D plane plot":
                     data = self.main_window.input_window.data[option]
                     if data is None:
                         print("No data available")
                         return
+
                     try:
-                        pH, deltapH, logFe, deltalogFe, logR, deltalogR = data.values()
-                    except:
-                        try:
-                            pH, deltapH, logFe, deltalogFe, logR, deltalogR = data
-                        except ValueError:
-                            print("Invalid data format")
-                            return
-                    plane_plotter = Plane3DPlotter()
-                    params, r_squared = plane_plotter.perform_analysis(pH, logFe, logR)
+                        df = pd.DataFrame(data)
+                        temp_filename = "temp_data_file.xlsx"
+                        df.to_excel(temp_filename, index=False)
+
+                        plane_plotter = Plane3DPlotter(temp_filename)
+                        params, r_squared = plane_plotter.perform_analysis()
+
+                        os.remove(temp_filename)
+
+                    except Exception as e:
+                        print("Error processing data:", e)
+                        return
+
                     self.result[option] = {
-                        "Default": (pH, logFe, logR, params, r_squared)
+                        "Default": (
+                            plane_plotter.pH, plane_plotter.log_initial_concentration, plane_plotter.log_initial_rate,
+                            params, r_squared)
                     }
                     self.result_button.setEnabled(True)
                     self.visual_button.setEnabled(True)
@@ -230,7 +226,7 @@ class ButtonArea(QWidget):
             if selected:
                 if option == "reaction order analysis":
                     for method, result in self.result[option].items():
-                        self.result_window.add_result(f"Reaction Order Analysis ({method})", result[6:],
+                        self.result_window.add_result(f"Reaction Order Analysis ({method})", result,
                                                       "Reaction Order Analysis")
                 elif option == "initial rate analysis":
                     for method, result in self.result[option].items():
@@ -249,7 +245,7 @@ class ButtonArea(QWidget):
         """
         Show visual functionality of the application.
         """
-        colors = {'no_sklearn': 'red', 'sklearn': 'blue'}
+        colors = 'blue'
 
         for option, selected in self.main_window.settings.func_current_options.items():
             if selected:
@@ -260,8 +256,8 @@ class ButtonArea(QWidget):
 
                 if option == "reaction order analysis":
                     for method, result in self.result[option].items():
-                        pixmap = regression_analysis.plot_regression(*result, ax=ax, fig=fig, label=method,
-                                                                     color=colors[method])
+                        pixmap = regression_analysis.plot_regression(*result, label=method,
+                                                                     color=colors, ax=ax, fig=fig)
 
                 elif option == "initial rate analysis":
 
@@ -294,30 +290,33 @@ class ButtonArea(QWidget):
                         pixmap = rate_const.plot(time, conc, slope, intercept, r_squared)
 
 
+
                 elif option == "3D plane plot":
                     for method, result in self.result[option].items():
                         fig = Figure()
-
                         ax = fig.add_subplot(111, projection='3d')
-
                         pH, logFe, logR, params, r_squared = result
-
-                        plane_plotter = Plane3DPlotter()
-                        plane_plotter.plot_3D_data(pH, logFe, logR, ax=ax)
-
-                        plane_plotter.plot_fitted_plane(ax, pH, logFe, params)
-
+                        ax.scatter(logFe, pH, logR, c='k', marker='o')
+                        ax.set_xlabel('log(Initial Concentration)')
+                        ax.set_ylabel('pH')
+                        ax.set_zlabel('log(Initial Rate)')
+                        logFe_range = np.linspace(min(logFe), max(logFe), 50)
+                        pH_range = np.linspace(min(pH), max(pH), 50)
+                        logFe_grid, pH_grid = np.meshgrid(logFe_range, pH_range)
+                        logR_fit = params[0] + params[1] * logFe_grid + params[2] * pH_grid
+                        ax.plot_surface(logFe_grid, pH_grid, logR_fit, alpha=0.5)
                         equation_str = f"logR_0 = {params[1]:.2f}pH + {params[2]:.2f}logFe_0 + {params[0]:.2f}"
-
                         ax.set_title(equation_str)
-
                         ax.text(0.02, 0.98, 0.02, s=f'R^2={r_squared:.2f}', transform=ax.transAxes,
                                 verticalalignment='top')
-
-                        pixmap = plane_plotter.fig_to_pixmap(fig)
-
+                        canvas = FigureCanvas(fig)
+                        canvas.draw()
+                        width, height = fig.get_size_inches() * fig.get_dpi()
+                        buffer = canvas.buffer_rgba()
+                        buf = buffer.tobytes()
+                        image = QImage(buf, width, height, QImage.Format_RGBA8888)
+                        pixmap = QPixmap.fromImage(image)
                         self.visual_window = VisualWindow(pixmap, self)
-
                 self.figures[option] = fig
 
                 if pixmap is not None:
@@ -348,6 +347,7 @@ class OptionDialog(QDialog):
     """
         A dialog for selecting analysis options.
     """
+
     def __init__(self, selected_features, parent=None):
         """
             Initialize the OptionDialog.
@@ -363,19 +363,15 @@ class OptionDialog(QDialog):
         for feature in selected_features:
             if feature == "reaction order analysis":
                 tab = QWidget()
-                self.use_sklearn_button = QRadioButton("Use sklearn")
-                self.use_sklearn_button.setChecked(True)
-                self.dont_use_sklearn_button = QRadioButton("Don't use sklearn")
-                self.both_button = QRadioButton("Use both")
+                self.default0 = QRadioButton("Default")
+                self.default0.setChecked(True)
 
                 tab_layout = QVBoxLayout()
-                tab_layout.addWidget(self.use_sklearn_button)
-                tab_layout.addWidget(self.dont_use_sklearn_button)
-                tab_layout.addWidget(self.both_button)
+                tab_layout.addWidget(self.default0)
                 tab.setLayout(tab_layout)
 
                 self.tabs[feature] = {"widget": tab,
-                                      "options": {"use_sklearn": self.use_sklearn_button, "use_both": self.both_button}}
+                                      "options": {"Default": self.default0}}
 
             if feature == "initial rate analysis":
                 tab = QWidget()

@@ -78,9 +78,7 @@ class SettingsWindow(QWidget):
         if 'reaction order analysis' in selected_options:
             func_guide_text.append("For reaction order analysis, please input your data in:<br>"
                                    "If import file: Excel format,<br>"
-                                   "log[Fe], logR0, Δlog[Fe] absolute, Δlog[Fe] upper, Δlog[Fe] lower,<br>"
-                                   "ΔlogR0 absolute, ΔlogR0 upper, ΔlogR0 lower<br>"
-                                   "in different columns.<br>"
+                                   "initial concentration, initial rate in different columns.<br>"
                                    "If manually input: follow the instructions.")
 
         if 'initial rate analysis' in selected_options:
@@ -98,11 +96,11 @@ class SettingsWindow(QWidget):
                                    "If manually input: follow the instructions.")
 
         if '3D plane plot' in selected_options:
-            func_guide_text.append("For 3D plane plot, please input your data in:<br>"
-                                   "If import file: Excel format,<br>"
-                                   "pH, ΔpH, logFe, ΔlogFe, logR, ΔlogR<br>"
-                                   "in different columns.<br>"
-                                   "If manually input: follow the instructions.")
+            func_guide_text.append("For the 3D plane plot, please provide your data in the following format:<br>"
+                                   "If importing from a file: Excel format with columns for:<br>"
+                                   "Initial Concentration, Initial Rate, pH<br>"
+                                   "If inputting manually: follow the provided instructions.<br>"
+                                   "<b>Note:</b> Do not provide log values; the program will calculate these for you.")
 
         # Combine all guidance texts
         divider = "<br>" + "-" * 30 + "<br>"  # HTML divider

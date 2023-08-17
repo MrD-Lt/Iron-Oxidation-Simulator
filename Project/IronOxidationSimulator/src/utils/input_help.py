@@ -33,11 +33,10 @@ class DataInputDialog(QDialog):
 
         # Define expected data types for each function/tab
         self.data_types = {
-            'reaction order analysis': ['log[Fe]', 'logR0', 'Δlog[Fe] absolute', 'Δlog[Fe] upper', 'Δlog[Fe] lower',
-                                        'ΔlogR0 absolute', 'ΔlogR0 upper', 'ΔlogR0 lower'],
-            'initial rate analysis': ['Time (seconds)', '[Fe2+] (uM)', 'Threshold (5%-20%)'],
-            'rate const analysis': ['Time (seconds)', '[Fe2+] (uM)'],
-            '3D plane plot': ['pH', 'ΔpH', 'logFe', 'ΔlogFe', 'logR', 'ΔlogR'],
+            'reaction order analysis': ['initial concentration (uM)', 'initial rate (uM/s)'],
+            'initial rate analysis': ['Time (seconds)', 'Conc (uM)', 'Threshold (5%-20%)'],
+            'rate const analysis': ['Time (seconds)', 'Conc (uM)'],
+            '3D plane plot': ['initial concentration', 'initial rate', 'PH'],
         }
 
         self.tab_widget = QTabWidget()

@@ -50,12 +50,13 @@ class ResultWindow(QMainWindow):
                 f"R Squared: {r_squared}"
             )
         elif feature_name == "Reaction Order Analysis":
-            slope, intercept, se_slope, se_intercept, r_squared = result
+            print('check here \n\n',result)
+            initial_concentration, initial_rate, slope, intercept, r_squared = result
             result_str = (
-                f"Initial rate: {slope}\n"
-                f"Initial conc: {intercept}\n"
-                f"Standard error of the initial rate: {se_slope}\n"
-                f"Standard error of the initial conc: {se_intercept}\n"
+                f"Initial concentration: {initial_concentration}\n"
+                f"Initial rate: {initial_rate}\n"
+                f"Standard error of the initial rate: {slope}\n"
+                f"Standard error of the initial conc: {intercept}\n"
                 f"R Squared: {r_squared}"
             )
         elif feature_name == "Rate Const Analysis":
