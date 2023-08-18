@@ -47,6 +47,38 @@ Project
    |   |-- docs
    |   |   |-- Makefile
    |   |   |-- build
+   |   |   |   |-- doctrees
+   |   |   |   |   |-- environment.pickle
+   |   |   |   |   |-- gui.doctree
+   |   |   |   |   |-- index.doctree
+   |   |   |   |   |-- src.doctree
+   |   |   |   |   |-- utils.doctree
+   |   |   |   |-- html
+   |   |   |   |   |-- .buildinfo
+   |   |   |   |   |-- _sources
+   |   |   |   |   |   |-- gui.rst.txt
+   |   |   |   |   |   |-- index.rst.txt
+   |   |   |   |   |   |-- src.rst.txt
+   |   |   |   |   |   |-- utils.rst.txt
+   |   |   |   |   |-- _static
+   |   |   |   |   |   |-- basic.css
+   |   |   |   |   |   |-- css
+   |   |   |   |   |   |   |-- badge_only.css
+   |   |   |   |   |   |   |-- fonts
+   |   |   |   |   |   |   |-- theme.css
+   |   |   |   |   |   |-- doctools.js
+   |   |   |   |   |   |-- documentation_options.js
+   |   |   |   |   |   |-- file.png
+   |   |   |   |   |   |-- js
+   |   |   |   |   |-- genindex.html
+   |   |   |   |   |-- gui.html
+   |   |   |   |   |-- index.html
+   |   |   |   |   |-- objects.inv
+   |   |   |   |   |-- py-modindex.html
+   |   |   |   |   |-- search.html
+   |   |   |   |   |-- searchindex.js
+   |   |   |   |   |-- src.html
+   |   |   |   |   |-- utils.html
    |   |   |   |-- latex
    |   |   |   |   |-- IndependentResearchProject.pdf
    |   |   |-- make.bat
@@ -61,7 +93,6 @@ Project
    |   |   |-- gui
    |   |   |   |-- __init__.py
    |   |   |   |-- button_area.py
-   |   |   |   |-- help_window.py
    |   |   |   |-- input_window.py
    |   |   |   |-- result_window.py
    |   |   |   |-- settings_window.py
