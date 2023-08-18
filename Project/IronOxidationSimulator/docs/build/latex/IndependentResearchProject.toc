@@ -4,31 +4,29 @@
 \contentsline {subsection}{\numberline {1.1.1}gui package}{1}{subsection.1.1.1}%
 \contentsline {subsubsection}{button\_area module}{1}{subsubsection*.3}%
 \contentsline {paragraph}{button\_area.py}{1}{paragraph*.4}%
-\contentsline {subsubsection}{help\_window module}{2}{subsubsection*.16}%
-\contentsline {paragraph}{help\_window.py}{2}{paragraph*.17}%
-\contentsline {subsubsection}{input\_window module}{2}{subsubsection*.20}%
-\contentsline {paragraph}{input\_window.py}{2}{paragraph*.21}%
-\contentsline {subsubsection}{result\_window module}{3}{subsubsection*.30}%
-\contentsline {paragraph}{result\_window.py}{3}{paragraph*.31}%
-\contentsline {subsubsection}{settings\_window module}{3}{subsubsection*.34}%
-\contentsline {paragraph}{settings\_window.py}{3}{paragraph*.35}%
-\contentsline {subsubsection}{visual\_window module}{3}{subsubsection*.38}%
-\contentsline {paragraph}{visual\_window.py}{3}{paragraph*.39}%
-\contentsline {subsection}{\numberline {1.1.2}utils package}{4}{subsection.1.1.2}%
-\contentsline {subsubsection}{initial\_rate module}{4}{subsubsection*.41}%
-\contentsline {paragraph}{initial\_rate.py}{4}{paragraph*.42}%
-\contentsline {subsubsection}{input\_help module}{5}{subsubsection*.49}%
-\contentsline {paragraph}{input\_help.py}{5}{paragraph*.50}%
-\contentsline {subsubsection}{plane3D\_plot module}{6}{subsubsection*.56}%
-\contentsline {paragraph}{plane3D\_plot.py}{6}{paragraph*.57}%
-\contentsline {subsubsection}{rate\_const module}{8}{subsubsection*.67}%
-\contentsline {paragraph}{rate\_const.py}{8}{paragraph*.68}%
-\contentsline {subsubsection}{regression\_analysis module}{8}{subsubsection*.72}%
-\contentsline {paragraph}{regression\_analysis.py}{8}{paragraph*.73}%
-\contentsline {subsubsection}{save module}{10}{subsubsection*.77}%
-\contentsline {paragraph}{save.py}{10}{paragraph*.78}%
-\contentsline {section}{\numberline {1.2}mainwindow module}{10}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}mainwindow.py}{10}{subsection.1.2.1}%
-\contentsline {chapter}{\numberline {2}Indices and tables}{13}{chapter.2}%
-\contentsline {chapter}{Python Module Index}{15}{section*.101}%
-\contentsline {chapter}{Index}{17}{section*.102}%
+\contentsline {subsubsection}{input\_window module}{2}{subsubsection*.16}%
+\contentsline {paragraph}{input\_window.py}{2}{paragraph*.17}%
+\contentsline {subsubsection}{result\_window module}{2}{subsubsection*.26}%
+\contentsline {paragraph}{result\_window.py}{2}{paragraph*.27}%
+\contentsline {subsubsection}{settings\_window module}{3}{subsubsection*.30}%
+\contentsline {paragraph}{settings\_window.py}{3}{paragraph*.31}%
+\contentsline {subsubsection}{visual\_window module}{3}{subsubsection*.34}%
+\contentsline {paragraph}{visual\_window.py}{3}{paragraph*.35}%
+\contentsline {subsection}{\numberline {1.1.2}utils package}{3}{subsection.1.1.2}%
+\contentsline {subsubsection}{initial\_rate module}{3}{subsubsection*.37}%
+\contentsline {paragraph}{initial\_rate.py}{3}{paragraph*.38}%
+\contentsline {subsubsection}{input\_help module}{5}{subsubsection*.45}%
+\contentsline {paragraph}{input\_help.py}{5}{paragraph*.46}%
+\contentsline {subsubsection}{plane3D\_plot module}{5}{subsubsection*.52}%
+\contentsline {paragraph}{plane3D\_plot.py}{5}{paragraph*.53}%
+\contentsline {subsubsection}{rate\_const module}{7}{subsubsection*.63}%
+\contentsline {paragraph}{rate\_const.py}{7}{paragraph*.64}%
+\contentsline {subsubsection}{regression\_analysis module}{7}{subsubsection*.68}%
+\contentsline {paragraph}{regression\_analysis.py}{7}{paragraph*.69}%
+\contentsline {subsubsection}{save module}{8}{subsubsection*.74}%
+\contentsline {paragraph}{save.py}{8}{paragraph*.75}%
+\contentsline {section}{\numberline {1.2}mainwindow module}{9}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}mainwindow.py}{9}{subsection.1.2.1}%
+\contentsline {chapter}{\numberline {2}Indices and tables}{11}{chapter.2}%
+\contentsline {chapter}{Python Module Index}{13}{section*.97}%
+\contentsline {chapter}{Index}{15}{section*.98}%

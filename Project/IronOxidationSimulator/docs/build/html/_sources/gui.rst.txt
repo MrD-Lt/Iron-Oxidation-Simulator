@@ -14,14 +14,6 @@ button_area module
    :undoc-members:
    :show-inheritance:
 
-help_window module
-------------------
-
-.. automodule:: src.gui.help_window
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 input_window module
 -------------------
 

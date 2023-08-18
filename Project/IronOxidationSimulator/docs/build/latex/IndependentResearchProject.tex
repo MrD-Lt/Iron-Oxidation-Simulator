@@ -64,7 +64,7 @@
 
 
 \title{Independent Research Project}
-\date{Aug 14, 2023}
+\date{Aug 18, 2023}
 \release{1.0.0}
 \author{Dongzi Ding}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -246,53 +246,6 @@ A dialog for selecting analysis options.
 \pysigstartsignatures
 \pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{use\_sklearn}}}{}{}
 \pysigstopsignatures
-\end{fulllineitems}
-
-
-\end{fulllineitems}
-
-
-
-\subsubsection{help\_window module}
-\label{\detokenize{gui:module-src.gui.help_window}}\label{\detokenize{gui:help-window-module}}\index{module@\spxentry{module}!src.gui.help\_window@\spxentry{src.gui.help\_window}}\index{src.gui.help\_window@\spxentry{src.gui.help\_window}!module@\spxentry{module}}
-
-\paragraph{help\_window.py}
-\label{\detokenize{gui:help-window-py}}
-\sphinxAtStartPar
-Author: Dongzi Ding
-Created: 2023\sphinxhyphen{}07\sphinxhyphen{}06
-Modified: 2023\sphinxhyphen{}08\sphinxhyphen{}14
-\index{HelpWindow (class in src.gui.help\_window)@\spxentry{HelpWindow}\spxextra{class in src.gui.help\_window}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{gui:src.gui.help_window.HelpWindow}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class\DUrole{w,w}{  }}}\sphinxcode{\sphinxupquote{src.gui.help\_window.}}\sphinxbfcode{\sphinxupquote{HelpWindow}}}{\sphinxparam{\DUrole{n,n}{parent}\DUrole{o,o}{=}\DUrole{default_value}{None}}}{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Bases: \sphinxcode{\sphinxupquote{QMainWindow}}
-
-\sphinxAtStartPar
-A QMainWindow class that represents the help window.
-\begin{description}
-\sphinxlineitem{Attributes:}\begin{quote}\begin{description}
-\sphinxlineitem{parent (QWidget)}
-\sphinxAtStartPar
-The parent widget of the help window.
-
-\end{description}\end{quote}
-
-\end{description}
-\index{open\_pdf\_manual() (src.gui.help\_window.HelpWindow method)@\spxentry{open\_pdf\_manual()}\spxextra{src.gui.help\_window.HelpWindow method}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{gui:src.gui.help_window.HelpWindow.open_pdf_manual}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{open\_pdf\_manual}}}{}{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Opens the PDF manual located in the assets directory. The method of opening depends on the OS.
-
 \end{fulllineitems}
 
 
@@ -911,7 +864,7 @@ Enables or disables the input field and checkbox for a clicked item.
 \sphinxAtStartPar
 Author: Dongzi Ding
 Created: 2023\sphinxhyphen{}08\sphinxhyphen{}12
-Modified: 2023\sphinxhyphen{}08\sphinxhyphen{}14
+Modified: 2023\sphinxhyphen{}08\sphinxhyphen{}17
 
 \sphinxAtStartPar
 This file contains functions for performing 3D plotting and regression analysis on data.
@@ -925,61 +878,35 @@ It includes functions for reading data, plotting 3D scatter points, and fitting 
 \pysigstopsignatures
 \sphinxAtStartPar
 Bases: \sphinxcode{\sphinxupquote{object}}
-
-\sphinxAtStartPar
-A class for performing 3D plotting and regression analysis on data.
 \begin{description}
 \sphinxlineitem{Attributes:}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-filename (str): The path to the data file.
+filename (str): Name of the input Excel file containing data.
 
 \item {} 
 \sphinxAtStartPar
-data (tuple): Data values for pH, deltapH, logFe, deltalogFe, logR, deltalogR.
+data (tuple): Processed data from the Excel file.
 
 \item {} 
 \sphinxAtStartPar
-params (tuple): Regression parameters.
+log\_initial\_concentration (array): Logged values of initial concentrations.
 
 \item {} 
 \sphinxAtStartPar
-r\_squared (float): R squared value of regression analysis.
-
-\end{itemize}
-
-\sphinxlineitem{Methods:}\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-read\_data: Read data from a file.
+log\_initial\_rate (array): Logged values of initial rates.
 
 \item {} 
 \sphinxAtStartPar
-perform\_analysis: Perform regression analysis.
+pH (array): pH values from the data.
 
 \item {} 
 \sphinxAtStartPar
-fit\_plane: Fit a plane to the data.
+params (tuple): Parameters of the fitted plane.
 
 \item {} 
 \sphinxAtStartPar
-plot\_3D\_data: Plot the 3D data with a fitted plane.
-
-\item {} 
-\sphinxAtStartPar
-create\_3D\_plot: Create a 3D plot.
-
-\item {} 
-\sphinxAtStartPar
-plot\_fitted\_plane: Plot a fitted plane on 3D data.
-
-\item {} 
-\sphinxAtStartPar
-get\_results: Retrieve analysis results.
-
-\item {} 
-\sphinxAtStartPar
-fig\_to\_pixmap: Convert a Matplotlib figure to a QPixmap.
+r\_squared (float): R\sphinxhyphen{}squared value of the fitted model.
 
 \end{itemize}
 
@@ -989,33 +916,21 @@ fig\_to\_pixmap: Convert a Matplotlib figure to a QPixmap.
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{utils:src.utils.plane3D_plot.Plane3DPlotter.create_3D_plot}}
 \pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{create\_3D\_plot}}}{\sphinxparam{\DUrole{n,n}{pH}}, \sphinxparam{\DUrole{n,n}{logFe}}, \sphinxparam{\DUrole{n,n}{logR}}, \sphinxparam{\DUrole{n,n}{ax}\DUrole{o,o}{=}\DUrole{default_value}{None}}}{}
+\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{create\_3D\_plot}}}{\sphinxparam{\DUrole{n,n}{ax}\DUrole{o,o}{=}\DUrole{default_value}{None}}}{}
 \pysigstopsignatures
 \sphinxAtStartPar
-Creates a 3D plot for the given data.
+Creates a 3D plot with data points.
 \begin{description}
 \sphinxlineitem{Args:}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-pH (array\sphinxhyphen{}like): pH values.
-
-\item {} 
-\sphinxAtStartPar
-logFe (array\sphinxhyphen{}like): logFe values.
-
-\item {} 
-\sphinxAtStartPar
-logR (array\sphinxhyphen{}like): logR values.
-
-\item {} 
-\sphinxAtStartPar
-ax (matplotlib.axes.\_subplots.Axes3DSubplot, optional): 3D subplot. Defaults to None.
+ax (Axes3D, optional): Existing 3D axes if provided. Defaults to None.
 
 \end{itemize}
 
 \sphinxlineitem{Returns:}
 \sphinxAtStartPar
-Matplotlib figure and 3D subplot.
+fig, ax: Figure and axes objects of the plot.
 
 \end{description}
 
@@ -1029,18 +944,18 @@ Matplotlib figure and 3D subplot.
 \pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{fig\_to\_pixmap}}}{\sphinxparam{\DUrole{n,n}{fig}}}{}
 \pysigstopsignatures
 \sphinxAtStartPar
-Converts a Matplotlib figure to a QPixmap.
+Converts a matplotlib figure to a QPixmap.
 \begin{description}
 \sphinxlineitem{Args:}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-fig (matplotlib.figure.Figure): Matplotlib figure.
+fig (Figure): Matplotlib figure to be converted.
 
 \end{itemize}
 
 \sphinxlineitem{Returns:}
 \sphinxAtStartPar
-PyQt5.QtGui.QPixmap: Pixmap representation of the figure.
+QPixmap: Converted QPixmap of the figure.
 
 \end{description}
 
@@ -1051,29 +966,29 @@ PyQt5.QtGui.QPixmap: Pixmap representation of the figure.
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{utils:src.utils.plane3D_plot.Plane3DPlotter.fit_plane}}
 \pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{fit\_plane}}}{\sphinxparam{\DUrole{n,n}{pH}}, \sphinxparam{\DUrole{n,n}{logFe}}, \sphinxparam{\DUrole{n,n}{logR}}}{}
+\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{fit\_plane}}}{\sphinxparam{\DUrole{n,n}{log\_initial\_concentration}}, \sphinxparam{\DUrole{n,n}{pH}}, \sphinxparam{\DUrole{n,n}{log\_initial\_rate}}}{}
 \pysigstopsignatures
 \sphinxAtStartPar
-Fits a plane to the data.
+Fits a plane to the given 3D data.
 \begin{description}
 \sphinxlineitem{Args:}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-pH (array\sphinxhyphen{}like): pH values.
+log\_initial\_concentration (array): Logged values of initial concentrations.
 
 \item {} 
 \sphinxAtStartPar
-logFe (array\sphinxhyphen{}like): logFe values.
+pH (array): pH values.
 
 \item {} 
 \sphinxAtStartPar
-logR (array\sphinxhyphen{}like): logR values.
+log\_initial\_rate (array): Logged values of initial rates.
 
 \end{itemize}
 
 \sphinxlineitem{Returns:}
 \sphinxAtStartPar
-Regression parameters and R squared value.
+tuple: Parameters of the fitted plane and R\sphinxhyphen{}squared value.
 
 \end{description}
 
@@ -1087,11 +1002,11 @@ Regression parameters and R squared value.
 \pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_results}}}{}{}
 \pysigstopsignatures
 \sphinxAtStartPar
-Retrieve the regression analysis results.
+Returns the parameters of the fitted plane and R\sphinxhyphen{}squared value.
 \begin{description}
 \sphinxlineitem{Returns:}
 \sphinxAtStartPar
-dict: Regression parameters and R squared value.
+dict: Parameters of the fitted plane and R\sphinxhyphen{}squared value.
 
 \end{description}
 
@@ -1102,29 +1017,14 @@ dict: Regression parameters and R squared value.
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{utils:src.utils.plane3D_plot.Plane3DPlotter.perform_analysis}}
 \pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{perform\_analysis}}}{\sphinxparam{\DUrole{n,n}{pH}}, \sphinxparam{\DUrole{n,n}{logFe}}, \sphinxparam{\DUrole{n,n}{logR}}}{}
+\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{perform\_analysis}}}{}{}
 \pysigstopsignatures
 \sphinxAtStartPar
-Perform regression analysis on data.
+Performs 3D analysis on the data.
 \begin{description}
-\sphinxlineitem{Args:}\begin{itemize}
-\item {} 
-\sphinxAtStartPar
-pH (array\sphinxhyphen{}like): pH values.
-
-\item {} 
-\sphinxAtStartPar
-logFe (array\sphinxhyphen{}like): logFe values.
-
-\item {} 
-\sphinxAtStartPar
-logR (array\sphinxhyphen{}like): logR values.
-
-\end{itemize}
-
 \sphinxlineitem{Returns:}
 \sphinxAtStartPar
-Regression parameters and R squared value.
+tuple: Parameters of the fitted plane and R\sphinxhyphen{}squared value.
 
 \end{description}
 
@@ -1135,33 +1035,21 @@ Regression parameters and R squared value.
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{utils:src.utils.plane3D_plot.Plane3DPlotter.plot_3D_data}}
 \pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{plot\_3D\_data}}}{\sphinxparam{\DUrole{n,n}{pH}}, \sphinxparam{\DUrole{n,n}{logFe}}, \sphinxparam{\DUrole{n,n}{logR}}, \sphinxparam{\DUrole{n,n}{ax}\DUrole{o,o}{=}\DUrole{default_value}{None}}}{}
+\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{plot\_3D\_data}}}{\sphinxparam{\DUrole{n,n}{ax}\DUrole{o,o}{=}\DUrole{default_value}{None}}}{}
 \pysigstopsignatures
 \sphinxAtStartPar
-Plot the 3D data along with the fitted plane.
+Plots the 3D data and fitted plane.
 \begin{description}
 \sphinxlineitem{Args:}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-pH (array\sphinxhyphen{}like): pH values.
-
-\item {} 
-\sphinxAtStartPar
-logFe (array\sphinxhyphen{}like): logFe values.
-
-\item {} 
-\sphinxAtStartPar
-logR (array\sphinxhyphen{}like): logR values.
-
-\item {} 
-\sphinxAtStartPar
-ax (matplotlib.axes.\_subplots.Axes3DSubplot, optional): 3D subplot. Defaults to None.
+ax (Axes3D, optional): Existing 3D axes if provided. Defaults to None.
 
 \end{itemize}
 
 \sphinxlineitem{Returns:}
 \sphinxAtStartPar
-Matplotlib figure and 3D subplot.
+fig, ax: Figure and axes objects of the plot.
 
 \end{description}
 
@@ -1172,33 +1060,21 @@ Matplotlib figure and 3D subplot.
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{utils:src.utils.plane3D_plot.Plane3DPlotter.plot_fitted_plane}}
 \pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{plot\_fitted\_plane}}}{\sphinxparam{\DUrole{n,n}{ax}}, \sphinxparam{\DUrole{n,n}{pH}}, \sphinxparam{\DUrole{n,n}{logFe}}, \sphinxparam{\DUrole{n,n}{params}}}{}
+\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{plot\_fitted\_plane}}}{\sphinxparam{\DUrole{n,n}{ax}}, \sphinxparam{\DUrole{n,n}{params}}}{}
 \pysigstopsignatures
 \sphinxAtStartPar
-Plots a fitted plane on the 3D data.
+Plots the fitted plane on the given 3D axes.
 \begin{description}
 \sphinxlineitem{Args:}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-ax (matplotlib.axes.\_subplots.Axes3DSubplot): 3D subplot.
+ax (Axes3D): 3D axes object to plot on.
 
 \item {} 
 \sphinxAtStartPar
-pH (array\sphinxhyphen{}like): pH values.
-
-\item {} 
-\sphinxAtStartPar
-logFe (array\sphinxhyphen{}like): logFe values.
-
-\item {} 
-\sphinxAtStartPar
-params (tuple): Regression parameters.
+params (tuple): Parameters of the fitted plane.
 
 \end{itemize}
-
-\sphinxlineitem{Returns:}
-\sphinxAtStartPar
-PyQt5.QtGui.QPixmap: Pixmap representation of the plot.
 
 \end{description}
 
@@ -1212,18 +1088,18 @@ PyQt5.QtGui.QPixmap: Pixmap representation of the plot.
 \pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{read\_data}}}{\sphinxparam{\DUrole{n,n}{filename}}}{}
 \pysigstopsignatures
 \sphinxAtStartPar
-Reads data from a file.
+Reads data from the specified Excel file and returns logged values.
 \begin{description}
 \sphinxlineitem{Args:}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-filename (str): Path to the data file.
+filename (str): Name of the Excel file to read from.
 
 \end{itemize}
 
 \sphinxlineitem{Returns:}
 \sphinxAtStartPar
-Data values for pH, deltapH, logFe, deltalogFe, logR, deltalogR or None if an error occurs.
+tuple: Logged initial concentration, logged initial rate, and pH values.
 
 \end{description}
 
@@ -1348,48 +1224,60 @@ Time and concentration values or None if an error occurs.
 \sphinxAtStartPar
 Author: Dongzi Ding
 Created: 2023\sphinxhyphen{}06\sphinxhyphen{}28
-Modified: 2023\sphinxhyphen{}08\sphinxhyphen{}14
-
-\sphinxAtStartPar
-This file contains functions for performing regression analysis on data. 
-It includes functions for reading data, calculating LINEAR regression,
-and plotting the regression line.
-\index{calculate\_regression() (in module src.utils.regression\_analysis)@\spxentry{calculate\_regression()}\spxextra{in module src.utils.regression\_analysis}}
+Modified: 2023\sphinxhyphen{}08\sphinxhyphen{}17
+\index{calculate\_log\_values() (in module src.utils.regression\_analysis)@\spxentry{calculate\_log\_values()}\spxextra{in module src.utils.regression\_analysis}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{utils:src.utils.regression_analysis.calculate_regression}}
+\phantomsection\label{\detokenize{utils:src.utils.regression_analysis.calculate_log_values}}
 \pysigstartsignatures
-\pysiglinewithargsret{\sphinxcode{\sphinxupquote{src.utils.regression\_analysis.}}\sphinxbfcode{\sphinxupquote{calculate\_regression}}}{\sphinxparam{\DUrole{n,n}{x}}, \sphinxparam{\DUrole{n,n}{y}}, \sphinxparam{\DUrole{n,n}{sdx\_absolute}\DUrole{o,o}{=}\DUrole{default_value}{None}}, \sphinxparam{\DUrole{n,n}{sdy\_absolute}\DUrole{o,o}{=}\DUrole{default_value}{None}}, \sphinxparam{\DUrole{n,n}{use\_sklearn}\DUrole{o,o}{=}\DUrole{default_value}{False}}}{}
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{src.utils.regression\_analysis.}}\sphinxbfcode{\sphinxupquote{calculate\_log\_values}}}{\sphinxparam{\DUrole{n,n}{initial\_concentration}}, \sphinxparam{\DUrole{n,n}{initial\_rate}}}{}
 \pysigstopsignatures
 \sphinxAtStartPar
-Calculates the linear regression of the data.
+Calculates the log values of the initial concentration and rate.
 \begin{description}
 \sphinxlineitem{Args:}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-x (array\sphinxhyphen{}like): The x data.
+initial\_concentration (array\sphinxhyphen{}like): Initial concentrations.
 
 \item {} 
 \sphinxAtStartPar
-y (array\sphinxhyphen{}like): The y data.
-
-\item {} 
-\sphinxAtStartPar
-sdx\_absolute (array\sphinxhyphen{}like, optional): Absolute standard deviations of the x data. Defaults to None.
-
-\item {} 
-\sphinxAtStartPar
-sdy\_absolute (array\sphinxhyphen{}like, optional): Absolute standard deviations of the y data. Defaults to None.
-
-\item {} 
-\sphinxAtStartPar
-use\_sklearn (bool, optional): Whether to use sklearn for the regression. Defaults to False.
+initial\_rate (array\sphinxhyphen{}like): Initial rates.
 
 \end{itemize}
 
 \sphinxlineitem{Returns:}
 \sphinxAtStartPar
-Slope, intercept, standard error of the slope, standard error of the intercept, and the R\sphinxhyphen{}squared value.
+Log values of the initial concentration and rate.
+
+\end{description}
+
+\end{fulllineitems}
+
+\index{calculate\_regression() (in module src.utils.regression\_analysis)@\spxentry{calculate\_regression()}\spxextra{in module src.utils.regression\_analysis}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{utils:src.utils.regression_analysis.calculate_regression}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{src.utils.regression\_analysis.}}\sphinxbfcode{\sphinxupquote{calculate\_regression}}}{\sphinxparam{\DUrole{n,n}{log\_concentration}}, \sphinxparam{\DUrole{n,n}{log\_rate}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Calculates the linear regression of the log values using sklearn.
+\begin{description}
+\sphinxlineitem{Args:}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+log\_concentration (array\sphinxhyphen{}like): The log concentration data.
+
+\item {} 
+\sphinxAtStartPar
+log\_rate (array\sphinxhyphen{}like): The log rate data.
+
+\end{itemize}
+
+\sphinxlineitem{Returns:}
+\sphinxAtStartPar
+Slope (reaction order), intercept, and the R\sphinxhyphen{}squared value.
 
 \end{description}
 
@@ -1400,7 +1288,7 @@ Slope, intercept, standard error of the slope, standard error of the intercept, 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{utils:src.utils.regression_analysis.plot_regression}}
 \pysigstartsignatures
-\pysiglinewithargsret{\sphinxcode{\sphinxupquote{src.utils.regression\_analysis.}}\sphinxbfcode{\sphinxupquote{plot\_regression}}}{\sphinxparam{\DUrole{n,n}{x}}, \sphinxparam{\DUrole{n,n}{y}}, \sphinxparam{\DUrole{n,n}{sdx\_lower}}, \sphinxparam{\DUrole{n,n}{sdx\_upper}}, \sphinxparam{\DUrole{n,n}{sdy\_lower}}, \sphinxparam{\DUrole{n,n}{sdy\_upper}}, \sphinxparam{\DUrole{n,n}{slope}}, \sphinxparam{\DUrole{n,n}{intercept}}, \sphinxparam{\DUrole{n,n}{se\_slope}}, \sphinxparam{\DUrole{n,n}{se\_intercept}}, \sphinxparam{\DUrole{n,n}{r\_squared}}, \sphinxparam{\DUrole{n,n}{label}}, \sphinxparam{\DUrole{n,n}{color}}, \sphinxparam{\DUrole{n,n}{ax}}, \sphinxparam{\DUrole{n,n}{fig}}}{}
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{src.utils.regression\_analysis.}}\sphinxbfcode{\sphinxupquote{plot\_regression}}}{\sphinxparam{\DUrole{n,n}{log\_concentration}}, \sphinxparam{\DUrole{n,n}{log\_rate}}, \sphinxparam{\DUrole{n,n}{slope}}, \sphinxparam{\DUrole{n,n}{intercept}}, \sphinxparam{\DUrole{n,n}{r\_squared}}, \sphinxparam{\DUrole{n,n}{label}}, \sphinxparam{\DUrole{n,n}{color}}, \sphinxparam{\DUrole{n,n}{ax}}, \sphinxparam{\DUrole{n,n}{fig}}}{}
 \pysigstopsignatures
 \sphinxAtStartPar
 Plots the data and the regression line.
@@ -1408,27 +1296,11 @@ Plots the data and the regression line.
 \sphinxlineitem{Args:}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-x (array\sphinxhyphen{}like): The x data.
+log\_concentration (array\sphinxhyphen{}like): The log concentration data.
 
 \item {} 
 \sphinxAtStartPar
-y (array\sphinxhyphen{}like): The y data.
-
-\item {} 
-\sphinxAtStartPar
-sdx\_lower (array\sphinxhyphen{}like): Lower standard deviations of the x data.
-
-\item {} 
-\sphinxAtStartPar
-sdx\_upper (array\sphinxhyphen{}like): Upper standard deviations of the x data.
-
-\item {} 
-\sphinxAtStartPar
-sdy\_lower (array\sphinxhyphen{}like): Lower standard deviations of the y data.
-
-\item {} 
-\sphinxAtStartPar
-sdy\_upper (array\sphinxhyphen{}like): Upper standard deviations of the y data.
+log\_rate (array\sphinxhyphen{}like): The log rate data.
 
 \item {} 
 \sphinxAtStartPar
@@ -1437,14 +1309,6 @@ slope (float): Slope of the regression line.
 \item {} 
 \sphinxAtStartPar
 intercept (float): Intercept of the regression line.
-
-\item {} 
-\sphinxAtStartPar
-se\_slope (float): Standard error of the slope.
-
-\item {} 
-\sphinxAtStartPar
-se\_intercept (float): Standard error of the intercept.
 
 \item {} 
 \sphinxAtStartPar
@@ -1594,18 +1458,6 @@ Checks if the ‘Calculate’ button should be enabled.
 \pysigstopsignatures
 \sphinxAtStartPar
 Opens the appropriate contact method based on the menu selection.
-
-\end{fulllineitems}
-
-\index{open\_help() (src.mainwindow.MainWindow method)@\spxentry{open\_help()}\spxextra{src.mainwindow.MainWindow method}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{src:src.mainwindow.MainWindow.open_help}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{open\_help}}}{}{}
-\pysigstopsignatures
-\sphinxAtStartPar
-Opens the Help window.
 
 \end{fulllineitems}
 
@@ -1840,7 +1692,6 @@ The absolute path to the resource.
 \item\relax\sphinxstyleindexentry{src}\sphinxstyleindexpageref{src:\detokenize{module-src}}
 \item\relax\sphinxstyleindexentry{src.gui}\sphinxstyleindexpageref{gui:\detokenize{module-src.gui}}
 \item\relax\sphinxstyleindexentry{src.gui.button\_area}\sphinxstyleindexpageref{gui:\detokenize{module-src.gui.button_area}}
-\item\relax\sphinxstyleindexentry{src.gui.help\_window}\sphinxstyleindexpageref{gui:\detokenize{module-src.gui.help_window}}
 \item\relax\sphinxstyleindexentry{src.gui.input\_window}\sphinxstyleindexpageref{gui:\detokenize{module-src.gui.input_window}}
 \item\relax\sphinxstyleindexentry{src.gui.result\_window}\sphinxstyleindexpageref{gui:\detokenize{module-src.gui.result_window}}
 \item\relax\sphinxstyleindexentry{src.gui.settings\_window}\sphinxstyleindexpageref{gui:\detokenize{module-src.gui.settings_window}}

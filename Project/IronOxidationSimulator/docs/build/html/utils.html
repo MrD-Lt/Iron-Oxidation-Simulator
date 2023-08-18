@@ -251,7 +251,7 @@ Modified: 2023-08-14</p>
 <h3>plane3D_plot.py<a class="headerlink" href="#plane3d-plot-py" title="Permalink to this heading">¶</a></h3>
 <p>Author: Dongzi Ding
 Created: 2023-08-12
-Modified: 2023-08-14</p>
+Modified: 2023-08-17</p>
 <p>This file contains functions for performing 3D plotting and regression analysis on data.
 It includes functions for reading data, plotting 3D scatter points, and fitting a plane to the data.</p>
 </section>
@@ -259,40 +259,28 @@ It includes functions for reading data, plotting 3D scatter points, and fitting 
 <dt class="sig sig-object py" id="src.utils.plane3D_plot.Plane3DPlotter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.utils.plane3D_plot.</span></span><span class="sig-name descname"><span class="pre">Plane3DPlotter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>A class for performing 3D plotting and regression analysis on data.</p>
 <dl class="simple">
 <dt>Attributes:</dt><dd><ul class="simple">
-<li><p>filename (str): The path to the data file.</p></li>
-<li><p>data (tuple): Data values for pH, deltapH, logFe, deltalogFe, logR, deltalogR.</p></li>
-<li><p>params (tuple): Regression parameters.</p></li>
-<li><p>r_squared (float): R squared value of regression analysis.</p></li>
-</ul>
-</dd>
-<dt>Methods:</dt><dd><ul class="simple">
-<li><p>read_data: Read data from a file.</p></li>
-<li><p>perform_analysis: Perform regression analysis.</p></li>
-<li><p>fit_plane: Fit a plane to the data.</p></li>
-<li><p>plot_3D_data: Plot the 3D data with a fitted plane.</p></li>
-<li><p>create_3D_plot: Create a 3D plot.</p></li>
-<li><p>plot_fitted_plane: Plot a fitted plane on 3D data.</p></li>
-<li><p>get_results: Retrieve analysis results.</p></li>
-<li><p>fig_to_pixmap: Convert a Matplotlib figure to a QPixmap.</p></li>
+<li><p>filename (str): Name of the input Excel file containing data.</p></li>
+<li><p>data (tuple): Processed data from the Excel file.</p></li>
+<li><p>log_initial_concentration (array): Logged values of initial concentrations.</p></li>
+<li><p>log_initial_rate (array): Logged values of initial rates.</p></li>
+<li><p>pH (array): pH values from the data.</p></li>
+<li><p>params (tuple): Parameters of the fitted plane.</p></li>
+<li><p>r_squared (float): R-squared value of the fitted model.</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="src.utils.plane3D_plot.Plane3DPlotter.create_3D_plot">
-<span class="sig-name descname"><span class="pre">create_3D_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pH</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logFe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.create_3D_plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a 3D plot for the given data.</p>
+<span class="sig-name descname"><span class="pre">create_3D_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.create_3D_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a 3D plot with data points.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><ul class="simple">
-<li><p>pH (array-like): pH values.</p></li>
-<li><p>logFe (array-like): logFe values.</p></li>
-<li><p>logR (array-like): logR values.</p></li>
-<li><p>ax (matplotlib.axes._subplots.Axes3DSubplot, optional): 3D subplot. Defaults to None.</p></li>
+<li><p>ax (Axes3D, optional): Existing 3D axes if provided. Defaults to None.</p></li>
 </ul>
 </dd>
-<dt>Returns:</dt><dd><p>Matplotlib figure and 3D subplot.</p>
+<dt>Returns:</dt><dd><p>fig, ax: Figure and axes objects of the plot.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -300,29 +288,29 @@ It includes functions for reading data, plotting 3D scatter points, and fitting 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.utils.plane3D_plot.Plane3DPlotter.fig_to_pixmap">
 <span class="sig-name descname"><span class="pre">fig_to_pixmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.fig_to_pixmap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts a Matplotlib figure to a QPixmap.</p>
+<dd><p>Converts a matplotlib figure to a QPixmap.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><ul class="simple">
-<li><p>fig (matplotlib.figure.Figure): Matplotlib figure.</p></li>
+<li><p>fig (Figure): Matplotlib figure to be converted.</p></li>
 </ul>
 </dd>
-<dt>Returns:</dt><dd><p>PyQt5.QtGui.QPixmap: Pixmap representation of the figure.</p>
+<dt>Returns:</dt><dd><p>QPixmap: Converted QPixmap of the figure.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.utils.plane3D_plot.Plane3DPlotter.fit_plane">
-<span class="sig-name descname"><span class="pre">fit_plane</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pH</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logFe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logR</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.fit_plane" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fits a plane to the data.</p>
+<span class="sig-name descname"><span class="pre">fit_plane</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_initial_concentration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pH</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_initial_rate</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.fit_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fits a plane to the given 3D data.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><ul class="simple">
-<li><p>pH (array-like): pH values.</p></li>
-<li><p>logFe (array-like): logFe values.</p></li>
-<li><p>logR (array-like): logR values.</p></li>
+<li><p>log_initial_concentration (array): Logged values of initial concentrations.</p></li>
+<li><p>pH (array): pH values.</p></li>
+<li><p>log_initial_rate (array): Logged values of initial rates.</p></li>
 </ul>
 </dd>
-<dt>Returns:</dt><dd><p>Regression parameters and R squared value.</p>
+<dt>Returns:</dt><dd><p>tuple: Parameters of the fitted plane and R-squared value.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -330,59 +318,46 @@ It includes functions for reading data, plotting 3D scatter points, and fitting 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.utils.plane3D_plot.Plane3DPlotter.get_results">
 <span class="sig-name descname"><span class="pre">get_results</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.get_results" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieve the regression analysis results.</p>
+<dd><p>Returns the parameters of the fitted plane and R-squared value.</p>
 <dl class="simple">
-<dt>Returns:</dt><dd><p>dict: Regression parameters and R squared value.</p>
+<dt>Returns:</dt><dd><p>dict: Parameters of the fitted plane and R-squared value.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.utils.plane3D_plot.Plane3DPlotter.perform_analysis">
-<span class="sig-name descname"><span class="pre">perform_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pH</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logFe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logR</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.perform_analysis" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform regression analysis on data.</p>
+<span class="sig-name descname"><span class="pre">perform_analysis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.perform_analysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs 3D analysis on the data.</p>
 <dl class="simple">
-<dt>Args:</dt><dd><ul class="simple">
-<li><p>pH (array-like): pH values.</p></li>
-<li><p>logFe (array-like): logFe values.</p></li>
-<li><p>logR (array-like): logR values.</p></li>
-</ul>
-</dd>
-<dt>Returns:</dt><dd><p>Regression parameters and R squared value.</p>
+<dt>Returns:</dt><dd><p>tuple: Parameters of the fitted plane and R-squared value.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.utils.plane3D_plot.Plane3DPlotter.plot_3D_data">
-<span class="sig-name descname"><span class="pre">plot_3D_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pH</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logFe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.plot_3D_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot the 3D data along with the fitted plane.</p>
+<span class="sig-name descname"><span class="pre">plot_3D_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.plot_3D_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the 3D data and fitted plane.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><ul class="simple">
-<li><p>pH (array-like): pH values.</p></li>
-<li><p>logFe (array-like): logFe values.</p></li>
-<li><p>logR (array-like): logR values.</p></li>
-<li><p>ax (matplotlib.axes._subplots.Axes3DSubplot, optional): 3D subplot. Defaults to None.</p></li>
+<li><p>ax (Axes3D, optional): Existing 3D axes if provided. Defaults to None.</p></li>
 </ul>
 </dd>
-<dt>Returns:</dt><dd><p>Matplotlib figure and 3D subplot.</p>
+<dt>Returns:</dt><dd><p>fig, ax: Figure and axes objects of the plot.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.utils.plane3D_plot.Plane3DPlotter.plot_fitted_plane">
-<span class="sig-name descname"><span class="pre">plot_fitted_plane</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pH</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logFe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.plot_fitted_plane" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plots a fitted plane on the 3D data.</p>
+<span class="sig-name descname"><span class="pre">plot_fitted_plane</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.plot_fitted_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the fitted plane on the given 3D axes.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><ul class="simple">
-<li><p>ax (matplotlib.axes._subplots.Axes3DSubplot): 3D subplot.</p></li>
-<li><p>pH (array-like): pH values.</p></li>
-<li><p>logFe (array-like): logFe values.</p></li>
-<li><p>params (tuple): Regression parameters.</p></li>
+<li><p>ax (Axes3D): 3D axes object to plot on.</p></li>
+<li><p>params (tuple): Parameters of the fitted plane.</p></li>
 </ul>
-</dd>
-<dt>Returns:</dt><dd><p>PyQt5.QtGui.QPixmap: Pixmap representation of the plot.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -390,13 +365,13 @@ It includes functions for reading data, plotting 3D scatter points, and fitting 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.utils.plane3D_plot.Plane3DPlotter.read_data">
 <span class="sig-name descname"><span class="pre">read_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.plane3D_plot.Plane3DPlotter.read_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads data from a file.</p>
+<dd><p>Reads data from the specified Excel file and returns logged values.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><ul class="simple">
-<li><p>filename (str): Path to the data file.</p></li>
+<li><p>filename (str): Name of the Excel file to read from.</p></li>
 </ul>
 </dd>
-<dt>Returns:</dt><dd><p>Data values for pH, deltapH, logFe, deltalogFe, logR, deltalogR or None if an error occurs.</p>
+<dt>Returns:</dt><dd><p>tuple: Logged initial concentration, logged initial rate, and pH values.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -466,45 +441,48 @@ Modified: 2023-08-14</p>
 <h3>regression_analysis.py<a class="headerlink" href="#regression-analysis-py" title="Permalink to this heading">¶</a></h3>
 <p>Author: Dongzi Ding
 Created: 2023-06-28
-Modified: 2023-08-14</p>
-<p>This file contains functions for performing regression analysis on data. 
-It includes functions for reading data, calculating LINEAR regression,
-and plotting the regression line.</p>
+Modified: 2023-08-17</p>
 </section>
 <dl class="py function">
-<dt class="sig sig-object py" id="src.utils.regression_analysis.calculate_regression">
-<span class="sig-prename descclassname"><span class="pre">src.utils.regression_analysis.</span></span><span class="sig-name descname"><span class="pre">calculate_regression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdx_absolute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdy_absolute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_sklearn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.regression_analysis.calculate_regression" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the linear regression of the data.</p>
+<dt class="sig sig-object py" id="src.utils.regression_analysis.calculate_log_values">
+<span class="sig-prename descclassname"><span class="pre">src.utils.regression_analysis.</span></span><span class="sig-name descname"><span class="pre">calculate_log_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initial_concentration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_rate</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.regression_analysis.calculate_log_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the log values of the initial concentration and rate.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><ul class="simple">
-<li><p>x (array-like): The x data.</p></li>
-<li><p>y (array-like): The y data.</p></li>
-<li><p>sdx_absolute (array-like, optional): Absolute standard deviations of the x data. Defaults to None.</p></li>
-<li><p>sdy_absolute (array-like, optional): Absolute standard deviations of the y data. Defaults to None.</p></li>
-<li><p>use_sklearn (bool, optional): Whether to use sklearn for the regression. Defaults to False.</p></li>
+<li><p>initial_concentration (array-like): Initial concentrations.</p></li>
+<li><p>initial_rate (array-like): Initial rates.</p></li>
 </ul>
 </dd>
-<dt>Returns:</dt><dd><p>Slope, intercept, standard error of the slope, standard error of the intercept, and the R-squared value.</p>
+<dt>Returns:</dt><dd><p>Log values of the initial concentration and rate.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.utils.regression_analysis.calculate_regression">
+<span class="sig-prename descclassname"><span class="pre">src.utils.regression_analysis.</span></span><span class="sig-name descname"><span class="pre">calculate_regression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_concentration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_rate</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.regression_analysis.calculate_regression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the linear regression of the log values using sklearn.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><ul class="simple">
+<li><p>log_concentration (array-like): The log concentration data.</p></li>
+<li><p>log_rate (array-like): The log rate data.</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>Slope (reaction order), intercept, and the R-squared value.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.utils.regression_analysis.plot_regression">
-<span class="sig-prename descclassname"><span class="pre">src.utils.regression_analysis.</span></span><span class="sig-name descname"><span class="pre">plot_regression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdx_lower</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdx_upper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdy_lower</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdy_upper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intercept</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">se_slope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">se_intercept</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_squared</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.regression_analysis.plot_regression" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">src.utils.regression_analysis.</span></span><span class="sig-name descname"><span class="pre">plot_regression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_concentration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slope</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intercept</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_squared</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.utils.regression_analysis.plot_regression" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots the data and the regression line.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><ul class="simple">
-<li><p>x (array-like): The x data.</p></li>
-<li><p>y (array-like): The y data.</p></li>
-<li><p>sdx_lower (array-like): Lower standard deviations of the x data.</p></li>
-<li><p>sdx_upper (array-like): Upper standard deviations of the x data.</p></li>
-<li><p>sdy_lower (array-like): Lower standard deviations of the y data.</p></li>
-<li><p>sdy_upper (array-like): Upper standard deviations of the y data.</p></li>
+<li><p>log_concentration (array-like): The log concentration data.</p></li>
+<li><p>log_rate (array-like): The log rate data.</p></li>
 <li><p>slope (float): Slope of the regression line.</p></li>
 <li><p>intercept (float): Intercept of the regression line.</p></li>
-<li><p>se_slope (float): Standard error of the slope.</p></li>
-<li><p>se_intercept (float): Standard error of the intercept.</p></li>
 <li><p>r_squared (float): R-squared value.</p></li>
 <li><p>label (str): Label for the plot.</p></li>
 <li><p>color (str): Color for the plot.</p></li>

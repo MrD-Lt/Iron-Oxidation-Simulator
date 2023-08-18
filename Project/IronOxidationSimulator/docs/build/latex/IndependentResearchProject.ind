@@ -6,7 +6,7 @@
 
   \bigletter A
   \item \spxentry{add\_result()}\spxextra{src.gui.result\_window.ResultWindow method}, 
-		\hyperpage{3}
+		\hyperpage{2}
 
   \indexspace
   \bigletter B
@@ -16,19 +16,21 @@
   \indexspace
   \bigletter C
   \item \spxentry{calculate()}\spxextra{src.gui.button\_area.ButtonArea method}, \hyperpage{1}
-  \item \spxentry{calculate\_rate()}\spxextra{in module src.utils.initial\_rate}, \hyperpage{4}
-  \item \spxentry{calculate\_rate()}\spxextra{in module src.utils.rate\_const}, \hyperpage{8}
+  \item \spxentry{calculate\_log\_values()}\spxextra{in module src.utils.regression\_analysis}, 
+		\hyperpage{7}
+  \item \spxentry{calculate\_rate()}\spxextra{in module src.utils.initial\_rate}, \hyperpage{3}
+  \item \spxentry{calculate\_rate()}\spxextra{in module src.utils.rate\_const}, \hyperpage{7}
   \item \spxentry{calculate\_rate\_compare()}\spxextra{in module src.utils.initial\_rate}, 
-		\hyperpage{4}
+		\hyperpage{3}
   \item \spxentry{calculate\_regression()}\spxextra{in module src.utils.regression\_analysis}, 
 		\hyperpage{8}
   \item \spxentry{check\_calculate\_button\_state()}\spxextra{src.mainwindow.MainWindow method}, 
-		\hyperpage{10}
+		\hyperpage{9}
   \item \spxentry{clear\_data()}\spxextra{src.gui.input\_window.InputWindow method}, \hyperpage{2}
   \item \spxentry{confirm\_input()}\spxextra{src.utils.input\_help.DataInputDialog method}, 
 		\hyperpage{5}
   \item \spxentry{create\_3D\_plot()}\spxextra{src.utils.plane3D\_plot.Plane3DPlotter method}, 
-		\hyperpage{6}
+		\hyperpage{5}
   \item \spxentry{cut\_data()}\spxextra{in module src.utils.initial\_rate}, \hyperpage{4}
 
   \indexspace
@@ -53,11 +55,7 @@
 		\hyperpage{5}
   \item \spxentry{get\_options()}\spxextra{src.gui.button\_area.OptionDialog method}, \hyperpage{1}
   \item \spxentry{get\_results()}\spxextra{src.utils.plane3D\_plot.Plane3DPlotter method}, 
-		\hyperpage{7}
-
-  \indexspace
-  \bigletter H
-  \item \spxentry{HelpWindow}\spxextra{class in src.gui.help\_window}, \hyperpage{2}
+		\hyperpage{6}
 
   \indexspace
   \bigletter I
@@ -67,83 +65,79 @@
 
   \indexspace
   \bigletter M
-  \item \spxentry{MainWindow}\spxextra{class in src.mainwindow}, \hyperpage{10}
+  \item \spxentry{MainWindow}\spxextra{class in src.mainwindow}, \hyperpage{9}
   \item \spxentry{manual\_input()}\spxextra{src.gui.input\_window.InputWindow method}, 
 		\hyperpage{2}
   \item \spxentry{module}
     \subitem \spxentry{src}, \hyperpage{1}
     \subitem \spxentry{src.gui}, \hyperpage{1}
     \subitem \spxentry{src.gui.button\_area}, \hyperpage{1}
-    \subitem \spxentry{src.gui.help\_window}, \hyperpage{2}
     \subitem \spxentry{src.gui.input\_window}, \hyperpage{2}
-    \subitem \spxentry{src.gui.result\_window}, \hyperpage{3}
+    \subitem \spxentry{src.gui.result\_window}, \hyperpage{2}
     \subitem \spxentry{src.gui.settings\_window}, \hyperpage{3}
     \subitem \spxentry{src.gui.visual\_window}, \hyperpage{3}
-    \subitem \spxentry{src.mainwindow}, \hyperpage{10}
-    \subitem \spxentry{src.utils}, \hyperpage{4}
-    \subitem \spxentry{src.utils.initial\_rate}, \hyperpage{4}
+    \subitem \spxentry{src.mainwindow}, \hyperpage{9}
+    \subitem \spxentry{src.utils}, \hyperpage{3}
+    \subitem \spxentry{src.utils.initial\_rate}, \hyperpage{3}
     \subitem \spxentry{src.utils.input\_help}, \hyperpage{5}
-    \subitem \spxentry{src.utils.plane3D\_plot}, \hyperpage{6}
-    \subitem \spxentry{src.utils.rate\_const}, \hyperpage{8}
-    \subitem \spxentry{src.utils.regression\_analysis}, \hyperpage{8}
-    \subitem \spxentry{src.utils.save}, \hyperpage{10}
+    \subitem \spxentry{src.utils.plane3D\_plot}, \hyperpage{5}
+    \subitem \spxentry{src.utils.rate\_const}, \hyperpage{7}
+    \subitem \spxentry{src.utils.regression\_analysis}, \hyperpage{7}
+    \subitem \spxentry{src.utils.save}, \hyperpage{8}
 
   \indexspace
   \bigletter O
-  \item \spxentry{open\_contact()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{10}
-  \item \spxentry{open\_help()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{10}
-  \item \spxentry{open\_pdf\_manual()}\spxextra{src.gui.help\_window.HelpWindow method}, 
-		\hyperpage{2}
+  \item \spxentry{open\_contact()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{9}
   \item \spxentry{OptionDialog}\spxextra{class in src.gui.button\_area}, \hyperpage{1}
 
   \indexspace
   \bigletter P
   \item \spxentry{perform\_analysis()}\spxextra{src.utils.plane3D\_plot.Plane3DPlotter method}, 
-		\hyperpage{7}
-  \item \spxentry{Plane3DPlotter}\spxextra{class in src.utils.plane3D\_plot}, \hyperpage{6}
-  \item \spxentry{plot()}\spxextra{in module src.utils.rate\_const}, \hyperpage{8}
+		\hyperpage{6}
+  \item \spxentry{Plane3DPlotter}\spxextra{class in src.utils.plane3D\_plot}, \hyperpage{5}
+  \item \spxentry{plot()}\spxextra{in module src.utils.rate\_const}, \hyperpage{7}
   \item \spxentry{plot\_3D\_data()}\spxextra{src.utils.plane3D\_plot.Plane3DPlotter method}, 
-		\hyperpage{7}
+		\hyperpage{6}
   \item \spxentry{plot\_fitted\_plane()}\spxextra{src.utils.plane3D\_plot.Plane3DPlotter method}, 
-		\hyperpage{7}
+		\hyperpage{6}
   \item \spxentry{plot\_initial\_rate()}\spxextra{in module src.utils.initial\_rate}, \hyperpage{4}
   \item \spxentry{plot\_rate\_comparison()}\spxextra{in module src.utils.initial\_rate}, 
 		\hyperpage{4}
   \item \spxentry{plot\_regression()}\spxextra{in module src.utils.regression\_analysis}, 
-		\hyperpage{9}
+		\hyperpage{8}
 
   \indexspace
   \bigletter R
-  \item \spxentry{read\_data()}\spxextra{in module src.utils.initial\_rate}, \hyperpage{5}
-  \item \spxentry{read\_data()}\spxextra{in module src.utils.rate\_const}, \hyperpage{8}
-  \item \spxentry{read\_data()}\spxextra{in module src.utils.regression\_analysis}, \hyperpage{9}
+  \item \spxentry{read\_data()}\spxextra{in module src.utils.initial\_rate}, \hyperpage{4}
+  \item \spxentry{read\_data()}\spxextra{in module src.utils.rate\_const}, \hyperpage{7}
+  \item \spxentry{read\_data()}\spxextra{in module src.utils.regression\_analysis}, \hyperpage{8}
   \item \spxentry{read\_data()}\spxextra{src.utils.plane3D\_plot.Plane3DPlotter method}, 
-		\hyperpage{7}
+		\hyperpage{6}
   \item \spxentry{reset()}\spxextra{src.gui.button\_area.ButtonArea method}, \hyperpage{1}
   \item \spxentry{reset()}\spxextra{src.gui.input\_window.InputWindow method}, \hyperpage{2}
-  \item \spxentry{reset()}\spxextra{src.mainwindow.Settings method}, \hyperpage{11}
-  \item \spxentry{resource\_path()}\spxextra{in module src.mainwindow}, \hyperpage{11}
-  \item \spxentry{ResultWindow}\spxextra{class in src.gui.result\_window}, \hyperpage{3}
+  \item \spxentry{reset()}\spxextra{src.mainwindow.Settings method}, \hyperpage{9}
+  \item \spxentry{resource\_path()}\spxextra{in module src.mainwindow}, \hyperpage{10}
+  \item \spxentry{ResultWindow}\spxextra{class in src.gui.result\_window}, \hyperpage{2}
 
   \indexspace
   \bigletter S
-  \item \spxentry{save()}\spxextra{in module src.utils.save}, \hyperpage{10}
+  \item \spxentry{save()}\spxextra{in module src.utils.save}, \hyperpage{8}
   \item \spxentry{save\_result()}\spxextra{src.gui.button\_area.ButtonArea method}, \hyperpage{1}
   \item \spxentry{select\_all()}\spxextra{src.utils.input\_help.DataInputDialog method}, 
 		\hyperpage{5}
-  \item \spxentry{select\_option1()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{10}
-  \item \spxentry{select\_option2()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{10}
-  \item \spxentry{select\_option3()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{10}
-  \item \spxentry{select\_option4()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{10}
-  \item \spxentry{select\_option5()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{10}
-  \item \spxentry{select\_option6()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{10}
-  \item \spxentry{select\_option7()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{10}
-  \item \spxentry{select\_option8()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{10}
-  \item \spxentry{set\_func\_option()}\spxextra{src.mainwindow.Settings method}, \hyperpage{11}
-  \item \spxentry{set\_input\_option()}\spxextra{src.mainwindow.Settings method}, \hyperpage{11}
-  \item \spxentry{set\_save\_option()}\spxextra{src.mainwindow.Settings method}, \hyperpage{11}
-  \item \spxentry{Settings}\spxextra{class in src.mainwindow}, \hyperpage{11}
-  \item \spxentry{settings\_changed}\spxextra{src.mainwindow.Settings attribute}, \hyperpage{11}
+  \item \spxentry{select\_option1()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{9}
+  \item \spxentry{select\_option2()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{9}
+  \item \spxentry{select\_option3()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{9}
+  \item \spxentry{select\_option4()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{9}
+  \item \spxentry{select\_option5()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{9}
+  \item \spxentry{select\_option6()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{9}
+  \item \spxentry{select\_option7()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{9}
+  \item \spxentry{select\_option8()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{9}
+  \item \spxentry{set\_func\_option()}\spxextra{src.mainwindow.Settings method}, \hyperpage{9}
+  \item \spxentry{set\_input\_option()}\spxextra{src.mainwindow.Settings method}, \hyperpage{9}
+  \item \spxentry{set\_save\_option()}\spxextra{src.mainwindow.Settings method}, \hyperpage{9}
+  \item \spxentry{Settings}\spxextra{class in src.mainwindow}, \hyperpage{9}
+  \item \spxentry{settings\_changed}\spxextra{src.mainwindow.Settings attribute}, \hyperpage{10}
   \item \spxentry{SettingsWindow}\spxextra{class in src.gui.settings\_window}, \hyperpage{3}
   \item \spxentry{show\_result()}\spxextra{src.gui.button\_area.ButtonArea method}, \hyperpage{1}
   \item \spxentry{show\_visual()}\spxextra{src.gui.button\_area.ButtonArea method}, \hyperpage{1}
@@ -153,36 +147,34 @@
     \subitem \spxentry{module}, \hyperpage{1}
   \item \spxentry{src.gui.button\_area}
     \subitem \spxentry{module}, \hyperpage{1}
-  \item \spxentry{src.gui.help\_window}
-    \subitem \spxentry{module}, \hyperpage{2}
   \item \spxentry{src.gui.input\_window}
     \subitem \spxentry{module}, \hyperpage{2}
   \item \spxentry{src.gui.result\_window}
-    \subitem \spxentry{module}, \hyperpage{3}
+    \subitem \spxentry{module}, \hyperpage{2}
   \item \spxentry{src.gui.settings\_window}
     \subitem \spxentry{module}, \hyperpage{3}
   \item \spxentry{src.gui.visual\_window}
     \subitem \spxentry{module}, \hyperpage{3}
   \item \spxentry{src.mainwindow}
-    \subitem \spxentry{module}, \hyperpage{10}
+    \subitem \spxentry{module}, \hyperpage{9}
   \item \spxentry{src.utils}
-    \subitem \spxentry{module}, \hyperpage{4}
+    \subitem \spxentry{module}, \hyperpage{3}
   \item \spxentry{src.utils.initial\_rate}
-    \subitem \spxentry{module}, \hyperpage{4}
+    \subitem \spxentry{module}, \hyperpage{3}
   \item \spxentry{src.utils.input\_help}
     \subitem \spxentry{module}, \hyperpage{5}
   \item \spxentry{src.utils.plane3D\_plot}
-    \subitem \spxentry{module}, \hyperpage{6}
+    \subitem \spxentry{module}, \hyperpage{5}
   \item \spxentry{src.utils.rate\_const}
-    \subitem \spxentry{module}, \hyperpage{8}
+    \subitem \spxentry{module}, \hyperpage{7}
   \item \spxentry{src.utils.regression\_analysis}
-    \subitem \spxentry{module}, \hyperpage{8}
+    \subitem \spxentry{module}, \hyperpage{7}
   \item \spxentry{src.utils.save}
-    \subitem \spxentry{module}, \hyperpage{10}
+    \subitem \spxentry{module}, \hyperpage{8}
 
   \indexspace
   \bigletter T
-  \item \spxentry{toggle\_option()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{10}
+  \item \spxentry{toggle\_option()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{9}
 
   \indexspace
   \bigletter U
@@ -190,8 +182,7 @@
 		\hyperpage{2}
   \item \spxentry{update\_content()}\spxextra{src.gui.settings\_window.SettingsWindow method}, 
 		\hyperpage{3}
-  \item \spxentry{update\_func\_option()}\spxextra{src.mainwindow.MainWindow method}, 
-		\hyperpage{10}
+  \item \spxentry{update\_func\_option()}\spxextra{src.mainwindow.MainWindow method}, \hyperpage{9}
   \item \spxentry{update\_input\_fields()}\spxextra{src.utils.input\_help.DataInputDialog method}, 
 		\hyperpage{5}
   \item \spxentry{update\_start\_button()}\spxextra{src.gui.button\_area.ButtonArea method}, 
