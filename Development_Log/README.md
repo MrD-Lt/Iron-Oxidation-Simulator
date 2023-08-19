@@ -19,8 +19,8 @@ Remember to include the following details:
 
 Please note that this project is still under development and the content may change over time.
 
-Version 0.1.1
+Version 1.0.0
 
-26 Jun. 2023
+19 Aug. 2023
 
 

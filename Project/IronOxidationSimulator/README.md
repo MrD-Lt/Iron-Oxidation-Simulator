@@ -66,6 +66,6 @@ To run the project, follow these steps:
 
 Please note that this project is still under development and the structure may change over time.
 
-Version 0.2.1
+Version 1.0.0
 
-14 Aug. 2023
+19 Aug. 2023

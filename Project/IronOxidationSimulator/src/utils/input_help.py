@@ -36,7 +36,7 @@ class DataInputDialog(QDialog):
             'reaction order analysis': ['initial concentration (uM)', 'initial rate (uM/s)'],
             'initial rate analysis': ['Time (seconds)', 'Conc (uM)', 'Threshold (5%-20%)'],
             'rate const analysis': ['Time (seconds)', 'Conc (uM)'],
-            '3D plane plot': ['initial concentration', 'initial rate', 'PH'],
+            '3D plane plot': ['initial concentration (uM)', 'initial rate (uM/s)', 'PH'],
         }
 
         self.tab_widget = QTabWidget()

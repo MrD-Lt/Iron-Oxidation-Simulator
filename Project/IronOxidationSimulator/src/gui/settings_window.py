@@ -84,14 +84,14 @@ class SettingsWindow(QWidget):
         if 'initial rate analysis' in selected_options:
             func_guide_text.append("For initial rate analysis, please input your data in:<br>"
                                    "If import file: Excel format,<br>"
-                                   "Time (seconds), [Fe2+] (uM), Threshold (5%-20%)<br>"
+                                   "Time (seconds), Conc (uM), Threshold (5%-20%)<br>"
                                    "in different columns.<br>"
                                    "If manually input: follow the instructions.")
 
         if 'rate const analysis' in selected_options:
             func_guide_text.append("For rate const analysis, please input your data in:<br>"
                                    "If import file: Excel format,<br>"
-                                   "Time (seconds), [Fe2+] (uM)<br>"
+                                   "Time (seconds), Conc (uM)<br>"
                                    "in different columns.<br>"
                                    "If manually input: follow the instructions.")
 
