@@ -120,7 +120,7 @@ class ButtonArea(QWidget):
 
                         self.result[option] = {
                             "result": (
-                                x, y, slope, intercept, r_squared
+                                log_x, log_y, slope, intercept, r_squared
                             )
                         }
 

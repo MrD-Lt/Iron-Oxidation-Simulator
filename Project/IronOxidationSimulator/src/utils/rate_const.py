@@ -85,7 +85,7 @@ def plot(time, conc, slope, intercept, r_squared):
 
     ax.scatter(time, conc, label="Data points", color="blue")
     ax.plot(time, slope * time + intercept, '-', color="red",
-            label=f"Fit: y = {slope:.2f}x + {intercept:.2f}, R^2 = {r_squared:.2f}")
+            label=f"Fit: y = {slope:.6f}x + {intercept:.2f}, R^2 = {r_squared:.2f}")
 
     ax.set_xlabel('Time')
     ax.set_ylabel('ln_Concentration')

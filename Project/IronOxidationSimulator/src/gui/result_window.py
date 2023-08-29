@@ -52,8 +52,8 @@ class ResultWindow(QMainWindow):
         elif feature_name == "Reaction Order Analysis":
             initial_concentration, initial_rate, slope, intercept, r_squared = result
             result_str = (
-                f"Initial concentration: {initial_concentration}\n"
-                f"Initial rate: {initial_rate}\n"
+                f"Log Initial concentration: {initial_concentration}\n"
+                f"Log Initial rate: {initial_rate}\n"
                 f"Standard error of the initial rate: {slope}\n"
                 f"Standard error of the initial conc: {intercept}\n"
                 f"R Squared: {r_squared}"

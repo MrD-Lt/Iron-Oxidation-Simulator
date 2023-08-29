@@ -1,0 +1,1 @@
+Solved some bugs when displaying the results.
